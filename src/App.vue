@@ -1,11 +1,25 @@
-<script setup></script>
+<script setup>
+import Navigation from './components/Navigation.vue';
+import Footer from './components/Footer.vue';
+import { watch } from 'vue';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
+
+watch(() => route.path, (newPath) => {
+  document.title = `Expense Tracker - ${newPath === '/' ? 'Home' : newPath.slice(1).charAt(0).toUpperCase() + newPath.slice(2)}`;
+})
+
+</script>
 
 <template>
-  <h1 class="text-2xl font-bold">You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <div class="expense-tracker">
+    <div class="content flex">
+      <Navigation :curPath="route.path" />
+      <router-view />
+    </div>
+    <Footer />
+  </div>
 </template>
 
 <style scoped></style>
