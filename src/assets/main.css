@@ -2,13 +2,13 @@
 @import 'tailwindcss';
 @custom-variant dark (&:where(.dark, .dark *));
 
-:root {
-    --main-color : #6cbc89
-    --secondary-color : #ffffff
-    --additional-color-1: #212121
-    --additional-color-2: #f75e5e
-    --additional-color-3: #ffa135
-    --additional-color-4: #35C9FF
+@theme {
+    --color-dark: #212121;
+    --color-light: #ffffff;
+    --color-highlight: #6cbc89;
+    --color-alert: #f75e5e;
+    --color-warn: #ffa135;
+    --color-smooth: #35C9FF;
 }
 
 html {
