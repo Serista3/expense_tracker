@@ -1,0 +1,24 @@
+[
+    {
+        "transactions": [
+            {
+                "id": 1,
+                "title": "Grocery Shopping",
+                "description": ".............",
+                "type": "expense",
+                "category": "Food",
+                "amount": -50.75,
+                "date": "2024-06-01"
+            },
+            {
+                "id": 2,
+                "title": "Salary",
+                "description": ".............",
+                "type": "income",
+                "category": "Salary",
+                "amount": 1500.00,
+                "date": "2024-06-05"
+            }
+        ]
+    }
+]
