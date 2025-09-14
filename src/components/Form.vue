@@ -5,48 +5,73 @@ import FormTextarea from './FormTextarea.vue';
 import Button from './Button.vue';
 import { ref } from 'vue';
 
-const radioValue = ref('')
+const props = defineProps({
+  editData: {
+    type: Object,
+    default: {},
+  },
+  categoryData: {
+    type: Array,
+    require: true,
+  },
+})
+const formData = ref({...props.editData})
+const category = ref({...props.categoryData})
+const emit = defineEmits(['saveTransaction', 'cancelTransaction', 'createTransaction'])
+
+const createTransaction = function(){
+  emit('createTransaction', formData.value)
+}
+
+const saveEditTransaction = function(){
+  emit('saveTransaction', formData.value)
+}
+
+const cancelEditTransaction = function(){
+  emit('cancelTransaction')
+}
 
 </script>
 
 <template>
-  <form class="form flex flex-col gap-8">
+  <form class="form flex flex-col gap-8 max-w-[50rem] w-full">
     <FormField labelName="title">
-      <FormInput type="text" name="title" placeholder="enter your title."/>
+      <FormInput type="text" name="title" placeholder="enter your title." v-model="formData.title" />
     </FormField>
     <FormField labelName="type">
-      <el-radio-group v-model="radioValue">
+      <el-radio-group v-model="formData.type">
         <el-radio value="expense" size="large">Expense</el-radio>
         <el-radio value="income" size="large">Income</el-radio>
       </el-radio-group>
     </FormField>
     <FormField labelName="category">
-      <el-select v-model="value" placeholder="select your category" style="width: 100%">
+      <el-select v-model="formData.category" placeholder="select your category" style="width: 100%">
         <el-option
-          v-for="item in options"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
+          v-for="item in category"
+          :key="item.id"
+          :label="item.name"
+          :value="item.name"
         />
       </el-select>
     </FormField>
     <FormField labelName="date">
       <el-date-picker
-        v-model="value1"
+        v-model="formData.date"
         type="date"
         placeholder="select your day"
         size="default"
       />
     </FormField>
     <FormField labelName="amount">
-      <FormInput type="number" name="amount" placeholder="enter your amount." :min="1"  />
+      <FormInput type="number" name="amount" placeholder="enter your amount." v-model="formData.amount" />
     </FormField>
     <FormField labelName="description">
-      <FormTextarea name="description" placeholder="enter your description." />
+      <FormTextarea name="description" placeholder="enter your description." v-model="formData.description"/>
     </FormField>
     <div class="form__button flex items-center justify-end gap-6 mt-14">
-      <Button className="btn-cancel bg-warn hover:bg-[#f58f1b]" btnName="Cancel" />
-      <Button className="btn-confirm bg-highlight hover:bg-[#4aba73]" btnName="Confirm" />
+      <Button @click="cancelEditTransaction" className="btn-cancel bg-warn hover:bg-[#f58f1b]" btnName="Cancel" />
+      <Button @click.prevent="saveEditTransaction" className="btn-save bg-highlight hover:bg-[#4aba73]" btnName="Save" v-if="formData.id" />
+      <Button @click.prevent="createTransaction" className="btn-confirm bg-highlight hover:bg-[#4aba73]" btnName="Confirm" v-else />
     </div>
   </form>
 </template>

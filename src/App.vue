@@ -15,7 +15,7 @@ watch(() => route.path, (newPath) => {
 <template>
   <div class="expense-tracker">
     <div class="content flex relative">
-      <Navigation :curPath="route.path" />
+      <Navigation :curPath="route.path" v-show="route.name !== 'EditTransaction' && route.name !== 'CreateTransaction'" />
       <router-view />
     </div>
     <Footer />

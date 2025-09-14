@@ -4,8 +4,8 @@ const props = defineProps({
   type: String,
   name: String,
   placeholder: String,
-  min: Number,
 })
+const modelValue = defineModel()
 
 </script>
 
@@ -16,5 +16,6 @@ const props = defineProps({
     :id="props.name" 
     :name="props.name" 
     :placeholder="props.placeholder"
-    :min="props.min">
+    step="any"
+    v-model="modelValue">
 </template>

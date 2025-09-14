@@ -4,6 +4,7 @@ const props = defineProps({
   name: String,
   placeholder: String,
 })
+const modelValue = defineModel()
 
 </script>
 
@@ -12,5 +13,6 @@ const props = defineProps({
     class="py-2 px-4 border border-gray-300 rounded-[.5rem]" 
     :name="props.name" 
     :id="props.name" 
-    :placeholder="props.placeholder"></textarea>
+    :placeholder="props.placeholder"
+    v-model="modelValue"></textarea>
 </template>

@@ -6,6 +6,7 @@ import Button from './Button.vue';
 
 const props = defineProps({
   typeModal: String,
+  rowData: Object,
 })
 
 const isModalActive = computed(() => activeModal.value === props.typeModal);
@@ -23,7 +24,8 @@ const isModalActive = computed(() => activeModal.value === props.typeModal);
             class="modal max-w-[40rem] w-full transition-all absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-light p-14 shadow-lg rounded-[1rem]">
           <div v-if="props.typeModal === 'Add' || props.typeModal === 'Edit'">
             <h1 class="text-5xl font-semibold text-dark text-center mb-12">Transaction</h1>
-            <Form />
+            <Form v-if="props.typeModal === 'Add'" />
+            <Form v-else :editData="props.rowData" />
           </div>
           <div v-else-if="props.typeModal === 'Delete'">
             <h2 class="text-center text-5xl text-dark font-semibold mb-14">Are you sure ?</h2>
