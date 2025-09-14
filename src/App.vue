@@ -14,7 +14,7 @@ watch(() => route.path, (newPath) => {
 
 <template>
   <div class="expense-tracker">
-    <div class="content flex">
+    <div class="content flex relative">
       <Navigation :curPath="route.path" />
       <router-view />
     </div>

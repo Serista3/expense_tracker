@@ -11,6 +11,12 @@
     --color-smooth: #35C9FF;
 }
 
+:root {
+    --el-color-primary: var(--color-dark) !important;
+    --el-font-size-base: 1.6rem !important;
+    --el-text-color-placeholder: #999999 !important;
+}
+
 html {
     font-size: 62.5%;
 }
