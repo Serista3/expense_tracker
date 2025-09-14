@@ -1,5 +1,7 @@
 <script setup>
+import FormField from './FormField.vue';
 import FormInput from './FormInput.vue';
+import FormTextarea from './FormTextarea.vue';
 import Button from './Button.vue';
 import { ref } from 'vue';
 
@@ -9,16 +11,16 @@ const radioValue = ref('')
 
 <template>
   <form class="form flex flex-col gap-8">
-    <FormInput type="text" name="title" placeholder="enter your title."/>
-    <div class="form__radio">
-      <div class="font-semibold">Type:</div>
+    <FormField labelName="title">
+      <FormInput type="text" name="title" placeholder="enter your title."/>
+    </FormField>
+    <FormField labelName="type">
       <el-radio-group v-model="radioValue">
         <el-radio value="expense" size="large">Expense</el-radio>
         <el-radio value="income" size="large">Income</el-radio>
       </el-radio-group>
-    </div>
-    <div class="form__category">
-      <div class="font-semibold mb-4">Category:</div>
+    </FormField>
+    <FormField labelName="category">
       <el-select v-model="value" placeholder="select your category" style="width: 100%">
         <el-option
           v-for="item in options"
@@ -27,18 +29,21 @@ const radioValue = ref('')
           :value="item.value"
         />
       </el-select>
-    </div>
-    <div class="form__date">
-      <div class="font-semibold mb-4">Date:</div>
+    </FormField>
+    <FormField labelName="date">
       <el-date-picker
         v-model="value1"
         type="date"
         placeholder="select your day"
         size="default"
       />
-    </div>
-    <FormInput type="number" name="amount" placeholder="enter your amount." :min="1"  />
-    <FormInput type="textarea" name="description" placeholder="enter your description." />
+    </FormField>
+    <FormField labelName="amount">
+      <FormInput type="number" name="amount" placeholder="enter your amount." :min="1"  />
+    </FormField>
+    <FormField labelName="description">
+      <FormTextarea name="description" placeholder="enter your description." />
+    </FormField>
     <div class="form__button flex items-center justify-end gap-6 mt-14">
       <Button className="btn-cancel bg-warn hover:bg-[#f58f1b]" btnName="Cancel" />
       <Button className="btn-confirm bg-highlight hover:bg-[#4aba73]" btnName="Confirm" />

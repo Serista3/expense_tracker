@@ -1,20 +1,16 @@
 <script setup>
 
 const props = defineProps({
-  type: String,
   name: String,
   placeholder: String,
-  min: Number,
 })
 
 </script>
 
 <template>
-  <input
+  <textarea
     class="py-2 px-4 border border-gray-300 rounded-[.5rem]" 
-    :type="props.type" 
-    :id="props.name" 
     :name="props.name" 
-    :placeholder="props.placeholder"
-    :min="props.min">
+    :id="props.name" 
+    :placeholder="props.placeholder"></textarea>
 </template>
