@@ -1,5 +1,5 @@
 <script setup>
-import Button from './Button.vue';
+import Button from '@/components/common/Button.vue';
 import { computed } from 'vue';
 
 const props = defineProps({
@@ -16,12 +16,14 @@ const props = defineProps({
 const transactions = computed(() => [...props.transactions]);
 const categories = computed(() => [...props.categories]);
 
+console.log(transactions.value)
+
 </script>
 
 <template>
     <table class="table border-collapse w-full mb-20">
         <tbody>
-            <tr v-if="transactions != []" v-for="data in transactions" :key="data.id" class="row border-y border-gray-300">
+            <tr v-if="transactions.length !== 0" v-for="data in transactions" :key="data.id" class="row border-y border-gray-300">
                 <td class="p-4">{{ data.title }}</td>
                 <td class="p-4">
                     <div class="tag inline-block px-4 py-1 rounded-xl text-light" :style="{ backgroundColor: categories.find(c => c.name === data.category)?.color }">{{ data.category }}</div>

@@ -1,6 +1,6 @@
 <script setup>
-import Table from '@/components/Table.vue';
-import Button from '@/components/Button.vue';
+import Table from '@/components/common/Table.vue';
+import Button from '@/components/common/Button.vue';
 import { getDataFromLocalStorage } from '@/composables/initial';
 import { ref } from 'vue';
 

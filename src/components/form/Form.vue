@@ -1,5 +1,5 @@
 <script setup>
-import Button from './Button.vue'
+import Button from '@/components/common/Button.vue'
 
 const props = defineProps({
   confirmText: {

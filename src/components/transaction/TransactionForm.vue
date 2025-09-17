@@ -1,11 +1,11 @@
 <script setup>
-import Form from './Form.vue';
-import FormField from './FormField.vue';
-import FormInput from './FormInput.vue';
-import FormTextarea from './FormTextarea.vue';
-import ErrorMessage from './ErrorMessage.vue';
-import Modal from './Modal.vue';
-import CategoryForm from './CategoryForm.vue';
+import Form from '@/components/form/Form.vue';
+import FormField from '@/components/form/FormField.vue';
+import FormInput from '@/components/form/FormInput.vue';
+import FormTextarea from '@/components/form/FormTextarea.vue';
+import ErrorMessage from '@/components/common/ErrorMessage.vue';
+import Modal from '@/components/common/Modal.vue';
+import CategoryForm from '@/components/CategoryForm.vue';
 import { activeModal } from '@/composables/reuse';
 import { ref, computed } from 'vue';
 

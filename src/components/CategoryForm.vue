@@ -1,8 +1,8 @@
 <script setup>
-import Form from './Form.vue'
-import FormField from './FormField.vue'
-import FormInput from './FormInput.vue'
-import ErrorMessage from './ErrorMessage.vue'
+import Form from '@/components/form/Form.vue'
+import FormField from '@/components/form/FormField.vue'
+import FormInput from '@/components/form/FormInput.vue'
+import ErrorMessage from '@/components/common/ErrorMessage.vue'
 import { ref } from 'vue'
 
 const emit = defineEmits(['submitCategory', 'cancelCategory'])

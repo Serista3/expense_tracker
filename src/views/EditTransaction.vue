@@ -1,5 +1,5 @@
 <script setup>
-import TransactionForm from '@/components/TransactionForm.vue';
+import TransactionForm from '@/components/transaction/TransactionForm.vue';
 import TransactionPageLayout from '@/components/layout/TransactionPageLayout.vue';
 import { useRoute, useRouter } from 'vue-router';
 import { getDataFromLocalStorage, updateDataToLocalStorage } from '@/composables/initial';

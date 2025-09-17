@@ -1,7 +1,7 @@
 <script setup>
 import { PhChartPie, PhArrowsLeftRight, PhGear } from '@phosphor-icons/vue';
-import UserProfile from './userProfile.vue';
-import SwitchMode from './SwitchMode.vue';
+import UserProfile from '@/components/userProfile.vue';
+import SwitchMode from '@/components/layout/SwitchMode.vue';
 
 const props = defineProps({
     curPath: String,
@@ -12,7 +12,7 @@ const classNavLink = 'nav__item flex items-center gap-5 hover:text-highlight tra
 </script>
 
 <template>
-    <nav class="nav__sidebar pt-18 pb-40 pl-22 pr-32 relative border-r border-gray-300 dark:bg-dark dark:text-light">
+    <nav class="nav__sidebar pt-18 pb-40 pl-22 pr-32 h-screen relative border-r border-gray-300 dark:bg-dark dark:text-light">
         <UserProfile />
         <ul class="nav__list flex flex-col gap-10">
             <li :class="[classNavLink, { 'text-highlight': curPath === '/' }]">

@@ -1,5 +1,5 @@
 <script setup>
-import TransactionForm from '@/components/TransactionForm.vue';
+import TransactionForm from '@/components/transaction/TransactionForm.vue';
 import TransactionPageLayout from '@/components/layout/TransactionPageLayout.vue';
 import { activeModal, formattedDate } from '@/composables/reuse';
 import { getDataFromLocalStorage, updateDataToLocalStorage } from '@/composables/initial';

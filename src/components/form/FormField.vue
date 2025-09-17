@@ -5,9 +5,7 @@ const props = defineProps({
   labelName: String,
 })
 
-const labelValue = computed(() => {
-  return props.labelName.slice(0, 1).toUpperCase() + props.labelName.slice(1);
-})
+const labelValue = computed(() => props.labelName.slice(0, 1).toUpperCase() + props.labelName.slice(1))
 
 </script>
 
