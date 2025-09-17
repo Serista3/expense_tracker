@@ -1,24 +1,38 @@
 <script setup>
-import Form from '@/components/Form.vue';
+import TransactionForm from '@/components/TransactionForm.vue';
 import TransactionPageLayout from '@/components/layout/TransactionPageLayout.vue';
 import { useRoute, useRouter } from 'vue-router';
-import { exData, exCategory } from '@/composables/initial';
+import { getDataFromLocalStorage, updateDataToLocalStorage } from '@/composables/initial';
+import { computed, ref } from 'vue';
 
 const route = useRoute();
 const router = useRouter();
 
-const getEditData = function(){
-  return Array.from(exData.value).filter(data => data.id === route.params.id).at(0)
-}
+const transactions = ref(getDataFromLocalStorage('transactions'))
+const categories = ref(getDataFromLocalStorage('categories') ?? []);
+
+const getEditData = computed(() => Array.from(transactions.value).find(t => t.id === Number(route.params.id)))
 
 const saveEditData = function(payload){
-  console.log(payload)
+  const curTransactionData = getDataFromLocalStorage('transactions');
+  const newUpdateData = Array.from(curTransactionData).map(t => t.id === payload.id ? t = {...payload} : t ) 
+
+  updateDataToLocalStorage('transactions', newUpdateData)
+  router.push('/transaction')
+}
+
+const cancelData = function(){
+  router.push('/transaction')
 }
 
 </script>
 
 <template>
   <TransactionPageLayout title="Edit Transaction">
-    <Form @saveTransaction="saveEditData" :editData="getEditData()" :categoryData="exCategory"/>
+    <TransactionForm 
+      @submitTransaction="saveEditData" 
+      @cancelTransaction="cancelData" 
+      :editData="getEditData" 
+      :categoryData="categories"/>
   </TransactionPageLayout>
 </template>

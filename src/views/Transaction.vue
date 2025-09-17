@@ -1,6 +1,11 @@
 <script setup>
 import Table from '@/components/Table.vue';
 import Button from '@/components/Button.vue';
+import { getDataFromLocalStorage } from '@/composables/initial';
+import { ref } from 'vue';
+
+const transactions = ref(getDataFromLocalStorage('transactions') ?? [])
+const categories = ref(getDataFromLocalStorage('categories') ?? [])
 
 </script>
 
@@ -10,6 +15,6 @@ import Button from '@/components/Button.vue';
         <div class="manage-transaction-data flex justify-end items-center gap-8">
             <router-link to="/createTransaction"><Button className="btn-add bg-highlight hover:bg-[#4aba73] mb-10" btnName="Add" /></router-link>
         </div>
-        <Table />
+        <Table :transactions="transactions" :categories="categories" />
     </div>
 </template>

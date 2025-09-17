@@ -1,16 +1,30 @@
 <script setup>
 import Button from './Button.vue';
-import { exData } from '@/composables/initial';
+import { computed } from 'vue';
+
+const props = defineProps({
+    'transactions': {
+        type: Array,
+        default: [],
+    },
+    'categories': {
+        type: Array,
+        default: [],
+    }
+})
+
+const transactions = computed(() => [...props.transactions]);
+const categories = computed(() => [...props.categories]);
 
 </script>
 
 <template>
     <table class="table border-collapse w-full mb-20">
         <tbody>
-            <tr v-if="exData" v-for="data in exData" :key="data.id" class="row border-y border-gray-300">
+            <tr v-if="transactions != []" v-for="data in transactions" :key="data.id" class="row border-y border-gray-300">
                 <td class="p-4">{{ data.title }}</td>
                 <td class="p-4">
-                    <div class="tag inline-block px-4 py-1 rounded-xl text-light bg-dark">{{ data.category }}</div>
+                    <div class="tag inline-block px-4 py-1 rounded-xl text-light" :style="{ backgroundColor: categories.find(c => c.name === data.category)?.color }">{{ data.category }}</div>
                 </td>
                 <td class="p-4">{{ data.date }}</td>
                 <td class="p-4 font-semibold" :class="{'text-highlight' : data.type === 'income', 'text-alert' : data.type === 'expense'}">

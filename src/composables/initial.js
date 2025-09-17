@@ -1,5 +1,18 @@
 import { ref } from 'vue';
 
+export const getDataFromLocalStorage = function(key){
+  try {
+    const data = JSON.parse(localStorage.getItem(key))
+    return data;
+  } catch(err) {
+    console.error(err.message)
+  }
+}
+
+export const updateDataToLocalStorage = function(key, data){
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
 export const exData = ref(
     [
             {
