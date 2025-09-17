@@ -15,14 +15,10 @@ const saveEditData = function(payload){
   console.log(payload)
 }
 
-const cancelEditData = function(){
-  router.push('/transaction');
-}
-
 </script>
 
 <template>
   <TransactionPageLayout title="Edit Transaction">
-    <Form @cancelTransaction="cancelEditData" @saveTransaction="saveEditData" :editData="getEditData()" :categoryData="exCategory"/>
+    <Form @saveTransaction="saveEditData" :editData="getEditData()" :categoryData="exCategory"/>
   </TransactionPageLayout>
 </template>

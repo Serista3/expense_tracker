@@ -8,7 +8,7 @@ export const exData = ref(
                 "description": ".............",
                 "type": "expense",
                 "category": "Food",
-                "amount": -50.75,
+                "amount": 50.75,
                 "date": "2024-06-01"
             },
             {

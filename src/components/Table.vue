@@ -1,7 +1,5 @@
 <script setup>
-import { ref } from 'vue';
 import Button from './Button.vue';
-import Modal from '@/components/Modal.vue';
 import { exData } from '@/composables/initial';
 
 </script>
@@ -16,7 +14,7 @@ import { exData } from '@/composables/initial';
                 </td>
                 <td class="p-4">{{ data.date }}</td>
                 <td class="p-4 font-semibold" :class="{'text-highlight' : data.type === 'income', 'text-alert' : data.type === 'expense'}">
-                    {{ data.type === 'income' ? `+${data.amount}` : `${data.amount}` }} THB
+                    {{ data.type === 'income' ? `+${data.amount}` : `-${data.amount}` }} THB
                 </td>
                 <td class="p-4 flex justify-center items-center gap-8">
                     <router-link :to="{name: 'EditTransaction', params: {id : data.id}}"><Button className="btn-edit bg-warn hover:bg-[#f58f1b]" btnName="Edit" /></router-link>
