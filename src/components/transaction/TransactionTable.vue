@@ -15,9 +15,14 @@ const props = defineProps({
         default: [],
     }
 })
+const emit = defineEmits(['deleteTransaction'])
 
 const transactions = computed(() => [...props.transactions]);
 const categories = computed(() => [...props.categories]);
+
+const deleteTransaction = function(transaction) {
+  emit('deleteTransaction', transaction)
+}
 
 </script>
 
@@ -38,7 +43,7 @@ const categories = computed(() => [...props.categories]);
         </TableData>
         <TableData class="flex justify-center items-center gap-8">
           <router-link :to="{name: 'EditTransaction', params: {id : t.id}}"><Button className="btn-edit bg-warn hover:bg-[#f58f1b]" btnName="Edit" /></router-link>
-          <Button className="btn-delete bg-alert hover:bg-[#f72525]" btnName="Delete" />
+          <Button @click="deleteTransaction(t)" className="btn-delete bg-alert hover:bg-[#f72525]" btnName="Delete" />
         </TableData>
       </TableRow>
       <TableRow v-else>

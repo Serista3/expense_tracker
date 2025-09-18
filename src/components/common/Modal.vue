@@ -1,58 +1,53 @@
 <script setup>
-import { closeModal, activeModal } from '@/composables/reuse';
 import { PhX } from '@phosphor-icons/vue';
 
 const props = defineProps({
   nameModal: String,
 })
 
+const activeModal = defineModel({
+  type: Boolean,
+  default: false
+})
+
 </script>
 
 <template>
-  <Transition>
-    <div v-if="activeModal" 
-        class="modal-background h-screen w-full bg-[rgba(0,0,0,0.3)] backdrop-blur-[1px] fixed top-0 left-0 z-10" 
-        @click="closeModal">
-      <Transition name="fade">
-        <div v-if="activeModal" class="modal max-w-[40rem] w-full transition-all z-20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-light p-14 shadow-lg rounded-[1rem]">
-          <h1 class="text-5xl font-semibold text-dark text-center mb-12">{{ props.nameModal }}</h1>
-          <slot></slot>
-          <div class="close-modal cursor-pointer absolute top-8 right-8" @click="activeModal = false">
-            <PhX :size="20" />
-          </div>
-        </div>
-      </Transition>
-    </div>
-  </Transition>
-</template>
-<!--      <div v-else-if="props.typeModal === 'Delete'">
-            <h2 class="text-center text-5xl text-dark font-semibold mb-14">Are you sure ?</h2>
-            <div class="group-btn flex items-center justify-center gap-8">
-              <Button className="btn-no bg-dark hover:bg-[#f58f1b]" btnName="No" />
-              <Button className="btn-yes bg-alert hover:bg-[#f72525]" btnName="Yes" />
+    <Transition name="modal-transition">
+        <div v-if="activeModal" 
+            class="modal-background h-screen w-full bg-[rgba(0,0,0,0.3)] backdrop-blur-[1px] fixed top-0 left-0 z-10 flex items-center justify-center" 
+            @click.self="activeModal = false"> <div class="modal-content max-w-[40rem] w-full bg-light p-14 shadow-lg rounded-[1rem] relative">
+                <h1 class="text-5xl font-semibold text-dark text-center mb-12">{{ nameModal }}</h1>
+                <slot></slot>
+                <div class="close-modal cursor-pointer absolute top-8 right-8" @click="activeModal = false">
+                    <PhX :size="20" />
+                </div>
             </div>
-          </div> -->
+        </div>
+    </Transition>
+</template>
+
 <style scoped>
 
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.3s ease;
+.modal-transition-enter-active,
+.modal-transition-leave-active {
+    transition: opacity 0.3s ease;
 }
 
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
+.modal-transition-enter-active .modal-content,
+.modal-transition-leave-active .modal-content {
+    transition: all 0.3s ease;
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 0.3s ease;
+
+.modal-transition-enter-from,
+.modal-transition-leave-to {
+    opacity: 0;
 }
 
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-  transform: translateY(3rem);
+.modal-transition-enter-from .modal-content,
+.modal-transition-leave-to .modal-content {
+    transform: translateY(3rem);
+    opacity: 0;
 }
-
 </style>

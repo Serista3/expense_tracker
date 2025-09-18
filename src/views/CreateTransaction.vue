@@ -1,13 +1,16 @@
 <script setup>
 import TransactionForm from '@/components/transaction/TransactionForm.vue';
 import TransactionPageLayout from '@/components/layout/TransactionPageLayout.vue';
-import { activeModal, formattedDate } from '@/composables/reuse';
+import Modal from '@/components/common/Modal.vue';
+import CategoryForm from '@/components/CategoryForm.vue';
+import { formattedDate } from '@/composables/reuse';
 import { getDataFromLocalStorage, updateDataToLocalStorage } from '@/composables/initial';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
 const categories = ref(getDataFromLocalStorage('categories') ?? []);
+const isCreateCategoryModalVisible = ref(false);
 
 const createData = function(payload){
   const transations = getDataFromLocalStorage('transactions') ?? []
@@ -25,6 +28,14 @@ const cancelData = function(){
   router.push('/transaction')
 }
 
+const openModalCreateCategory = function(){
+  isCreateCategoryModalVisible.value = true
+}
+
+const closeModalCreateCategory = function(){
+  isCreateCategoryModalVisible.value = false
+}
+
 const createCategoryData = function(payload){
   payload.id = categories.value == [] ? 1 : categories.value.length + 1;
   payload.name = String(payload.name).slice(0, 1).toUpperCase() + String(payload.name).slice(1)
@@ -32,11 +43,7 @@ const createCategoryData = function(payload){
   categories.value.push({...payload})
   updateDataToLocalStorage('categories', categories.value)
 
-  activeModal.value = false;
-}
-
-const cancelCategoryData = function(){
-  activeModal.value = false;
+  closeModalCreateCategory()
 }
 
 </script>
@@ -47,7 +54,9 @@ const cancelCategoryData = function(){
       :categoryData="categories" 
       @submitTransaction="createData" 
       @cancelTransaction="cancelData" 
-      @submitCategory="createCategoryData" 
-      @cancelCategory="cancelCategoryData" />
+      @openModalCreateCategory="openModalCreateCategory"/>
+    <Modal v-model="isCreateCategoryModalVisible" nameModal="Category">
+      <CategoryForm @submitCategory="createCategoryData" @cancelCategory="closeModalCreateCategory" />
+    </Modal>
   </TransactionPageLayout>
 </template>

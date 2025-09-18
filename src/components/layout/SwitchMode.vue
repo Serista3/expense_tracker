@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
+import { getDataFromLocalStorage, updateDataToLocalStorage } from '@/composables/initial';
 
 const curTheme = ref('');
 
@@ -8,11 +9,11 @@ const changeTheme = function() {
     curTheme.value = curTheme.value === 'dark' ? 'light' : 'dark';
     document.documentElement.classList.add(curTheme.value);
 
-    localStorage.setItem('theme', JSON.stringify(curTheme.value));
+    updateDataToLocalStorage('theme', curTheme.value);
 }
 
 const getTheme = function() {
-    curTheme.value = JSON.parse(localStorage.getItem('theme'));
+    curTheme.value = getDataFromLocalStorage('theme');
     document.documentElement.classList.add(curTheme.value || 'light');
 }
 

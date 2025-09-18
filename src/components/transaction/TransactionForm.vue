@@ -4,9 +4,6 @@ import FormField from '@/components/form/FormField.vue';
 import FormInput from '@/components/form/FormInput.vue';
 import FormTextarea from '@/components/form/FormTextarea.vue';
 import ErrorMessage from '@/components/common/ErrorMessage.vue';
-import Modal from '@/components/common/Modal.vue';
-import CategoryForm from '@/components/CategoryForm.vue';
-import { activeModal } from '@/composables/reuse';
 import { ref, computed } from 'vue';
 
 const props = defineProps({
@@ -22,7 +19,7 @@ const props = defineProps({
 
 const formData = ref({...props.editData})
 const category = computed(() => [...props.categoryData])
-const emit = defineEmits(['submitTransaction', 'cancelTransaction', 'submitCategory', 'cancelCategory'])
+const emit = defineEmits(['submitTransaction', 'cancelTransaction', 'openModalCreateCategory'])
 const errDataTransac = ref({})
 
 const validationForm = function(){
@@ -47,12 +44,8 @@ const handleCancel = function(){
   emit('cancelTransaction')
 }
 
-const createCategory = function(payload){
-  emit('submitCategory', payload)
-}
-
-const cancelCategory = function(){
-  emit('cancelCategory')
+const openModalCreateCategory = function(){
+  emit('openModalCreateCategory')
 }
 
 </script>
@@ -81,10 +74,7 @@ const cancelCategory = function(){
       </el-select>
       <div class="flex justify-between items-center">
         <ErrorMessage v-if="errDataTransac.category" :message="errDataTransac.category" />
-        <button @click.prevent="activeModal = true" v-if="!formData.id" class="create-category inline-block ml-auto font-semibold text-[1.4rem] hover:underline cursor-pointer">create your category</button>
-        <Modal nameModal="Category">
-          <CategoryForm @submitCategory="createCategory" @cancelCategory="cancelCategory" />
-        </Modal>
+        <button @click.prevent="openModalCreateCategory" v-if="!formData.id" class="create-category inline-block ml-auto font-semibold text-[1.4rem] hover:underline cursor-pointer">create your category</button>
       </div>
     </FormField>
     <FormField labelName="date">
