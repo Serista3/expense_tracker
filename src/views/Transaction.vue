@@ -1,5 +1,5 @@
 <script setup>
-import Table from '@/components/common/Table.vue';
+import TransactionTable from '@/components/transaction/TransactionTable.vue';
 import Button from '@/components/common/Button.vue';
 import { getDataFromLocalStorage } from '@/composables/initial';
 import { ref } from 'vue';
@@ -15,6 +15,6 @@ const categories = ref(getDataFromLocalStorage('categories') ?? [])
         <div class="manage-transaction-data flex justify-end items-center gap-8">
             <router-link to="/createTransaction"><Button className="btn-add bg-highlight hover:bg-[#4aba73] mb-10" btnName="Add" /></router-link>
         </div>
-        <Table :transactions="transactions" :categories="categories" />
+        <TransactionTable :transactions="transactions" :categories="categories" />
     </div>
 </template>
