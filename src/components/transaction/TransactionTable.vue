@@ -33,7 +33,7 @@ const deleteTransaction = function(transaction) {
           {{ t.title }}
         </TableData>
         <TableData>
-          <div class="tag inline-block px-4 py-1 rounded-xl text-light" :style="{ backgroundColor: categories.find(c => c.name === t.category)?.color }">{{ t.category }}</div>
+          <div class="tag inline-block px-4 py-1 rounded-xl text-light font-semibold" :style="{ backgroundColor: categories.find(c => c.name === t.category)?.color }">{{ t.category }}</div>
         </TableData>
         <TableData>
           {{ t.date }}
@@ -42,8 +42,8 @@ const deleteTransaction = function(transaction) {
           {{ t.type === 'income' ? `+${t.amount}` : `-${t.amount}` }} THB
         </TableData>
         <TableData class="flex justify-center items-center gap-8">
-          <router-link :to="{name: 'EditTransaction', params: {id : t.id}}"><Button className="btn-edit bg-warn hover:bg-[#f58f1b]" btnName="Edit" /></router-link>
-          <Button @click="deleteTransaction(t)" className="btn-delete bg-alert hover:bg-[#f72525]" btnName="Delete" />
+          <router-link :to="{name: 'EditTransaction', params: {id : t.id}}"><Button class="btn-edit bg-warn hover:bg-[#f58f1b]">Edit</Button></router-link>
+          <Button @click="deleteTransaction(t)" class="btn-delete bg-alert hover:bg-[#f72525]">Delete</Button>
         </TableData>
       </TableRow>
       <TableRow v-else>
