@@ -3,48 +3,64 @@ import TransactionTable from '@/components/transaction/TransactionTable.vue';
 import Button from '@/components/common/Button.vue';
 import Modal from '@/components/common/Modal.vue';
 import Search from '@/components/common/Search.vue';
+import Filter from '@/components/common/Filter.vue';
 import { getDataFromLocalStorage, updateDataToLocalStorage } from '@/composables/initial';
-import { ref, watch } from 'vue';
+import { ref, computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
 const route = useRoute();
 const router = useRouter();
 
 const transactions = ref(getDataFromLocalStorage('transactions') ?? [])
-const transactionFilter = ref(transactions.value);
 const categories = ref(getDataFromLocalStorage('categories') ?? [])
-
 const isDeleteModalVisible = ref(false);
-const delArrData = ref([])
+let transactionToDelId = null;
 
-const openDeleteModal = function() {
+const typeFil = ref(route.query.type ?? 'All Type')
+const categoryFil = ref(route.query.categories ? route.query.categories.split(',') : [])
+
+const types = ["All Type",'income', 'expense']
+const options = Array.from(categories.value).map(c => ({ value: `${c.name}`, label: c.name}))
+
+const openDeleteModal = function(id) {
+    transactionToDelId = id
     isDeleteModalVisible.value = true;
 };
 
-const closeDeleteModal = function(){
-    isDeleteModalVisible.value = false;
-}
-
 const confirmDelTransaction = function(){
-    transactions.value = delArrData.value;
-    updateDataToLocalStorage('transactions', delArrData.value)
-    closeDeleteModal()
+    transactions.value = transactions.value.filter(t => t.id !== transactionToDelId);
+    updateDataToLocalStorage('transactions', transactions.value)
+    isDeleteModalVisible.value = false;
+    transactionToDelId = null
 }
 
-const delTransaction = function(payload){
-    openDeleteModal()
-    delArrData.value = Array.from(getDataFromLocalStorage('transactions')).filter(t => t.id !== payload.id)
+const updateQuery = function(key, value){
+    const newQuery = { ...route.query }
+
+    if(!value || (key === 'type' && value === 'All Type') || (key === 'categories' && value.length === 0))
+        newQuery[key] = undefined
+    else
+        newQuery[key] = Array.isArray(value) ? value.join(',') : value
+
+    router.push({ name: 'Transaction', query : newQuery})
 }
 
-const searchTransaction = function(payload){
-    payload !== '' ? router.push({ name: 'Transaction', query: { 'title': payload } }) : router.push({ name: 'Transaction' })
-}
+const filterTransaction = computed(() => {
+    const { title, type, categories } = { ...route.query }
 
-watch(() => route.query, (newQuery) => {
-    transactionFilter.value = newQuery.title ? 
-    Array.from(transactions.value).filter(t => String(t.title).toLocaleLowerCase().includes(newQuery.title.toLocaleLowerCase()))
-     : transactions.value
-}, { immediate: true})
+    if(!title && !type && !categories) 
+        return transactions.value
+    
+    const categoryArr = categories ? categories.split(',') : []
+
+    return Array.from(transactions.value).filter(transaction => {
+        const isTitle = !title || title.toLowerCase().includes(transaction.title)
+        const isType = !type || type.toLowerCase().includes(transaction.type)
+        const isCategory = !categoryArr.length || categoryArr.find(c => c === transaction.category)
+
+        return isTitle && isType && isCategory
+    })
+})
 
 </script>
 
@@ -52,14 +68,22 @@ watch(() => route.query, (newQuery) => {
     <div class="transaction-page py-18 px-30 dark:text-light dark:bg-dark w-full">
         <h1 class="text-6xl font-semibold mb-10">Transactions</h1>
         <div class="manage-transaction-data flex justify-end items-center gap-8 mb-10">
-            <Search @searchData="searchTransaction" :initSearchVal="route.query.title" />
+            <Search @searchData="payload => updateQuery('title', payload)" :initSearchVal="route.query.title" />
+            <Filter style="max-width: 12rem;">
+                <el-select v-model="typeFil" placeholder="Type" @change="updateQuery('type', typeFil)">
+                    <el-option v-for="item, index in types" :key="index" :label="item" :value="item" />
+                </el-select>
+            </Filter>
+            <Filter style="max-width: 20rem;">
+                <el-select-v2 @change="updateQuery('categories', categoryFil)" v-model="categoryFil" :options="options" placeholder="Categories" multiple collapse-tags collapse-tags-tooltip/>
+            </Filter>
             <router-link to="/createTransaction"><Button class="btn-add bg-highlight hover:bg-[#4aba73]">Add</Button></router-link>
         </div>
-        <TransactionTable @deleteTransaction="delTransaction" :transactions="transactionFilter" :categories="categories" />
+        <TransactionTable @deleteTransaction="payload => openDeleteModal(payload.id)" :transactions="filterTransaction" :categories="categories" />
         <Modal v-model="isDeleteModalVisible" nameModal="Are you sure?">
             <div class="group-btn flex items-center justify-center gap-8">
                 <Button @click="confirmDelTransaction" class="btn-yes bg-alert hover:bg-[#f72525]">Yes</Button>
-                <Button @click="closeDeleteModal" class="btn-no bg-dark hover:bg-[#363636]">No</Button>
+                <Button @click="isDeleteModalVisible = false;" class="btn-no bg-dark hover:bg-[#363636]">No</Button>
             </div>
         </Modal>
     </div>

@@ -11,7 +11,7 @@ const modelValue = defineModel()
 
 <template>
   <input
-    class="py-2 px-4 border border-gray-300 rounded-[.5rem]" 
+    class="py-2 px-4 border border-gray-300 rounded-[.7rem]" 
     :type="props.type" 
     :id="props.name" 
     :name="props.name" 
