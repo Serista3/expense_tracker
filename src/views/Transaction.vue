@@ -55,7 +55,7 @@ const filterTransaction = computed(() => {
     const categoryArr = categories ? categories.split(',') : []
 
     return Array.from(transactions.value).filter(transaction => {
-        const isTitle = !title || title.toLowerCase().includes(transaction.title)
+        const isTitle = !title || transaction.title.includes(title.toLowerCase())
         const isType = !type || type.toLowerCase().includes(transaction.type)
         const isCategory = !categoryArr.length || categoryArr.find(c => c === transaction.category)
 
@@ -77,6 +77,8 @@ const updatePage = function(page) {
 const pageTransaction = computed(() => {
     const start = (curPage.value - 1) * 10;
     const end = start + 10;
+
+    updatePage(curPage.value > totalPage.value ? totalPage.value : curPage.value);
     return filterTransaction.value.slice(start, end);
 })
 
