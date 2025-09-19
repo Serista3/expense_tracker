@@ -4,6 +4,7 @@ import Button from '@/components/common/Button.vue';
 import Modal from '@/components/common/Modal.vue';
 import Search from '@/components/common/Search.vue';
 import Filter from '@/components/common/Filter.vue';
+import Pagination from '@/components/common/Pagination.vue';
 import { getDataFromLocalStorage, updateDataToLocalStorage } from '@/composables/initial';
 import { ref, computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
@@ -48,7 +49,7 @@ const updateQuery = function(key, value){
 const filterTransaction = computed(() => {
     const { title, type, categories } = { ...route.query }
 
-    if(!title && !type && !categories) 
+    if(!title && !type && !categories)
         return transactions.value
     
     const categoryArr = categories ? categories.split(',') : []
@@ -60,6 +61,23 @@ const filterTransaction = computed(() => {
 
         return isTitle && isType && isCategory
     })
+})
+
+const curPage = ref(route.query.page ? Number(route.query.page) : 1);
+const totalPage = computed(() => Math.ceil(filterTransaction.value.length / 10) || 1);
+
+const updatePage = function(page) {
+    if(!page || page > totalPage.value)
+        return;
+
+    curPage.value = page;
+    updateQuery('page', page);
+}
+
+const pageTransaction = computed(() => {
+    const start = (curPage.value - 1) * 10;
+    const end = start + 10;
+    return filterTransaction.value.slice(start, end);
 })
 
 </script>
@@ -79,7 +97,8 @@ const filterTransaction = computed(() => {
             </Filter>
             <router-link to="/createTransaction"><Button class="btn-add bg-highlight hover:bg-[#4aba73]">Add</Button></router-link>
         </div>
-        <TransactionTable @deleteTransaction="payload => openDeleteModal(payload.id)" :transactions="filterTransaction" :categories="categories" />
+        <TransactionTable @deleteTransaction="payload => openDeleteModal(payload.id)" :transactions="pageTransaction" :categories="categories" />
+        <Pagination :curPage="curPage" :totalPage="totalPage" @updatePage="updatePage" />
         <Modal v-model="isDeleteModalVisible" nameModal="Are you sure?">
             <div class="group-btn flex items-center justify-center gap-8">
                 <Button @click="confirmDelTransaction" class="btn-yes bg-alert hover:bg-[#f72525]">Yes</Button>
