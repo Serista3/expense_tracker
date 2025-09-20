@@ -6,7 +6,7 @@ import Search from '@/components/common/Search.vue';
 import Filter from '@/components/common/Filter.vue';
 import Pagination from '@/components/common/Pagination.vue';
 import { getDataFromLocalStorage, updateDataToLocalStorage } from '@/composables/initial';
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
 const route = useRoute();
@@ -41,7 +41,7 @@ const updateQuery = function(key, value){
     if(!value || (key === 'type' && value === 'All Type') || (key === 'categories' && value.length === 0))
         newQuery[key] = undefined
     else
-        newQuery[key] = Array.isArray(value) ? value.join(',') : value
+        newQuery[key] = Array.isArray(value) ? value.map(v => v.toLowerCase()).join(',') : String(value).toLowerCase()
 
     router.push({ name: 'Transaction', query : newQuery})
 }
@@ -56,8 +56,8 @@ const filterTransaction = computed(() => {
 
     return Array.from(transactions.value).filter(transaction => {
         const isTitle = !title || transaction.title.toLowerCase().includes(title.toLowerCase())
-        const isType = !type || type.toLowerCase().includes(transaction.type)
-        const isCategory = !categoryArr.length || categoryArr.find(c => c === transaction.category)
+        const isType = !type || type.toLowerCase().includes(transaction.type.toLowerCase())
+        const isCategory = !categoryArr.length || categoryArr.find(c => c.toLowerCase() === transaction.category.toLowerCase())
 
         return isTitle && isType && isCategory
     })
@@ -74,11 +74,14 @@ const updatePage = function(page) {
     updateQuery('page', page);
 }
 
+watch(totalPage, (newTotalPage) => {
+    updatePage(curPage.value > newTotalPage ? newTotalPage : curPage.value);
+})
+
 const pageTransaction = computed(() => {
     const start = (curPage.value - 1) * 10;
     const end = start + 10;
 
-    updatePage(curPage.value > totalPage.value ? totalPage.value : curPage.value);
     return filterTransaction.value.slice(start, end);
 })
 

@@ -14,20 +14,17 @@ const props = defineProps({
     }
 })
 
-const curPage = computed(() => props.curPage);
-const totalPage = computed(() => props.totalPage);
-
 const emit = defineEmits(['updatePage'])
 const ArrPageShow = computed(() => {
-    if(totalPage.value <= 7) 
-        return Array.from({ length: totalPage.value - 2}, (_, i) => i + 2);
+    if(props.totalPage <= 7) 
+        return Array.from({ length: props.totalPage - 2}, (_, i) => i + 2);
     else
-        if(curPage.value >= 5 && curPage.value <= totalPage.value - 3)
-            return Array.from({ length: 5}, (_, i) => i + curPage.value - 2)
-        else if(curPage.value < 5)
+        if(props.curPage >= 5 && props.curPage <= props.totalPage - 3)
+            return Array.from({ length: 5}, (_, i) => i + props.curPage - 2)
+        else if(props.curPage < 5)
             return Array.from({ length: 5}, (_, i) => i + 2);
-        else if(curPage.value > totalPage.value - 3)
-            return Array.from({ length: 5}, (_, i) => totalPage.value - 1 - i).reverse();
+        else if(props.curPage > props.totalPage - 3)
+            return Array.from({ length: 5}, (_, i) => props.totalPage - 1 - i).reverse();
 })
 
 </script>
