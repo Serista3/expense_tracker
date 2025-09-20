@@ -55,7 +55,7 @@ const filterTransaction = computed(() => {
     const categoryArr = categories ? categories.split(',') : []
 
     return Array.from(transactions.value).filter(transaction => {
-        const isTitle = !title || transaction.title.includes(title.toLowerCase())
+        const isTitle = !title || transaction.title.toLowerCase().includes(title.toLowerCase())
         const isType = !type || type.toLowerCase().includes(transaction.type)
         const isCategory = !categoryArr.length || categoryArr.find(c => c === transaction.category)
 

@@ -1,24 +1,1082 @@
 [
-    {
-        "transactions": [
-            {
-                "id": 1,
-                "title": "Grocery Shopping",
-                "description": ".............",
-                "type": "expense",
-                "category": "Food",
-                "amount": -50.75,
-                "date": "2024-06-01"
-            },
-            {
-                "id": 2,
-                "title": "Salary",
-                "description": ".............",
-                "type": "income",
-                "category": "Salary",
-                "amount": 1500.00,
-                "date": "2024-06-05"
-            }
-        ]
-    }
+  {
+    "id": 2,
+    "title": "Netflix Subscription",
+    "amount": 149,
+    "type": "expense",
+    "category": "Entertainment",
+    "date": "2025-09-01",
+    "description": ""
+  },
+  {
+    "id": 3,
+    "title": "Grab ride to work",
+    "amount": 85,
+    "type": "expense",
+    "category": "Transportation",
+    "date": "2025-09-02",
+    "description": ""
+  },
+  {
+    "id": 4,
+    "title": "Starbucks Coffee",
+    "amount": 120,
+    "type": "expense",
+    "category": "Food",
+    "date": "2025-09-02",
+    "description": ""
+  },
+  {
+    "id": 5,
+    "title": "New T-shirt from Uniqlo",
+    "amount": 590,
+    "type": "expense",
+    "category": "Shopping",
+    "date": "2025-09-04",
+    "description": ""
+  },
+  {
+    "id": 6,
+    "title": "Electricity Bill",
+    "amount": 850,
+    "type": "expense",
+    "category": "Utilities",
+    "date": "2025-09-05",
+    "description": ""
+  },
+  {
+    "id": 7,
+    "title": "Dinner at a Japanese restaurant",
+    "amount": 750,
+    "type": "expense",
+    "category": "Food",
+    "date": "2025-09-05",
+    "description": ""
+  },
+  {
+    "id": 8,
+    "title": "Movie ticket for 'The Galactic Echo'",
+    "amount": 220,
+    "type": "expense",
+    "category": "Entertainment",
+    "date": "2025-09-06",
+    "description": ""
+  },
+  {
+    "id": 9,
+    "title": "Monthly phone bill",
+    "amount": 499,
+    "type": "expense",
+    "category": "Utilities",
+    "date": "2025-09-07",
+    "description": ""
+  },
+  {
+    "id": 10,
+    "title": "Groceries from Tops",
+    "amount": 1250,
+    "type": "expense",
+    "category": "Groceries",
+    "date": "2025-09-08",
+    "description": ""
+  },
+  {
+    "id": 11,
+    "title": "BTS Rabbit Card Top-up",
+    "amount": 300,
+    "type": "expense",
+    "category": "Transportation",
+    "date": "2025-09-09",
+    "description": ""
+  },
+  {
+    "id": 12,
+    "title": "Lunch at office canteen",
+    "amount": 60,
+    "type": "expense",
+    "category": "Food",
+    "date": "2025-09-10",
+    "description": ""
+  },
+  {
+    "id": 13,
+    "title": "New book 'The Art of Coding'",
+    "amount": 450,
+    "type": "expense",
+    "category": "Shopping",
+    "date": "2025-09-11",
+    "description": ""
+  },
+  {
+    "id": 14,
+    "title": "Headache pills from pharmacy",
+    "amount": 95,
+    "type": "expense",
+    "category": "Health",
+    "date": "2025-09-12",
+    "description": ""
+  },
+  {
+    "id": 15,
+    "title": "Spotify Premium",
+    "amount": 129,
+    "type": "expense",
+    "category": "Entertainment",
+    "date": "2025-09-12",
+    "description": ""
+  },
+  {
+    "id": 16,
+    "title": "Water Bill",
+    "amount": 250,
+    "type": "expense",
+    "category": "Utilities",
+    "date": "2025-09-13",
+    "description": ""
+  },
+  {
+    "id": 17,
+    "title": "Donation to a charity",
+    "amount": 200,
+    "type": "expense",
+    "category": "Others",
+    "date": "2025-09-14",
+    "description": ""
+  },
+  {
+    "id": 18,
+    "title": "Street food dinner",
+    "amount": 150,
+    "type": "expense",
+    "category": "Food",
+    "date": "2025-09-15",
+    "description": ""
+  },
+  {
+    "id": 19,
+    "title": "Gasoline for motorcycle",
+    "amount": 100,
+    "type": "expense",
+    "category": "Transportation",
+    "date": "2025-09-16",
+    "description": ""
+  },
+  {
+    "id": 20,
+    "title": "Online course subscription",
+    "amount": 899,
+    "type": "expense",
+    "category": "Education",
+    "date": "2025-09-17",
+    "description": ""
+  },
+  {
+    "id": 21,
+    "title": "Birthday gift for a friend",
+    "amount": 500,
+    "type": "expense",
+    "category": "Shopping",
+    "date": "2025-09-18",
+    "description": ""
+  },
+  {
+    "id": 22,
+    "title": "Dental check-up",
+    "amount": 900,
+    "type": "expense",
+    "category": "Health",
+    "date": "2025-09-19",
+    "description": ""
+  },
+  {
+    "id": 23,
+    "title": "Pizza for dinner",
+    "amount": 350,
+    "type": "expense",
+    "category": "Food",
+    "date": "2025-09-20",
+    "description": ""
+  },
+  {
+    "id": 24,
+    "title": "Internet Bill",
+    "amount": 599,
+    "type": "expense",
+    "category": "Utilities",
+    "date": "2025-09-21",
+    "description": ""
+  },
+  {
+    "id": 25,
+    "title": "Concert ticket",
+    "amount": 1500,
+    "type": "expense",
+    "category": "Entertainment",
+    "date": "2025-09-22",
+    "description": ""
+  },
+  {
+    "id": 26,
+    "title": "Fruit from local market",
+    "amount": 180,
+    "type": "expense",
+    "category": "Groceries",
+    "date": "2025-09-23",
+    "description": ""
+  },
+  {
+    "id": 27,
+    "title": "Tollway fee",
+    "amount": 50,
+    "type": "expense",
+    "category": "Transportation",
+    "date": "2025-09-24",
+    "description": ""
+  },
+  {
+    "id": 28,
+    "title": "Stationery for work",
+    "amount": 120,
+    "type": "expense",
+    "category": "Shopping",
+    "date": "2025-09-25",
+    "description": ""
+  },
+  {
+    "id": 29,
+    "title": "Gym membership",
+    "amount": 1200,
+    "type": "expense",
+    "category": "Health",
+    "date": "2025-09-26",
+    "description": ""
+  },
+  {
+    "id": 30,
+    "title": "Bubble tea",
+    "amount": 75,
+    "type": "expense",
+    "category": "Food",
+    "date": "2025-09-27",
+    "description": ""
+  },
+  {
+    "id": 31,
+    "title": "YouTube Premium",
+    "amount": 159,
+    "type": "expense",
+    "category": "Entertainment",
+    "date": "2025-09-28",
+    "description": ""
+  },
+  {
+    "id": 32,
+    "title": "Parking fee at mall",
+    "amount": 40,
+    "type": "expense",
+    "category": "Transportation",
+    "date": "2025-09-29",
+    "description": ""
+  },
+  {
+    "id": 33,
+    "title": "New phone case",
+    "amount": 250,
+    "type": "expense",
+    "category": "Shopping",
+    "date": "2025-09-30",
+    "description": ""
+  },
+  {
+    "id": 34,
+    "title": "Som Tum for lunch",
+    "amount": 80,
+    "type": "expense",
+    "category": "Food",
+    "date": "2025-10-01",
+    "description": ""
+  },
+  {
+    "id": 35,
+    "title": "Common area fee",
+    "amount": 550,
+    "type": "expense",
+    "category": "Utilities",
+    "date": "2025-10-02",
+    "description": ""
+  },
+  {
+    "id": 36,
+    "title": "Meat and vegetables for BBQ",
+    "amount": 950,
+    "type": "expense",
+    "category": "Groceries",
+    "date": "2025-10-03",
+    "description": ""
+  },
+  {
+    "id": 37,
+    "title": "Vitamin supplements",
+    "amount": 600,
+    "type": "expense",
+    "category": "Health",
+    "date": "2025-10-04",
+    "description": ""
+  },
+  {
+    "id": 38,
+    "title": "Grab delivery fee",
+    "amount": 25,
+    "type": "expense",
+    "category": "Food",
+    "date": "2025-10-05",
+    "description": ""
+  },
+  {
+    "id": 39,
+    "title": "Taxi to airport",
+    "amount": 450,
+    "type": "expense",
+    "category": "Transportation",
+    "date": "2025-10-06",
+    "description": ""
+  },
+  {
+    "id": 40,
+    "title": "Textbook for language class",
+    "amount": 780,
+    "type": "expense",
+    "category": "Education",
+    "date": "2025-10-07",
+    "description": ""
+  },
+  {
+    "id": 41,
+    "title": "New pair of shoes",
+    "amount": 1800,
+    "type": "expense",
+    "category": "Shopping",
+    "date": "2025-10-08",
+    "description": ""
+  },
+  {
+    "id": 42,
+    "title": "Ice cream after dinner",
+    "amount": 90,
+    "type": "expense",
+    "category": "Food",
+    "date": "2025-10-09",
+    "description": ""
+  },
+  {
+    "id": 43,
+    "title": "Video game purchase",
+    "amount": 1250,
+    "type": "expense",
+    "category": "Entertainment",
+    "date": "2025-10-10",
+    "description": ""
+  },
+  {
+    "id": 44,
+    "title": "Laundry service",
+    "amount": 150,
+    "type": "expense",
+    "category": "Others",
+    "date": "2025-10-11",
+    "description": ""
+  },
+  {
+    "id": 45,
+    "title": "Milk and bread",
+    "amount": 110,
+    "type": "expense",
+    "category": "Groceries",
+    "date": "2025-10-12",
+    "description": ""
+  },
+  {
+    "id": 46,
+    "title": "Car wash",
+    "amount": 200,
+    "type": "expense",
+    "category": "Transportation",
+    "date": "2025-10-13",
+    "description": ""
+  },
+  {
+    "id": 47,
+    "title": "KFC",
+    "amount": 299,
+    "type": "expense",
+    "category": "Food",
+    "date": "2025-10-14",
+    "description": ""
+  },
+  {
+    "id": 48,
+    "title": "Haircut",
+    "amount": 300,
+    "type": "expense",
+    "category": "Others",
+    "date": "2025-10-15",
+    "description": ""
+  },
+  {
+    "id": 49,
+    "title": "Skin care products",
+    "amount": 850,
+    "type": "expense",
+    "category": "Health",
+    "date": "2025-10-16",
+    "description": ""
+  },
+  {
+    "id": 50,
+    "title": "Online magazine subscription",
+    "amount": 99,
+    "type": "expense",
+    "category": "Education",
+    "date": "2025-10-17",
+    "description": ""
+  },
+  {
+    "id": 51,
+    "title": "Shabu buffet with friends",
+    "amount": 499,
+    "type": "expense",
+    "category": "Food",
+    "date": "2025-10-18",
+    "description": ""
+  },
+  {
+    "id": 52,
+    "title": "New headphones",
+    "amount": 2500,
+    "type": "expense",
+    "category": "Shopping",
+    "date": "2025-10-19",
+    "description": ""
+  },
+  {
+    "id": 53,
+    "title": "Visit to a museum",
+    "amount": 150,
+    "type": "expense",
+    "category": "Entertainment",
+    "date": "2025-10-20",
+    "description": ""
+  },
+  {
+    "id": 54,
+    "title": "Motorbike maintenance",
+    "amount": 400,
+    "type": "expense",
+    "category": "Transportation",
+    "date": "2025-10-21",
+    "description": ""
+  },
+  {
+    "id": 55,
+    "title": "Snacks for office",
+    "amount": 220,
+    "type": "expense",
+    "category": "Groceries",
+    "date": "2025-10-22",
+    "description": ""
+  },
+  {
+    "id": 56,
+    "title": "Doctor's visit (flu)",
+    "amount": 750,
+    "type": "expense",
+    "category": "Health",
+    "date": "2025-10-23",
+    "description": ""
+  },
+  {
+    "id": 57,
+    "title": "Pad Thai lunch",
+    "amount": 70,
+    "type": "expense",
+    "category": "Food",
+    "date": "2025-10-24",
+    "description": ""
+  },
+  {
+    "id": 58,
+    "title": "Room cleaning supplies",
+    "amount": 350,
+    "type": "expense",
+    "category": "Utilities",
+    "date": "2025-10-25",
+    "description": ""
+  },
+  {
+    "id": 59,
+    "title": "Bowling with family",
+    "amount": 600,
+    "type": "expense",
+    "category": "Entertainment",
+    "date": "2025-10-26",
+    "description": ""
+  },
+  {
+    "id": 60,
+    "title": "Postage for a package",
+    "amount": 65,
+    "type": "expense",
+    "category": "Others",
+    "date": "2025-10-27",
+    "description": ""
+  },
+  {
+    "id": 61,
+    "title": "New software license",
+    "amount": 1800,
+    "type": "expense",
+    "category": "Education",
+    "date": "2025-10-28",
+    "description": ""
+  },
+  {
+    "id": 62,
+    "title": "MRT fare",
+    "amount": 42,
+    "type": "expense",
+    "category": "Transportation",
+    "date": "2025-10-29",
+    "description": ""
+  },
+  {
+    "id": 63,
+    "title": "Instant noodles pack",
+    "amount": 55,
+    "type": "expense",
+    "category": "Groceries",
+    "date": "2025-10-30",
+    "description": ""
+  },
+  {
+    "id": 64,
+    "title": "Coffee and cake",
+    "amount": 180,
+    "type": "expense",
+    "category": "Food",
+    "date": "2025-10-31",
+    "description": ""
+  },
+  {
+    "id": 65,
+    "title": "New jacket",
+    "amount": 1200,
+    "type": "expense",
+    "category": "Shopping",
+    "date": "2025-11-01",
+    "description": ""
+  },
+  {
+    "id": 66,
+    "title": "Eye exam and new glasses",
+    "amount": 3500,
+    "type": "expense",
+    "category": "Health",
+    "date": "2025-11-02",
+    "description": ""
+  },
+  {
+    "id": 67,
+    "title": "Rental of a movie online",
+    "amount": 79,
+    "type": "expense",
+    "category": "Entertainment",
+    "date": "2025-11-03",
+    "description": ""
+  },
+  {
+    "id": 68,
+    "title": "Home repair (leaky faucet)",
+    "amount": 500,
+    "type": "expense",
+    "category": "Utilities",
+    "date": "2025-11-04",
+    "description": ""
+  },
+  {
+    "id": 69,
+    "title": "Bakery items",
+    "amount": 130,
+    "type": "expense",
+    "category": "Food",
+    "date": "2025-11-05",
+    "description": ""
+  },
+  {
+    "id": 70,
+    "title": "Bus fare",
+    "amount": 20,
+    "type": "expense",
+    "category": "Transportation",
+    "date": "2025-11-06",
+    "description": ""
+  },
+  {
+    "id": 71,
+    "title": "Pet food",
+    "amount": 450,
+    "type": "expense",
+    "category": "Others",
+    "date": "2025-11-07",
+    "description": ""
+  },
+  {
+    "id": 72,
+    "title": "September Salary",
+    "amount": 55000,
+    "type": "income",
+    "category": "Salary",
+    "date": "2025-09-25",
+    "description": "Monthly base salary"
+  },
+  {
+    "id": 73,
+    "title": "Freelance Web Design Project",
+    "amount": 15000,
+    "type": "income",
+    "category": "Freelance",
+    "date": "2025-09-05",
+    "description": "Client: ABC Corp"
+  },
+  {
+    "id": 74,
+    "title": "Sold old camera",
+    "amount": 4500,
+    "type": "income",
+    "category": "Other Income",
+    "date": "2025-09-08",
+    "description": ""
+  },
+  {
+    "id": 75,
+    "title": "Performance Bonus",
+    "amount": 10000,
+    "type": "income",
+    "category": "Bonus",
+    "date": "2025-09-15",
+    "description": "Q3 Performance"
+  },
+  {
+    "id": 76,
+    "title": "YouTube Ad Revenue",
+    "amount": 3200,
+    "type": "income",
+    "category": "Investment",
+    "date": "2025-09-20",
+    "description": ""
+  },
+  {
+    "id": 77,
+    "title": "Freelance Logo Design",
+    "amount": 5000,
+    "type": "income",
+    "category": "Freelance",
+    "date": "2025-09-22",
+    "description": ""
+  },
+  {
+    "id": 78,
+    "title": "Birthday Gift Money",
+    "amount": 2000,
+    "type": "income",
+    "category": "Gift",
+    "date": "2025-09-28",
+    "description": "From parents"
+  },
+  {
+    "id": 79,
+    "title": "Stock Dividend",
+    "amount": 1850,
+    "type": "income",
+    "category": "Investment",
+    "date": "2025-09-30",
+    "description": ""
+  },
+  {
+    "id": 80,
+    "title": "October Salary",
+    "amount": 55000,
+    "type": "income",
+    "category": "Salary",
+    "date": "2025-10-25",
+    "description": "Monthly base salary"
+  },
+  {
+    "id": 81,
+    "title": "Consulting Fee",
+    "amount": 8000,
+    "type": "income",
+    "category": "Freelance",
+    "date": "2025-10-02",
+    "description": ""
+  },
+  {
+    "id": 82,
+    "title": "Sold old textbooks",
+    "amount": 750,
+    "type": "income",
+    "category": "Other Income",
+    "date": "2025-10-05",
+    "description": ""
+  },
+  {
+    "id": 83,
+    "title": "Interest from savings account",
+    "amount": 150,
+    "type": "income",
+    "category": "Investment",
+    "date": "2025-10-10",
+    "description": ""
+  },
+  {
+    "id": 84,
+    "title": "Cashback from credit card",
+    "amount": 320,
+    "type": "income",
+    "category": "Other Income",
+    "date": "2025-10-12",
+    "description": ""
+  },
+  {
+    "id": 85,
+    "title": "Freelance Translation Work",
+    "amount": 3500,
+    "type": "income",
+    "category": "Freelance",
+    "date": "2025-10-18",
+    "description": ""
+  },
+  {
+    "id": 86,
+    "title": "Lottery prize (small win)",
+    "amount": 500,
+    "type": "income",
+    "category": "Other Income",
+    "date": "2025-10-21",
+    "description": ""
+  },
+  {
+    "id": 87,
+    "title": "Refund for returned item",
+    "amount": 1200,
+    "type": "income",
+    "category": "Other Income",
+    "date": "2025-10-23",
+    "description": ""
+  },
+  {
+    "id": 88,
+    "title": "November Salary",
+    "amount": 55000,
+    "type": "income",
+    "category": "Salary",
+    "date": "2025-11-25",
+    "description": "Monthly base salary"
+  },
+  {
+    "id": 89,
+    "title": "Project Milestone Payment",
+    "amount": 25000,
+    "type": "income",
+    "category": "Freelance",
+    "date": "2025-11-01",
+    "description": "Phase 2 completion"
+  },
+  {
+    "id": 90,
+    "title": "Year-End Bonus",
+    "amount": 40000,
+    "type": "income",
+    "category": "Bonus",
+    "date": "2025-11-15",
+    "description": ""
+  },
+  {
+    "id": 91,
+    "title": "Cryptocurrency Gains",
+    "amount": 7800,
+    "type": "income",
+    "category": "Investment",
+    "date": "2025-11-18",
+    "description": ""
+  },
+  {
+    "id": 92,
+    "title": "Tutoring session",
+    "amount": 1000,
+    "type": "income",
+    "category": "Freelance",
+    "date": "2025-11-20",
+    "description": ""
+  },
+  {
+    "id": 93,
+    "title": "Sold graphic design template",
+    "amount": 650,
+    "type": "income",
+    "category": "Other Income",
+    "date": "2025-11-22",
+    "description": ""
+  },
+  {
+    "id": 94,
+    "title": "Holiday Gift",
+    "amount": 3000,
+    "type": "income",
+    "category": "Gift",
+    "date": "2025-11-28",
+    "description": ""
+  },
+  {
+    "id": 95,
+    "title": "December Salary",
+    "amount": 55000,
+    "type": "income",
+    "category": "Salary",
+    "date": "2025-12-25",
+    "description": "Monthly base salary"
+  },
+  {
+    "id": 96,
+    "title": "Final Project Payment",
+    "amount": 10000,
+    "type": "income",
+    "category": "Freelance",
+    "date": "2025-12-05",
+    "description": ""
+  },
+  {
+    "id": 97,
+    "title": "Affiliate Marketing Commission",
+    "amount": 2100,
+    "type": "income",
+    "category": "Investment",
+    "date": "2025-12-10",
+    "description": ""
+  },
+  {
+    "id": 98,
+    "title": "Reimbursement for travel expenses",
+    "amount": 2500,
+    "type": "income",
+    "category": "Other Income",
+    "date": "2025-12-12",
+    "description": ""
+  },
+  {
+    "id": 99,
+    "title": "New Year Bonus",
+    "amount": 5000,
+    "type": "income",
+    "category": "Bonus",
+    "date": "2025-12-20",
+    "description": ""
+  },
+  {
+    "id": 100,
+    "title": "Stock photos sale",
+    "amount": 800,
+    "type": "income",
+    "category": "Other Income",
+    "date": "2025-12-22",
+    "description": ""
+  },
+  {
+    "id": 101,
+    "title": "Rental Income",
+    "amount": 12000,
+    "type": "income",
+    "category": "Investment",
+    "date": "2025-12-28",
+    "description": ""
+  },
+  {
+    "id": 102,
+    "title": "January Salary",
+    "amount": 56500,
+    "type": "income",
+    "category": "Salary",
+    "date": "2026-01-25",
+    "description": "Salary with annual increment"
+  },
+  {
+    "id": 103,
+    "title": "Freelance Writing Article",
+    "amount": 4000,
+    "type": "income",
+    "category": "Freelance",
+    "date": "2026-01-10",
+    "description": ""
+  },
+  {
+    "id": 104,
+    "title": "Sold old furniture",
+    "amount": 3000,
+    "type": "income",
+    "category": "Other Income",
+    "date": "2026-01-15",
+    "description": ""
+  },
+  {
+    "id": 105,
+    "title": "Mutual Fund Gains",
+    "amount": 6200,
+    "type": "income",
+    "category": "Investment",
+    "date": "2026-01-20",
+    "description": ""
+  },
+  {
+    "id": 106,
+    "title": "Chinese New Year Gift",
+    "amount": 2500,
+    "type": "income",
+    "category": "Gift",
+    "date": "2026-01-28",
+    "description": ""
+  },
+  {
+    "id": 107,
+    "title": "February Salary",
+    "amount": 56500,
+    "type": "income",
+    "category": "Salary",
+    "date": "2026-02-25",
+    "description": ""
+  },
+  {
+    "id": 108,
+    "title": "Speaking Engagement Fee",
+    "amount": 10000,
+    "type": "income",
+    "category": "Freelance",
+    "date": "2026-02-05",
+    "description": ""
+  },
+  {
+    "id": 109,
+    "title": "Tax Refund",
+    "amount": 8500,
+    "type": "income",
+    "category": "Other Income",
+    "date": "2026-02-12",
+    "description": ""
+  },
+  {
+    "id": 110,
+    "title": "Bond Interest Payment",
+    "amount": 2200,
+    "type": "income",
+    "category": "Investment",
+    "date": "2026-02-18",
+    "description": ""
+  },
+  {
+    "id": 111,
+    "title": "March Salary",
+    "amount": 56500,
+    "type": "income",
+    "category": "Salary",
+    "date": "2026-03-25",
+    "description": ""
+  },
+  {
+    "id": 112,
+    "title": "Commission from Sales",
+    "amount": 7500,
+    "type": "income",
+    "category": "Bonus",
+    "date": "2026-03-10",
+    "description": ""
+  },
+  {
+    "id": 113,
+    "title": "Freelance Video Editing",
+    "amount": 12000,
+    "type": "income",
+    "category": "Freelance",
+    "date": "2026-03-15",
+    "description": ""
+  },
+  {
+    "id": 114,
+    "title": "Scholarship Grant",
+    "amount": 20000,
+    "type": "income",
+    "category": "Gift",
+    "date": "2026-03-20",
+    "description": ""
+  },
+  {
+    "id": 115,
+    "title": "April Salary",
+    "amount": 56500,
+    "type": "income",
+    "category": "Salary",
+    "date": "2026-04-25",
+    "description": ""
+  },
+  {
+    "id": 116,
+    "title": "Insurance Claim Payout",
+    "amount": 15000,
+    "type": "income",
+    "category": "Other Income",
+    "date": "2026-04-05",
+    "description": ""
+  },
+  {
+    "id": 117,
+    "title": "Profit Share",
+    "amount": 18000,
+    "type": "income",
+    "category": "Bonus",
+    "date": "2026-04-15",
+    "description": ""
+  },
+  {
+    "id": 118,
+    "title": "Royalties from a book",
+    "amount": 6000,
+    "type": "income",
+    "category": "Investment",
+    "date": "2026-04-20",
+    "description": ""
+  },
+  {
+    "id": 119,
+    "title": "Freelance Social Media Management",
+    "amount": 9000,
+    "type": "income",
+    "category": "Freelance",
+    "date": "2026-04-28",
+    "description": ""
+  },
+  {
+    "id": 120,
+    "title": "May Salary",
+    "amount": 56500,
+    "type": "income",
+    "category": "Salary",
+    "date": "2026-05-25",
+    "description": ""
+  },
+  {
+    "id": 121,
+    "title": "Inheritance",
+    "amount": 100000,
+    "type": "income",
+    "category": "Gift",
+    "date": "2026-05-10",
+    "description": ""
+  }
 ]
