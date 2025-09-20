@@ -4,6 +4,7 @@ import TransactionPageLayout from '@/components/layout/TransactionPageLayout.vue
 import Modal from '@/components/common/Modal.vue';
 import CategoryForm from '@/components/CategoryForm.vue';
 import { formattedDate } from '@/composables/reuse';
+import { cancelData } from '@/composables/Transaction';
 import { getDataFromLocalStorage, updateDataToLocalStorage } from '@/composables/initial';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -21,10 +22,6 @@ const createData = function(payload){
   transations.push({...payload})
   updateDataToLocalStorage('transactions', transations)
 
-  router.push('/transaction')
-}
-
-const cancelData = function(){
   router.push('/transaction')
 }
 
@@ -53,7 +50,7 @@ const createCategoryData = function(payload){
     <TransactionForm 
       :categoryData="categories" 
       @submitTransaction="createData" 
-      @cancelTransaction="cancelData" 
+      @cancelTransaction="cancelData(router)"
       @openModalCreateCategory="openModalCreateCategory"/>
     <Modal v-model="isCreateCategoryModalVisible" nameModal="Category">
       <CategoryForm @submitCategory="createCategoryData" @cancelCategory="closeModalCreateCategory" />

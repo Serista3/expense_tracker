@@ -12,7 +12,7 @@ const classNavLink = 'nav__item flex items-center gap-5 hover:text-highlight tra
 </script>
 
 <template>
-    <nav class="nav__sidebar pt-18 pb-40 pl-22 pr-32 h-screen relative border-r border-gray-300 dark:bg-dark dark:text-light">
+    <nav class="nav__sidebar pt-18 pb-40 pl-22 pr-32 h-screen border-r border-gray-300 dark:bg-dark dark:text-light sticky top-0 left-0">
         <UserProfile />
         <ul class="nav__list flex flex-col gap-10">
             <li>

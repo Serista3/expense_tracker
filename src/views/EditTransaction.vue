@@ -3,6 +3,7 @@ import TransactionForm from '@/components/transaction/TransactionForm.vue';
 import TransactionPageLayout from '@/components/layout/TransactionPageLayout.vue';
 import { useRoute, useRouter } from 'vue-router';
 import { getDataFromLocalStorage, updateDataToLocalStorage } from '@/composables/initial';
+import { cancelData } from '@/composables/Transaction';
 import { computed, ref } from 'vue';
 
 const route = useRoute();
@@ -21,17 +22,13 @@ const saveEditData = function(payload){
   router.push('/transaction')
 }
 
-const cancelData = function(){
-  router.push('/transaction')
-}
-
 </script>
 
 <template>
   <TransactionPageLayout title="Edit Transaction">
     <TransactionForm 
       @submitTransaction="saveEditData" 
-      @cancelTransaction="cancelData" 
+      @cancelTransaction="cancelData(router)" 
       :editData="getEditData" 
       :categoryData="categories"/>
   </TransactionPageLayout>

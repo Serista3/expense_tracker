@@ -17,12 +17,6 @@ const categories = ref(getDataFromLocalStorage('categories') ?? [])
 const isDeleteModalVisible = ref(false);
 let transactionToDelId = null;
 
-const typeFil = ref(route.query.type ?? 'All Type')
-const categoryFil = ref(route.query.categories ? route.query.categories.split(',') : [])
-
-const types = ["All Type",'income', 'expense']
-const options = Array.from(categories.value).map(c => ({ value: `${c.name}`, label: c.name}))
-
 const openDeleteModal = function(id) {
     transactionToDelId = id
     isDeleteModalVisible.value = true;
@@ -34,6 +28,12 @@ const confirmDelTransaction = function(){
     isDeleteModalVisible.value = false;
     transactionToDelId = null
 }
+
+const typeFil = ref(route.query.type ?? 'All Type')
+const categoryFil = ref(route.query.categories ? route.query.categories.split(',') : [])
+
+const types = ["All Type",'income', 'expense']
+const options = Array.from(categories.value).map(c => ({ value: `${c.name}`, label: c.name}))
 
 const updateQuery = function(key, value){
     const newQuery = { ...route.query }
