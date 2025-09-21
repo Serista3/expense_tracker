@@ -4,7 +4,7 @@ import TransactionPageLayout from '@/components/layout/TransactionPageLayout.vue
 import Modal from '@/components/common/Modal.vue';
 import CategoryForm from '@/components/CategoryForm.vue';
 import { formattedDate } from '@/composables/reuse';
-import { cancelData } from '@/composables/Transaction';
+import { cancelData } from '@/composables/useTransaction';
 import { getDataFromLocalStorage, updateDataToLocalStorage } from '@/composables/initial';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';

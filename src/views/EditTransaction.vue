@@ -3,7 +3,7 @@ import TransactionForm from '@/components/transaction/TransactionForm.vue';
 import TransactionPageLayout from '@/components/layout/TransactionPageLayout.vue';
 import { useRoute, useRouter } from 'vue-router';
 import { getDataFromLocalStorage, updateDataToLocalStorage } from '@/composables/initial';
-import { cancelData } from '@/composables/Transaction';
+import { cancelData } from '@/composables/useTransaction';
 import { computed, ref } from 'vue';
 
 const route = useRoute();

@@ -4,29 +4,15 @@ import TransactionTable from '@/components/transaction/TransactionTable.vue';
 import Modal from '@/components/common/Modal.vue';
 import Button from '@/components/common/Button.vue';
 import { getDataFromLocalStorage } from '@/composables/initial';
+import { isDeleteModalVisible, openDeleteModal, confirmDelTransaction } from '@/composables/useTransaction';
 import { ref, computed } from 'vue';
 
+const transactions = ref(getDataFromLocalStorage('transactions') ?? [])
 const recentTransactions = computed(() => {
-    const transactions = getDataFromLocalStorage('transactions') ?? []
-    if(transactions.length)
-        return Array.from(transactions).sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5)
+    if(transactions.value.length)
+        return Array.from(transactions.value).sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5)
 })
 const categories = ref(getDataFromLocalStorage('categories') ?? [])
-
-// const isDeleteModalVisible = ref(false);
-// let transactionToDelId = null;
-
-// const openDeleteModal = function(id) {
-//     transactionToDelId = id
-//     isDeleteModalVisible.value = true;
-// };
-
-// const confirmDelTransaction = function(){
-//     transactions.value = transactions.value.filter(t => t.id !== transactionToDelId);
-//     updateDataToLocalStorage('transactions', transactions.value)
-//     isDeleteModalVisible.value = false;
-//     transactionToDelId = null
-// }
 
 </script>
 
@@ -39,7 +25,7 @@ const categories = ref(getDataFromLocalStorage('categories') ?? [])
         </div>
         <Modal v-model="isDeleteModalVisible" nameModal="Are you sure?">
             <div class="group-btn flex items-center justify-center gap-8">
-                <Button @click="confirmDelTransaction" class="btn-yes bg-alert hover:bg-[#f72525]">Yes</Button>
+                <Button @click="transactions = confirmDelTransaction()" class="btn-yes bg-alert hover:bg-[#f72525]">Yes</Button>
                 <Button @click="isDeleteModalVisible = false;" class="btn-no bg-dark hover:bg-[#363636]">No</Button>
             </div>
         </Modal>
