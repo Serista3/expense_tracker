@@ -3,6 +3,7 @@ import TransactionForm from '@/components/transaction/TransactionForm.vue';
 import TransactionPageLayout from '@/components/layout/TransactionPageLayout.vue';
 import { useRoute, useRouter } from 'vue-router';
 import { getDataFromLocalStorage, updateDataToLocalStorage } from '@/composables/initial';
+import { useFormat } from '@/composables/useFormat';
 import { cancelData } from '@/composables/useTransaction';
 import { computed, ref } from 'vue';
 
@@ -11,10 +12,13 @@ const router = useRouter();
 
 const transactions = ref(getDataFromLocalStorage('transactions'))
 const categories = ref(getDataFromLocalStorage('categories') ?? []);
+const { formattedDate } = useFormat();
 
 const getEditData = computed(() => Array.from(transactions.value).find(t => t.id === Number(route.params.id)))
 
 const saveEditData = function(payload){
+  payload.date = formattedDate(payload.date)
+
   const curTransactionData = getDataFromLocalStorage('transactions');
   const newUpdateData = Array.from(curTransactionData).map(t => t.id === payload.id ? t = {...payload} : t ) 
 
