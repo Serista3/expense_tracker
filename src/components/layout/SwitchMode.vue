@@ -1,8 +1,9 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { getDataFromLocalStorage, updateDataToLocalStorage } from '@/composables/initial';
+import { useLocalStorage } from '@/composables/useLocalStorage';
 
 const curTheme = ref('');
+const { getDataFromLocalStorage, updateDataToLocalStorage} = useLocalStorage()
 
 const changeTheme = function() {
     document.documentElement.classList.remove(curTheme.value === 'dark' ? 'dark' : 'light');
