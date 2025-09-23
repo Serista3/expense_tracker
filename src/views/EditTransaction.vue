@@ -2,28 +2,29 @@
 import TransactionForm from '@/components/transaction/TransactionForm.vue';
 import TransactionPageLayout from '@/components/layout/TransactionPageLayout.vue';
 import { useRoute, useRouter } from 'vue-router';
-import { getDataFromLocalStorage, updateDataToLocalStorage } from '@/composables/initial';
+import { useLocalStorage } from '@/composables/useLocalStorage';
+import { useTransaction } from '@/composables/useTransaction';
+import { useCategories } from '@/composables/useCategories';
 import { useFormat } from '@/composables/useFormat';
-import { cancelData } from '@/composables/useTransaction';
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 
 const route = useRoute();
 const router = useRouter();
 
-const transactions = ref(getDataFromLocalStorage('transactions'))
-const categories = ref(getDataFromLocalStorage('categories') ?? []);
+const { updateDataToLocalStorage } = useLocalStorage();
+const { transactions } = useTransaction();
+const { categories } = useCategories();
 const { formattedDate } = useFormat();
 
 const getEditData = computed(() => Array.from(transactions.value).find(t => t.id === Number(route.params.id)))
 
 const saveEditData = function(payload){
   payload.date = formattedDate(payload.date)
-
-  const curTransactionData = getDataFromLocalStorage('transactions');
-  const newUpdateData = Array.from(curTransactionData).map(t => t.id === payload.id ? t = {...payload} : t ) 
-
+  const newUpdateData = Array.from(transactions.value).map(t => t.id === payload.id ? t = {...payload} : t )
+  
   updateDataToLocalStorage('transactions', newUpdateData)
-  router.push('/transaction')
+  transactions.value = newUpdateData;
+  router.back()
 }
 
 </script>
@@ -32,7 +33,7 @@ const saveEditData = function(payload){
   <TransactionPageLayout title="Edit Transaction">
     <TransactionForm 
       @submitTransaction="saveEditData" 
-      @cancelTransaction="cancelData(router)" 
+      @cancelTransaction="router.back()" 
       :editData="getEditData" 
       :categoryData="categories"/>
   </TransactionPageLayout>

@@ -1,33 +1,20 @@
 <script setup>
 import TransactionTable from '@/components/transaction/TransactionTable.vue';
-import Button from '@/components/common/Button.vue';
 import Modal from '@/components/common/Modal.vue';
+import Button from '@/components/common/Button.vue';
 import Search from '@/components/common/Search.vue';
 import Filter from '@/components/common/Filter.vue';
 import Pagination from '@/components/common/Pagination.vue';
-import { getDataFromLocalStorage, updateDataToLocalStorage } from '@/composables/initial';
+import { useTransaction } from '@/composables/useTransaction';
+import { useCategories } from '@/composables/useCategories';
 import { ref, computed, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
 const route = useRoute();
 const router = useRouter();
 
-const transactions = ref(getDataFromLocalStorage('transactions') ?? [])
-const categories = ref(getDataFromLocalStorage('categories') ?? [])
-const isDeleteModalVisible = ref(false);
-let transactionToDelId = null;
-
-const openDeleteModal = function(id) {
-    transactionToDelId = id
-    isDeleteModalVisible.value = true;
-};
-
-const confirmDelTransaction = function(){
-    transactions.value = transactions.value.filter(t => t.id !== transactionToDelId);
-    updateDataToLocalStorage('transactions', transactions.value)
-    isDeleteModalVisible.value = false;
-    transactionToDelId = null
-}
+const { transactions, isDeleteModalVisible, openDeleteModal, confirmDelTransaction } = useTransaction();
+const { categories } = useCategories();
 
 const typeFil = ref(route.query.type ?? 'All Type')
 const categoryFil = ref(route.query.categories ? route.query.categories.split(',') : [])
@@ -106,7 +93,7 @@ const pageTransaction = computed(() => {
         <Pagination :curPage="curPage" :totalPage="totalPage" @updatePage="updatePage" />
         <Modal v-model="isDeleteModalVisible" nameModal="Are you sure?">
             <div class="group-btn flex items-center justify-center gap-8">
-                <Button @click="confirmDelTransaction" class="btn-yes bg-alert hover:bg-[#f72525]">Yes</Button>
+                <Button @click="confirmDelTransaction()" class="btn-yes bg-alert hover:bg-[#f72525]">Yes</Button>
                 <Button @click="isDeleteModalVisible = false;" class="btn-no bg-dark hover:bg-[#363636]">No</Button>
             </div>
         </Modal>

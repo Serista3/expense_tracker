@@ -5,25 +5,25 @@ import Modal from '@/components/common/Modal.vue';
 import CategoryForm from '@/components/CategoryForm.vue';
 import { useFormat } from '@/composables/useFormat';
 import { useLocalStorage } from '@/composables/useLocalStorage';
+import { useTransaction } from '@/composables/useTransaction';
 import { useCategories } from '@/composables/useCategories';
-import { cancelData } from '@/composables/useTransaction';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
 const { formattedDate } = useFormat();
-const { getDataFromLocalStorage, updateDataToLocalStorage } = useLocalStorage();
+const { updateDataToLocalStorage } = useLocalStorage();
+const { transactions } = useTransaction();
 const { categories, isCreateCategoryModalVisible, openModalCreateCategory, closeModalCreateCategory, createCategoryData } = useCategories();
 
 const createData = function(payload){
-  const transations = getDataFromLocalStorage('transactions') ?? []
-  payload.id = transations == [] ? 1 : transations.at(-1).id + 1
+  payload.id = !transactions.value.length ? 1 : transactions.value.at(-1).id + 1
   payload.date = formattedDate(payload.date);
   payload.description = payload.description ?? ''
 
-  transations.push({...payload})
-  updateDataToLocalStorage('transactions', transations)
+  transactions.value.push({...payload})
+  updateDataToLocalStorage('transactions', transactions.value)
 
-  router.push('/transaction')
+  router.back()
 }
 
 </script>
@@ -33,7 +33,7 @@ const createData = function(payload){
     <TransactionForm 
       :categoryData="categories" 
       @submitTransaction="createData" 
-      @cancelTransaction="cancelData(router)"
+      @cancelTransaction="router.back()"
       @openModalCreateCategory="openModalCreateCategory"/>
     <Modal v-model="isCreateCategoryModalVisible" nameModal="Category">
       <CategoryForm @submitCategory="createCategoryData" @cancelCategory="closeModalCreateCategory" />

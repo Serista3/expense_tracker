@@ -1,24 +1,24 @@
 import { ref } from 'vue';
-import { updateDataToLocalStorage, getDataFromLocalStorage } from './initial';
+import { useLocalStorage } from './useLocalStorage';
 
-export const isDeleteModalVisible = ref(false);
-let transactionToDelId = null;
+const { updateDataToLocalStorage, getDataFromLocalStorage } = useLocalStorage();
+const transactions = ref(getDataFromLocalStorage('transactions') ?? [])
 
-export const openDeleteModal = function(id) {
+export function useTransaction(){
+  const isDeleteModalVisible = ref(false);
+  let transactionToDelId = null;
+
+  const openDeleteModal = function(id) {
     transactionToDelId = id
     isDeleteModalVisible.value = true;
-};
+  };
 
-export const confirmDelTransaction = function(){
-  const transactions = getDataFromLocalStorage('transactions');
-  const notDeltransactions = transactions.filter(t => t.id !== transactionToDelId);
-  updateDataToLocalStorage('transactions', notDeltransactions);
-  isDeleteModalVisible.value = false;
-  transactionToDelId = null;
+  const confirmDelTransaction = function(){
+    transactions.value = transactions.value.filter(t => t.id !== transactionToDelId);
+    updateDataToLocalStorage('transactions', transactions.value);
+    isDeleteModalVisible.value = false;
+    transactionToDelId = null;
+  }
 
-  return notDeltransactions
-}
-
-export const cancelData = function(router){
-  router.push('/transaction')
+  return { transactions, isDeleteModalVisible, openDeleteModal, confirmDelTransaction }
 }
