@@ -20,7 +20,7 @@ const recentTransactions = computed(() => {
 
 <template>
     <div class="home-page py-18 px-30 dark:text-light dark:bg-dark w-full">
-        <Dashboard />
+        <Dashboard :transactions="transactions"/>
         <div class="recent-transactions mt-30">
             <h2 class="text-4xl font-semibold mb-15">Recent Transactions</h2>
             <TransactionTable @deleteTransaction="payload => openDeleteModal(payload.id)" :transactions="recentTransactions" :categories="categories"/>

@@ -5,6 +5,7 @@ import TableRow from '../table/TableRow.vue';
 import TableData from '../table/TableData.vue';
 import Button from '@/components/common/Button.vue';
 import { computed } from 'vue';
+import numeral from 'numeral';
 
 const props = defineProps({
     'transactions': {
@@ -41,7 +42,7 @@ const deleteTransaction = function(transaction) {
             {{ t.date }}
           </TableData>
           <TableData class="font-semibold" :class="{'text-highlight' : t.type === 'income', 'text-alert' : t.type === 'expense'}">
-            {{ t.type === 'income' ? `+${t.amount}` : `-${t.amount}` }} THB
+            {{ t.type === 'income' ? `${numeral(t.amount).format('+0,0.00')}` : `-${numeral(t.amount).format('0,0.00')}` }} THB
           </TableData>
           <TableData class="flex justify-center items-center gap-8">
             <router-link :to="{name: 'EditTransaction', params: {id : t.id}}"><Button class="btn-edit bg-warn hover:bg-[#f58f1b]">Edit</Button></router-link>
