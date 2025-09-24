@@ -10,11 +10,8 @@ export function useFormat() {
   }
 
   const formattedDateToRead = function(newDate){
-    const date = new Date(newDate)
-    const year = date.getFullYear()
-    const month = date.getMonth()
-    const day = date.getDate()
-    return `${day} ${months[month]}, ${year}`;
+    const date = formattedDate(newDate).split('-').reverse()
+    return `${parseInt(date.at(0))} ${months.at(date.at(1) - 1)}, ${date.at(-1)}`;
   }
   return { formattedDate, formattedDateToRead }
 }
