@@ -1,4 +1,5 @@
 <script setup>
+import MainLayout from '@/components/layout/MainLayout.vue';
 import TransactionTable from '@/components/transaction/TransactionTable.vue';
 import Modal from '@/components/common/Modal.vue';
 import Button from '@/components/common/Button.vue';
@@ -75,7 +76,7 @@ const pageTransaction = computed(() => {
 </script>
 
 <template>
-    <div class="transaction-page p-30 dark:text-light dark:bg-dark w-full">
+    <MainLayout class="transaction-page">
         <h1 class="text-6xl font-semibold mb-10">Transactions</h1>
         <div class="manage-transaction-data flex justify-end items-center gap-8 mb-10">
             <Search @searchData="payload => updateQuery('title', payload)" :initSearchVal="route.query.title" />
@@ -97,5 +98,5 @@ const pageTransaction = computed(() => {
                 <Button @click="isDeleteModalVisible = false;" class="btn-no bg-dark hover:bg-[#363636]">No</Button>
             </div>
         </Modal>
-    </div>
+    </MainLayout>
 </template>

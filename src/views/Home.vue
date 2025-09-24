@@ -1,11 +1,12 @@
 <script setup>
+import MainLayout from '@/components/layout/MainLayout.vue';
 import SummaryCard from '@/components/common/SummaryCard.vue';
-import { PhTrendUp, PhTrendDown, PhScales, PhTrash, PhPen } from '@phosphor-icons/vue';
 import BarChart from '@/components/chart/BarChart.vue';
 import Doughnut from '@/components/chart/Doughnut.vue';
 import TransactionTable from '@/components/transaction/TransactionTable.vue';
 import Modal from '@/components/common/Modal.vue';
 import Button from '@/components/common/Button.vue';
+import { PhTrendUp, PhTrendDown, PhScales, PhTrash, PhPen } from '@phosphor-icons/vue';
 import { useTransaction } from '@/composables/useTransaction';
 import { useCategories } from '@/composables/useCategories';
 import { computed } from 'vue';
@@ -42,7 +43,7 @@ const monthSummaries = computed(() => {
 </script>
 
 <template>
-    <div class="home-page p-30 dark:text-light dark:bg-dark w-full">
+    <MainLayout class="home-page">
         <div class="dashboard grid grid-cols-3 gap-10">
             <SummaryCard class="bg-highlight text-light" title="Total Income" :amount="income">
                 <template #summary__card-icon>
@@ -80,5 +81,5 @@ const monthSummaries = computed(() => {
                 <Button @click="isDeleteModalVisible = false;" class="btn-no bg-dark hover:bg-[#363636]">No</Button>
             </div>
         </Modal>
-    </div>
+    </MainLayout>
 </template>
