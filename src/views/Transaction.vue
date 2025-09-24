@@ -75,7 +75,7 @@ const pageTransaction = computed(() => {
 </script>
 
 <template>
-    <div class="transaction-page py-18 px-30 dark:text-light dark:bg-dark w-full">
+    <div class="transaction-page p-30 dark:text-light dark:bg-dark w-full">
         <h1 class="text-6xl font-semibold mb-10">Transactions</h1>
         <div class="manage-transaction-data flex justify-end items-center gap-8 mb-10">
             <Search @searchData="payload => updateQuery('title', payload)" :initSearchVal="route.query.title" />

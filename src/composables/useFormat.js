@@ -1,3 +1,5 @@
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
 export function useFormat() {
   const formattedDate = function(newDate){
     const date = new Date(newDate)
@@ -7,5 +9,12 @@ export function useFormat() {
     return `${year}-${month}-${day}`;
   }
 
-  return { formattedDate }
+  const formattedDateToRead = function(newDate){
+    const date = new Date(newDate)
+    const year = date.getFullYear()
+    const month = date.getMonth()
+    const day = date.getDate()
+    return `${day} ${months[month]}, ${year}`;
+  }
+  return { formattedDate, formattedDateToRead }
 }
