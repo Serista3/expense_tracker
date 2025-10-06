@@ -9,10 +9,13 @@ import Button from '@/components/common/Button.vue';
 import { PhTrendUp, PhTrendDown, PhScales, PhTrash, PhPen } from '@phosphor-icons/vue';
 import { useTransaction } from '@/composables/useTransaction';
 import { useCategories } from '@/composables/useCategories';
+import { useFormat } from '@/composables/useFormat';
 import { computed } from 'vue';
+import { months } from '@/composables/useFormat';
 
 const { transactions, isDeleteModalVisible, openDeleteModal, confirmDelTransaction } = useTransaction();
 const { categories } = useCategories()
+const { formattedHextoRgba } = useFormat()
 
 const recentTransactions = computed(() => {
     if(transactions.value.length)
@@ -24,20 +27,40 @@ const income = computed(() => transactions.value.filter(t => t.type === 'income'
 const expense = computed(() => transactions.value.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0) ?? 0)
 const balance = computed(() => income.value - expense.value ?? 0)
 
-const categorySumExpenseTop5 = computed(() => {
+const calcuCategoryTop5 = function(type){
     const newCategories = []
     categories.value.forEach(c => {
             newCategories.push(
                 {
                     'name': c.name, 
-                    'amount': transactions.value.filter(t => t.category === c.name && t.type === 'expense').reduce((sum, t) => sum + t.amount, 0),
-                    'color': c.color
+                    'amount': transactions.value.filter(t => t.category === c.name && t.type === type).reduce((sum, t) => sum + t.amount, 0),
+                    'color': formattedHextoRgba(c.color, 0.5),
+                    'backgroundColor': formattedHextoRgba(c.color, 0.8),
+                    'hoverColor': formattedHextoRgba(c.color, 1),
                 })
     })
     return newCategories.filter(n => n.amount !== 0).sort((a, b) => b.amount - a.amount).slice(0, 5)
-})
+}
+
+const top5Income = computed(() => calcuCategoryTop5('income'))
+const top5Expense = computed(() => calcuCategoryTop5('expense'))
+
 const monthSummaries = computed(() => {
-    const newMonths = []
+    const curMonth = new Date().getMonth()
+    const durationMonth = Array.from({length: 4}, (v, i) => {
+        if (curMonth + i >= months.length)
+            return 12 - (curMonth + 3)
+        return curMonth + i
+    })
+    const arrMonths = [months[durationMonth[0]], months[durationMonth[1]], months[durationMonth[2]], months[durationMonth[3]]]
+    const sumTransactionMonth = arrMonths.map(m => {
+        return { 
+            month: m,
+            income: transactions.value.filter(t => t.type === 'income' && months[new Date(t.date).getMonth()] === m).reduce((sum, t) => sum + t.amount, 0) ?? 0,
+            expense: transactions.value.filter(t => t.type === 'expense' && months[new Date(t.date).getMonth()] === m).reduce((sum, t) => sum + t.amount, 0) ?? 0,
+        }
+    })
+    return sumTransactionMonth;
 })
 
 </script>
@@ -60,8 +83,9 @@ const monthSummaries = computed(() => {
                     <PhScales :size="56" />
                 </template>
             </SummaryCard>
-            <Doughnut :categorySumExpenseTop5="categorySumExpenseTop5" />
-            <BarChart />
+            <Doughnut :calcuCategoryTop5="top5Income" title="Top 5 Income" />
+            <Doughnut :calcuCategoryTop5="top5Expense" title="Top 5 Expense" />
+            <BarChart :monthSummaries="monthSummaries" />
             <div class="recent-transaction col-span-full mt-10">
                 <div class="recent-transaction__header mb-15 flex justify-between items-center">
                     <h2 class="text-4xl font-semibold">Recent Transactions</h2>
