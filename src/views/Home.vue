@@ -48,9 +48,9 @@ const top5Expense = computed(() => calcuCategoryTop5('expense'))
 const monthSummaries = computed(() => {
     const curMonth = new Date().getMonth()
     const durationMonth = Array.from({length: 4}, (v, i) => {
-        if (curMonth + i >= months.length)
+        if (curMonth + (i - 1) >= months.length)
             return 12 - (curMonth + 3)
-        return curMonth + i
+        return curMonth + (i - 1)
     })
     const arrMonths = [months[durationMonth[0]], months[durationMonth[1]], months[durationMonth[2]], months[durationMonth[3]]]
     const sumTransactionMonth = arrMonths.map(m => {
