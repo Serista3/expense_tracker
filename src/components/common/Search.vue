@@ -21,7 +21,7 @@ const searchData = function(){
 </script>
 
 <template>
-  <Form class="form__search" @submit="searchData">
+  <Form class="form__search bg-light" @submit="searchData">
     <FormInput class="form__input-search" v-model="searchValue" type="text" name="search" placeholder="enter your title here."></FormInput>
     <template #action>
       <Button type="submit" class="btn-search bg-dark hover:bg-[#474747] absolute top-0 right-0 h-full">

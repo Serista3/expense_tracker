@@ -86,7 +86,7 @@ const monthSummaries = computed(() => {
             <Doughnut :calcuCategoryTop5="top5Income" title="Top 5 Income" />
             <Doughnut :calcuCategoryTop5="top5Expense" title="Top 5 Expense" />
             <BarChart :monthSummaries="monthSummaries" />
-            <div class="recent-transaction col-span-full mt-10">
+            <div class="recent-transaction bg-light col-span-full py-14 px-20 shadow-lg rounded-[.7rem]">
                 <div class="recent-transaction__header mb-15 flex justify-between items-center">
                     <h2 class="text-4xl font-semibold">Recent Transactions</h2>
                     <router-link to="/transaction">

@@ -1,5 +1,5 @@
 <template>
-  <div class="p-30 dark:text-light dark:bg-dark w-full">
+  <div class="py-30 mx-auto max-w-[130rem] w-full dark:text-light dark:bg-dark">
     <slot></slot>
   </div>
 </template>
