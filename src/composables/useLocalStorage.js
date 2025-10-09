@@ -1,4 +1,5 @@
 export function useLocalStorage() {
+  
   // ดึงข้อมูลจาก localstorage ผ่าน key
   const getDataFromLocalStorage = function(key){
     try {

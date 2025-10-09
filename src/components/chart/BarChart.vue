@@ -1,71 +1,71 @@
 <script setup>
+import BaseChart from './BaseChart.vue';
 import { Bar } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
-import BaseChart from './BaseChart.vue';
 import { computed } from 'vue';
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
 const props = defineProps({
-  monthSummaries: {
+  title: {
+    type: String,
+    default: 'Bar Chart'
+  },
+  data: {
     type: Array,
     default: [],
-  }
+  },
 })
 
+// ข้อมูลใน Barchart
 const barChartData = computed(() => {
   return { 
-    labels: props.monthSummaries.map(m => m.month),
+    labels: props.data.map(c => c.name),
     datasets: [
       {
-        label: 'Income',
         order: 0,
-        backgroundColor: 'rgba(108, 188, 137, 0.5)',
-        borderWidth: 2,
-        borderColor: '#6cbc89',
-        hoverBackgroundColor: '#4aba73',
-        data: props.monthSummaries.map(m => m.income),
-      },
-      {
-        label: 'Expense',
-        order: 1,
-        backgroundColor: 'rgba(247, 94, 94, 0.5)',
-        borderWidth: 2,
-        borderColor: '#f75e5e',
-        hoverBackgroundColor: '#f72525',
-        data: props.monthSummaries.map(m => m.expense),
+        backgroundColor: props.data.map(c => c.color),
+        hoverBackgroundColor: props.data.map(c => c.hoverColor),
+        boderWidth: 2,
+        borderColor: props.data.map(c => c.backgroundColor),
+        data: props.data.map(c => c.amount)
       }
     ]
   }
 });
 
+// config ใน Barchart
 const barChartOptions = computed(() => {
   return {
+    indexAxis: 'y',
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
       title: {
         display: true,
-        text: 'Monthly Income vs Expense',
+        text: props.title,
         color: '#212121',
         font: {
           size: 24
         }
+      },
+      legend: {
+        display: false,
       }
     },
 
     scales: {
-      y: { 
+      x: { 
         beginAtZero: true,
         grid: {
           color: 'rgba(0, 0, 0, 0.1)'
         },
         title: {
           display: true,
-          text: 'Amount (THB)' ,
-          color: '#212121',
+          text: 'Amount' ,
+          color: 'rgba(0,0,0,0.4)',
           font: {
-            weight: '500',
+            weight: '300',
             size: 14,
           }
         }
@@ -79,9 +79,11 @@ const barChartOptions = computed(() => {
 <template>
   <BaseChart>
     <Bar
+      v-if="data.length"
       class="bar-chart"
       :options="barChartOptions"
       :data="barChartData"
     />
+    <div v-else class="text-gray-400 text-[1.4rem] font-light">no transactions</div>
   </BaseChart>
 </template>

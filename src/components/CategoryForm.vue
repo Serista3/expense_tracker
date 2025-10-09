@@ -9,6 +9,7 @@ const emit = defineEmits(['submitCategory', 'cancelCategory'])
 const newCategory = ref({})
 const errDataCategory = ref({})
 
+// ตรวจสอบข้อมูลจาก user ก่อน submit
 const validationCategory = function(){
   errDataCategory.value.name = !newCategory.value.name || Number.parseInt(newCategory.value.name) 
     ? "Category must have data or Category must not be number." : undefined

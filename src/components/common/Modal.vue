@@ -5,6 +5,7 @@ const props = defineProps({
   nameModal: String,
 })
 
+// ไว้เปิด/ปิด modal จากตัว parent
 const activeModal = defineModel({
   type: Boolean,
   default: false

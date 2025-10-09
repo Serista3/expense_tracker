@@ -34,6 +34,7 @@ const updateQuery = function(key, value){
     router.push({ name: 'Transaction', query : newQuery})
 }
 
+// Filter transactions ตาม url query
 const filterTransaction = computed(() => {
     const { title, type, categories } = { ...route.query }
 
@@ -54,6 +55,7 @@ const filterTransaction = computed(() => {
 const curPage = ref(route.query.page ? Number(route.query.page) : 1);
 const totalPage = computed(() => Math.ceil(filterTransaction.value.length / 10) || 1);
 
+// เปลี่ยน page ตามการกดปุ่ม
 const updatePage = function(page) {
     if(!page || page > totalPage.value)
         return;
@@ -62,10 +64,12 @@ const updatePage = function(page) {
     updateQuery('page', page);
 }
 
+// ถ้าหน้า page ทั้งหมด change ให้ดูว่า page ปัจจุบันมากกว่า page ทั้งหมดรึป่าว ถ้าใช่ให้ page ปัจจุบัน = page ทั้งหมด
 watch(totalPage, (newTotalPage) => {
     updatePage(curPage.value > newTotalPage ? newTotalPage : curPage.value);
 })
 
+// ให้แต่ละ page มี transaction แค่ 10 ตัว
 const pageTransaction = computed(() => {
     const start = (curPage.value - 1) * 10;
     const end = start + 10;

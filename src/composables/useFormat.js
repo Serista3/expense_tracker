@@ -2,6 +2,8 @@ export const months = ['January', 'February', 'March', 'April', 'May', 'June', '
 export const hexAF = {'a': 10, 'b': 11, 'c': 12, 'd': 13, 'e': 14, 'f': 15}
 
 export function useFormat() {
+
+  // แปลงสีรูปแบบ Hex to rgba
   const formattedHextoRgba = function(hex, alpha){
     const first = [hex[1], hex[2]]
     const second = [hex[3], hex[4]]
@@ -23,6 +25,7 @@ export function useFormat() {
     return `rgba(${calR}, ${calG}, ${calB}, ${alpha})`
   }
 
+  // แปลงวันที่ให้เป็นรูปแบบสำหรับการจัดเก็บลง Local Storage
   const formattedDate = function(newDate){
     const date = new Date(newDate)
     const year = date.getFullYear()

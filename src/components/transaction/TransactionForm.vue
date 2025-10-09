@@ -22,6 +22,7 @@ const category = computed(() => [...props.categoryData])
 const emit = defineEmits(['submitTransaction', 'cancelTransaction', 'openModalCreateCategory'])
 const errDataTransac = ref({})
 
+// ตรวจสอบข้อมูลจาก user ก่อน submit
 const validationForm = function(){
   errDataTransac.value.title = !formData.value.title || Number.parseInt(formData.value.title) 
     ? "Title must have data or title must not be number." : undefined

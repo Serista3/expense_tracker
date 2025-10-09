@@ -1,6 +1,5 @@
 <script setup>
 import Form from '../form/Form.vue';
-
 </script>
 
 <template>

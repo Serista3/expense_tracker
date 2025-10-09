@@ -9,10 +9,10 @@ const props = defineProps({
 </script>
 
 <template>
-    <div class="summary__card inline-flex justify-between items-center gap-20 p-12 rounded-[.7rem] shadow-lg">
+    <div class="summary__card inline-flex justify-between items-center p-8 rounded-[.7rem] shadow-lg">
         <div class="summary__card-detail flex flex-col gap-4">
-            <h3 class="summary__card-title text-3xl">{{ props.title }}</h3>
-            <div class="summary__card-amount text-5xl font-medium">{{ numeral(props.amount).format('0,0.00') }} THB</div>
+            <h3 class="summary__card-title text-2xl">{{ props.title }}</h3>
+            <div class="summary__card-amount text-4xl font-medium">{{ numeral(props.amount).format('0,0.00') }} THB</div>
         </div>
         <slot name="summary__card-icon"></slot>
     </div>

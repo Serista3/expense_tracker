@@ -1,14 +1,17 @@
 <script setup>
-import { ref } from 'vue';
+import { useUserData } from '@/composables/useUserData';
 
-const userName = ref('');
-const userAvatar = ref('');
+const { userAvatar, userName, userCurrency } = useUserData()
+
 </script>
 
 <template>
     <div class="user__profile flex items-center gap-2 pb-6 mb-10 border-b border-gray-300">
-        <img :src="userAvatar" alt="user-avatar" class="user__profile-avatar" v-if="userAvatar" />
-        <div class="user__avatar uppercase text-2xl rounded-[50%] bg-dark text-light font-semibold px-4 py-2 mr-2" v-else>{{ userName || 'u' }}</div>
-        <div class="user__profile-name"> {{ userName || 'User' }}</div>
+        <img :src="userAvatar" alt="user-avatar" class="user__profile-avatar w-[3.5rem] h-[3.5rem] object-cover rounded-[50%] mr-2" v-if="userAvatar" />
+        <div class="user__avatar uppercase text-2xl rounded-[50%] bg-dark text-light font-semibold px-4 py-2 mr-2" v-else>{{ userName.toUpperCase().slice(0, 1) }}</div>
+        <div class="user__detail">
+            <div class="user__profile-name"> {{ userName }}</div>
+            <div class="user__currency text-[1.2rem] text-gray-500">{{ userCurrency }}</div>
+        </div>
     </div>
 </template>

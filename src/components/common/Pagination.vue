@@ -1,6 +1,6 @@
 <script setup>
-import { PhCaretLeft, PhCaretRight, PhDotsThree } from '@phosphor-icons/vue';
 import Button from './Button.vue';
+import { PhCaretLeft, PhCaretRight, PhDotsThree } from '@phosphor-icons/vue';
 import { computed } from 'vue';
 
 const props = defineProps({
@@ -15,6 +15,8 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['updatePage'])
+
+// Algorithm สำหรับปุ่ม paginations ถ้าเกิน 7 ปุ่ม
 const ArrPageShow = computed(() => {
     if(props.totalPage <= 7) 
         return Array.from({ length: props.totalPage - 2}, (_, i) => i + 2);

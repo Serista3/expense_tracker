@@ -9,6 +9,7 @@ import { useToggleWithScrollLock } from './composables/useToggleWithScrollLock';
 const route = useRoute();
 const { isNav, openNav, closeNav } = useToggleWithScrollLock()
 
+// เปลี่ยน title page ตาม path
 watch(() => route.path, (newPath) => {
   document.title = `Expense Tracker - ${newPath === '/' ? 'Home' : newPath.slice(1).charAt(0).toUpperCase() + newPath.slice(2)}`;
 })
