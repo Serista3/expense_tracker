@@ -16,8 +16,8 @@ import { computed, ref } from 'vue';
 
 const { transactions, isDeleteModalVisible, openDeleteModal, confirmDelTransaction } = useTransaction();
 const { categories } = useCategories()
-const { formattedHextoRgba, months } = useFormat()
-const { userBudget } = useUserData()
+const { formattedHextoRgba, months, formattedUppercaseFirstChar } = useFormat()
+const { userBudgets } = useUserData()
 useModalScrollLock(isDeleteModalVisible);
 const route = useRoute()
 const router = useRouter()
@@ -46,6 +46,7 @@ const recentTransactions = computed(() => {
 const income = computed(() => filterTransactionsbyMonthAndYear.value.filter(t => t.type === 'income').reduce((sum, t) => sum + t.amount, 0) ?? 0)
 const expense = computed(() => filterTransactionsbyMonthAndYear.value.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0) ?? 0)
 const balance = computed(() => income.value - expense.value ?? 0)
+const budget = computed(() => userBudgets.value.find(b => months[b.month] === filterMonth.value && b.year === filterYear.value)?.amount ?? 1)
 
 // คำนวนค่าใช้จ่ายตามหมวดหมู่
 const calcuCategory = function(type){
@@ -86,7 +87,7 @@ const updateQuery = function(filter){
                 <el-option
                 v-for="(m, index) in allMonth"
                 :key="index"
-                :label="months[m]"
+                :label="formattedUppercaseFirstChar(months[m])"
                 :value="months[m]"
                 />
             </el-select>
@@ -115,7 +116,7 @@ const updateQuery = function(filter){
                     <PhScales :size="48" />
                 </template>
             </SummaryCard>
-            <SummaryCard class="bg-dark text-light" title="Budget" :amount="50000">
+            <SummaryCard class="bg-dark text-light" title="Budget" :amount="budget">
                 <template #summary__card-icon>
                     <PhBank :size="48" />
                 </template>

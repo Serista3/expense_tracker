@@ -1,4 +1,4 @@
-export const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+export const months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']
 export const hexAF = {'a': 10, 'b': 11, 'c': 12, 'd': 13, 'e': 14, 'f': 15}
 
 export function useFormat() {
@@ -36,7 +36,12 @@ export function useFormat() {
 
   const formattedDateToRead = function(newDate){
     const date = formattedDate(newDate).split('-').reverse()
-    return `${parseInt(date.at(0))} ${months.at(date.at(1) - 1)}, ${date.at(-1)}`;
+    return `${parseInt(date.at(0))} ${formattedUppercaseFirstChar(months.at(date.at(1) - 1))}, ${date.at(-1)}`;
   }
-  return { formattedHextoRgba, formattedDate, formattedDateToRead, months }
+
+  const formattedUppercaseFirstChar = function(text) {
+    return String(text).slice(0, 1).toUpperCase() + String(text).slice(1)
+  }
+
+  return { formattedHextoRgba, formattedDate, formattedDateToRead, months, formattedUppercaseFirstChar }
 }

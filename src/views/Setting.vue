@@ -13,33 +13,44 @@ import TableData from '@/components/table/TableData.vue';
 import Notification from '@/components/common/Notification.vue';
 import { PhFloppyDiskBack } from '@phosphor-icons/vue';
 import { useCategories } from '@/composables/useCategories';
-import { useLocalStorage } from '@/composables/useLocalStorage';
 import { useUserData } from '@/composables/useUserData';
 import { ref } from 'vue'
 
 const { categories } = useCategories()
-const { updateDataToLocalStorage } = useLocalStorage();
-const { userAvatar, userName, userCurrency } = useUserData();
+const { userAvatar, userName, userBudgets, saveUserData } = useUserData();
 
 const username = ref(userName.value)
 const imgUrl = ref(userAvatar.value)
-const currency = ref(userCurrency.value)
-const budget = ref(1)
+const curBudget = ref(Array.from(userBudgets.value).find(b => new Date().getMonth() === b.month && new Date().getFullYear() === b.year)?.amount ?? 1)
 
+const budgets = ref(userBudgets.value)
 const success = ref(false)
-const currencies = ref(['THB', 'USD'])
+const isSaving = ref(false);
+let notiTimeout = null;
 
 const handleProfilesave = function(){
-    const userData = {'username': username.value, 'imgUrl': imgUrl.value, 'currency': currency.value}
-    updateDataToLocalStorage('userData', userData)
+    isSaving.value = true;
+    clearTimeout(notiTimeout);
 
-    userAvatar.value = imgUrl.value
-    userName.value = username.value
-    userCurrency.value = currency.value
+    const newBudgets = [...budgets.value]
+    const today = new Date()
+    const currentMonth = today.getMonth()
+    const currentYear = today.getFullYear()
 
-    success.value = true
+    const budgetIndex = newBudgets.findIndex(b => b.month === currentMonth && b.year === currentYear);
 
-    setTimeout(() => success.value = false, 3000)
+    if(budgetIndex === -1){
+        newBudgets.push({ 'id': newBudgets.length + 1, 'month': currentMonth, 'year': currentYear, 'amount': Number(curBudget.value) });
+    } else {
+        newBudgets[budgetIndex].amount = Number(curBudget.value);
+    }
+
+    saveUserData({'username': username.value, 'imgUrl': imgUrl.value, 'budgets': newBudgets})
+    
+    isSaving.value = false;
+
+    success.value = true;
+    notiTimeout = setTimeout(() => success.value = false, 3000);
 }
 
 </script>
@@ -59,35 +70,11 @@ const handleProfilesave = function(){
                     <FormField labelName="Url Image">
                          <FormInput type="text" name="imgurl" placeholder="enter your image url." v-model="imgUrl" />
                     </FormField>
-                    <FormField labelName="Currency">
-                        <el-select v-model="currency" placeholder="select your currency" style="width: 40%">
-                            <el-option
-                            v-for="(c, index) in currencies"
-                            :key="index"
-                            :label="c"
-                            :value="c"
-                            />
-                        </el-select>
+                    <FormField labelName="This Month's Budget">
+                         <FormInput type="number" name="budget" placeholder="enter your budget." v-model="curBudget" :min="1" required />
                     </FormField>
-                    <Button type="submit" class="btn-save bg-highlight hover:bg-[#4aba73] flex gap-4 justify-center items-center max-w-[12rem] mt-6">
-                        Save
-                        <PhFloppyDiskBack :size="20" weight="fill" />
-                    </Button>
-                    <template #action>
-                        <div class="hidden"></div>
-                    </template>
-                </Form>
-            </div>
-        </div>
-        <div class="budget mb-30">
-            <h2 class="budget__title mb-8 text-[2.4rem] font-semibold text-center">Budget</h2>
-            <div class="budget__content flex justify-center items-center">
-                <Form class="general__form">
-                    <FormField labelName="Monthly budget">
-                         <FormInput type="number" name="budget" placeholder="enter your budget." v-model="budget" :min="1" />
-                    </FormField>
-                    <Button class="btn-save mx-auto bg-highlight hover:bg-[#4aba73] flex gap-4 justify-center items-center max-w-[12rem] mt-6">
-                        Save
+                    <Button type="submit" :disabled="isSaving" :class="{'disabled' : isSaving}" class="btn-save bg-highlight hover:bg-[#4aba73] flex gap-4 justify-center items-center max-w-[12rem] mt-6">
+                        {{ isSaving ? 'Saving...' : 'Save' }}
                         <PhFloppyDiskBack :size="20" weight="fill" />
                     </Button>
                     <template #action>
@@ -137,9 +124,28 @@ const handleProfilesave = function(){
                 <Button class="btn-clear bg-alert hover:bg-[#f72525]">Clear all data</Button>
             </div>
         </div>
+        <Transition name="noti-fade">
+            <Notification v-if="success" class="fixed bottom-16 right-16 bg-highlight" message="Profile saved successfully!" />
+        </Transition>
     </MainLayout>
-    <Notification 
-        class="fixed bottom-16 right-16" 
-        message="Your data has saved in localstorage."
-        :class="{'bg-highlight opacity-100 visible -translate-y-6': success, 'opacity-0 invisible translate-y-[0]' : !success}"/>
 </template>
+
+<style scoped>
+
+.disabled {
+    opacity: 0.7;
+    cursor: default !important;
+}
+
+.noti-fade-enter-active,
+.noti-fade-leave-active {
+  transition: all 0.3s ease;
+}
+
+.noti-fade-enter-from,
+.noti-fade-leave-to {
+  opacity: 0;
+  transform: translateY(1.5rem);
+}
+
+</style>

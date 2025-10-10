@@ -10,5 +10,5 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="notification py-4 px-8 rounded-[.7rem] text-white transition-all z-50">{{ message }}</div>
+  <div class="notification py-4 px-8 rounded-[.7rem] text-white transition-all z-8">{{ message }}</div>
 </template>
