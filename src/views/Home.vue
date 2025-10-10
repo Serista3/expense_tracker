@@ -10,6 +10,7 @@ import { useTransaction } from '@/composables/useTransaction';
 import { useCategories } from '@/composables/useCategories';
 import { useFormat } from '@/composables/useFormat';
 import { useUserData } from '@/composables/useUserData';
+import { useModalScrollLock } from '@/composables/useModalScrollLock';
 import { useRouter, useRoute } from 'vue-router';
 import { computed, ref } from 'vue';
 
@@ -17,6 +18,7 @@ const { transactions, isDeleteModalVisible, openDeleteModal, confirmDelTransacti
 const { categories } = useCategories()
 const { formattedHextoRgba, months } = useFormat()
 const { userBudget } = useUserData()
+useModalScrollLock(isDeleteModalVisible);
 const route = useRoute()
 const router = useRouter()
 
@@ -27,7 +29,7 @@ const allYear = computed(() => [...new Set(Array.from(transactions.value).map(t 
 const allMonth = computed(() => [...new Set(Array.from(transactions.value).map(t => new Date(t.date).getMonth()).sort((a, b) => a - b))])
 
 // Filter ตามเดือนและปีใน url query
-const filterTransaction = computed(() => {
+const filterTransactionsbyMonthAndYear = computed(() => {
     return Array.from(transactions.value).filter(t => {
         if (months[new Date(t.date).getMonth()] === filterMonth.value && new Date(t.date).getFullYear() === filterYear.value)
             return t
@@ -36,13 +38,13 @@ const filterTransaction = computed(() => {
 
 // คำนวนหา transactions ล่าสุด มา 3 ตัว
 const recentTransactions = computed(() => {
-    if(filterTransaction.value.length)
-        return Array.from(filterTransaction.value).sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3)
+    if(filterTransactionsbyMonthAndYear.value.length)
+        return Array.from(filterTransactionsbyMonthAndYear.value).sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3)
     return [];
 })
 
-const income = computed(() => filterTransaction.value.filter(t => t.type === 'income').reduce((sum, t) => sum + t.amount, 0) ?? 0)
-const expense = computed(() => filterTransaction.value.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0) ?? 0)
+const income = computed(() => filterTransactionsbyMonthAndYear.value.filter(t => t.type === 'income').reduce((sum, t) => sum + t.amount, 0) ?? 0)
+const expense = computed(() => filterTransactionsbyMonthAndYear.value.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0) ?? 0)
 const balance = computed(() => income.value - expense.value ?? 0)
 
 // คำนวนค่าใช้จ่ายตามหมวดหมู่
@@ -52,7 +54,7 @@ const calcuCategory = function(type){
             newCategories.push(
                 {
                     'name': c.name, 
-                    'amount': filterTransaction.value.filter(t => t.category === c.name && t.type === type).reduce((sum, t) => sum + t.amount, 0),
+                    'amount': filterTransactionsbyMonthAndYear.value.filter(t => t.category === c.name && t.type === type).reduce((sum, t) => sum + t.amount, 0),
                     'color': formattedHextoRgba(c.color, 0.5),
                     'backgroundColor': formattedHextoRgba(c.color, 0.8),
                     'hoverColor': formattedHextoRgba(c.color, 1),

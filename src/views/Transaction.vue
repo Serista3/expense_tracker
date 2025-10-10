@@ -8,14 +8,16 @@ import Filter from '@/components/common/Filter.vue';
 import Pagination from '@/components/common/Pagination.vue';
 import { useTransaction } from '@/composables/useTransaction';
 import { useCategories } from '@/composables/useCategories';
-import { ref, computed, watch } from 'vue';
+import { useModalScrollLock } from '@/composables/useModalScrollLock';
 import { useRouter, useRoute } from 'vue-router';
+import { ref, computed, watch } from 'vue';
 
 const route = useRoute();
 const router = useRouter();
 
 const { transactions, isDeleteModalVisible, openDeleteModal, confirmDelTransaction } = useTransaction();
 const { categories } = useCategories();
+useModalScrollLock(isDeleteModalVisible);
 
 const typeFil = ref(route.query.type ?? 'All Type')
 const categoryFil = ref(route.query.categories ? route.query.categories.split(',') : [])
