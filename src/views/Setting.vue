@@ -11,13 +11,31 @@ import TableBody from '@/components/table/TableBody.vue';
 import TableRow from '@/components/table/TableRow.vue';
 import TableData from '@/components/table/TableData.vue';
 import Notification from '@/components/common/Notification.vue';
+import Modal from '@/components/common/Modal.vue';
+import CategoryForm from '@/components/CategoryForm.vue';
 import { PhFloppyDiskBack } from '@phosphor-icons/vue';
 import { useCategories } from '@/composables/useCategories';
+import { useTransaction } from '@/composables/useTransaction';
 import { useUserData } from '@/composables/useUserData';
+import { useModalScrollLock } from '@/composables/useModalScrollLock';
 import { ref } from 'vue'
 
-const { categories } = useCategories()
+const { 
+        categories, 
+        isCreateCategoryModalVisible, 
+        isDeleteCategoryModalVisible, 
+        editCategoryData,
+        delCategoryData,
+        openModalCreateCategory, 
+        closeModalCreateCategory, 
+        createCategoryData, 
+        updateCategoryData, 
+        deleteCategoryData 
+} = useCategories();
+const { transactions } = useTransaction();
 const { userAvatar, userName, userBudgets, saveUserData } = useUserData();
+useModalScrollLock(isCreateCategoryModalVisible);
+useModalScrollLock(isDeleteCategoryModalVisible);
 
 const username = ref(userName.value)
 const imgUrl = ref(userAvatar.value)
@@ -46,7 +64,6 @@ const handleProfilesave = function(){
     }
 
     saveUserData({'username': username.value, 'imgUrl': imgUrl.value, 'budgets': newBudgets})
-    
     isSaving.value = false;
 
     success.value = true;
@@ -85,11 +102,12 @@ const handleProfilesave = function(){
         </div>
         <div class="category-management mb-30 max-w-[70rem] mx-auto flex flex-col">
             <h2 class="category__title mb-8 text-[2.4rem] font-semibold text-center">Category Management</h2>
-            <Button class="btn-add bg-highlight hover:bg-[#4aba73] self-end mb-4">Add</Button>
+            <Button class="btn-add bg-highlight hover:bg-[#4aba73] self-end mb-4" @click="openModalCreateCategory">Add</Button>
             <div class="category__table overflow-y-scroll h-[30rem]">
                 <Table>
                     <TableHeader>
                         <TableHead>Name</TableHead>
+                        <TableHead>Transactions</TableHead>
                         <TableHead style="text-align: center;">Action</TableHead>
                     </TableHeader>
                     <TableBody v-if="categories.length">
@@ -97,11 +115,14 @@ const handleProfilesave = function(){
                             <TableData>
                                 <div class="tag inline-block px-4 py-1 rounded-xl text-light font-semibold" :style="{ backgroundColor: c.color }">{{ c.name }}</div>
                             </TableData>
+                            <TableData>
+                                {{ transactions.filter(t => t.category === c.name).length || 0 }}
+                            </TableData>
                             <TableData class="flex justify-center items-center gap-8">
-                                <Button class="btn-edit bg-warn hover:bg-[#f58f1b]">
+                                <Button class="btn-edit bg-warn hover:bg-[#f58f1b]" @click="openModalCreateCategory(c)">
                                     <slot name="edit-btn">Edit</slot>
                                 </Button>
-                                <Button class="btn-delete bg-alert hover:bg-[#f72525]">
+                                <Button class="btn-delete bg-alert hover:bg-[#f72525]" @click="delCategoryData = c, isDeleteCategoryModalVisible = true">
                                     <slot name="del-btn">Delete</slot>
                                 </Button>
                             </TableData>
@@ -127,6 +148,15 @@ const handleProfilesave = function(){
         <Transition name="noti-fade">
             <Notification v-if="success" class="fixed bottom-16 right-16 bg-highlight" message="Profile saved successfully!" />
         </Transition>
+        <Modal v-model="isCreateCategoryModalVisible" nameModal="Category">
+            <CategoryForm @submitCategory="(payload) => Boolean(editCategoryData.id) ? updateCategoryData(payload) : createCategoryData(payload)" @cancelCategory="closeModalCreateCategory" :editData="editCategoryData" />
+        </Modal>
+        <Modal v-model="isDeleteCategoryModalVisible" :nameModal="`Are you sure to delete ${delCategoryData?.name}?`">
+            <div class="group-btn flex items-center justify-center gap-8">
+                <Button @click="deleteCategoryData()" class="btn-yes bg-alert hover:bg-[#f72525]">Yes</Button>
+                <Button @click="isDeleteCategoryModalVisible = false;" class="btn-no bg-dark hover:bg-[#363636]">No</Button>
+            </div>
+        </Modal>
     </MainLayout>
 </template>
 
