@@ -18,7 +18,7 @@ import { useCategories } from '@/composables/useCategories';
 import { useTransaction } from '@/composables/useTransaction';
 import { useUserData } from '@/composables/useUserData';
 import { useModalScrollLock } from '@/composables/useModalScrollLock';
-import { ref } from 'vue'
+import { nextTick, ref, useTemplateRef } from 'vue'
 
 const { 
         categories, 
@@ -68,6 +68,32 @@ const handleProfilesave = function(){
 
     success.value = true;
     notiTimeout = setTimeout(() => success.value = false, 3000);
+}
+
+const urlData = ref(null);
+const downloadLink = useTemplateRef('downloadLink');
+
+// ส่งข้อมูลทั้งหมดไปเป็นไฟล์ JSON
+const exportData = async function(){
+    const data = JSON.stringify([{
+        user: {
+            username: userName.value,
+            imgUrl: userAvatar.value,
+            budgets: userBudgets.value
+        },
+        categories: categories.value,
+        transactions: transactions.value
+    }], null, '\t');
+    
+    const blob = new Blob([data], { type: 'application/json'} );
+    urlData.value = URL.createObjectURL(blob);
+    
+    // ให้ vue render element ให้เสร็จก่อน แล้วค่อยกด link เพื่อโหลดไฟล์
+    await nextTick();
+    downloadLink.value.click();
+
+    URL.revokeObjectURL(urlData.value);
+    urlData.value = null;
 }
 
 </script>
@@ -137,12 +163,22 @@ const handleProfilesave = function(){
             </div>
             
         </div>
-        <div class="data-management">
+        <div class="data-management max-w-[40rem] mx-auto">
             <h2 class="data__title mb-8 text-[2.4rem] font-semibold text-center">Data Management</h2>
-            <div class="data__content flex justify-center items-center gap-8">
-                <Button class="btn-import bg-dark hover:bg-gray-700">Import</Button>
-                <Button class="btn-export bg-gray-500 hover:bg-gray-600">Export</Button>
-                <Button class="btn-clear bg-alert hover:bg-[#f72525]">Clear all data</Button>
+            <div class="data__content flex flex-col justify-center items-start gap-8">
+                <div class="data__import flex justify-center items-center gap-6">
+                    <Button class="btn-import bg-dark hover:bg-gray-700">Import</Button>
+                    <div class="text-[1.2rem] text-gray-400 font-light mt-2">import all data from a json file.</div>
+                </div>
+                <div class="data__export flex justify-center items-center gap-6">
+                    <a v-if="urlData" :href="urlData" download="data.json" class="hidden" ref="downloadLink"></a>
+                    <Button @click="exportData" class="btn-export bg-gray-500 hover:bg-gray-600">Export</Button>
+                    <div class="text-[1.2rem] text-gray-400 font-light mt-2">export all data to a json file.</div>
+                </div>
+                <div class="data__clear flex justify-center items-center gap-6">
+                    <Button class="btn-clear bg-alert hover:bg-[#f72525]">Clear all data</Button>
+                    <div class="text-[1.2rem] text-gray-400 font-light mt-2">clear all data (categories & transactions).</div>
+                </div>
             </div>
         </div>
         <Transition name="noti-fade">
