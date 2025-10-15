@@ -70,17 +70,50 @@ const handleProfilesave = function(){
     notiTimeout = setTimeout(() => success.value = false, 3000);
 }
 
+const inputImportFile = useTemplateRef('input-import-file');
+const isFileLoaded = ref(false);
+let loadFileTimeout = null;
+
+// นำเข้าข้อมูลจากไฟล์ที่เป็น JSON
+const importData = function(){
+    clearTimeout(loadFileTimeout);
+    inputImportFile.value.value = null;
+    
+    inputImportFile.value.click();
+    const reader = new FileReader();
+
+    inputImportFile.value.addEventListener('change', () => {
+        if(!inputImportFile.value.files.length) return;
+
+        reader.addEventListener('load', () => {
+            try {
+                const [ data ] = JSON.parse(reader.result);
+                if(!data) throw new Error('No data found in file');
+                
+                transactions.value = data.transactions ?? [];
+                categories.value = data.categories ?? [];
+                
+                localStorage.setItem('transactions', JSON.stringify(transactions.value));
+                localStorage.setItem('categories', JSON.stringify(categories.value));
+
+            } catch (error){
+                console.error('Error import data: file is not a valid JSON');
+            } finally {
+                isFileLoaded.value = true;
+                loadFileTimeout = setTimeout(() => isFileLoaded.value = false, 3000);
+            }
+        })
+        
+        reader.readAsText(inputImportFile.value.files[0]);
+    })
+}
+
 const urlData = ref(null);
 const downloadLink = useTemplateRef('downloadLink');
 
 // ส่งข้อมูลทั้งหมดไปเป็นไฟล์ JSON
 const exportData = async function(){
     const data = JSON.stringify([{
-        user: {
-            username: userName.value,
-            imgUrl: userAvatar.value,
-            budgets: userBudgets.value
-        },
         categories: categories.value,
         transactions: transactions.value
     }], null, '\t');
@@ -94,6 +127,20 @@ const exportData = async function(){
 
     URL.revokeObjectURL(urlData.value);
     urlData.value = null;
+}
+
+const isClearAllDataModalVisible = ref(false);
+useModalScrollLock(isClearAllDataModalVisible);
+
+// ลบข้อมูลทั้งหมด categories และ transactions
+const clearAllData = function(){
+    transactions.value = [];
+    categories.value = [];
+
+    localStorage.removeItem('transactions');
+    localStorage.removeItem('categories');
+
+    isClearAllDataModalVisible.value = false;
 }
 
 </script>
@@ -166,8 +213,9 @@ const exportData = async function(){
         <div class="data-management max-w-[40rem] mx-auto">
             <h2 class="data__title mb-8 text-[2.4rem] font-semibold text-center">Data Management</h2>
             <div class="data__content flex flex-col justify-center items-start gap-8">
-                <div class="data__import flex justify-center items-center gap-6">
-                    <Button class="btn-import bg-dark hover:bg-gray-700">Import</Button>
+                <div class="data__import flex justify-center items-center gap-6 relative">
+                    <input type="file" name="importFile" id="importFile" class="hidden" ref="input-import-file" accept="application/json">
+                    <Button @click="importData" class="btn-import bg-dark hover:bg-gray-700">Import</Button>
                     <div class="text-[1.2rem] text-gray-400 font-light mt-2">import all data from a json file.</div>
                 </div>
                 <div class="data__export flex justify-center items-center gap-6">
@@ -176,8 +224,8 @@ const exportData = async function(){
                     <div class="text-[1.2rem] text-gray-400 font-light mt-2">export all data to a json file.</div>
                 </div>
                 <div class="data__clear flex justify-center items-center gap-6">
-                    <Button class="btn-clear bg-alert hover:bg-[#f72525]">Clear all data</Button>
-                    <div class="text-[1.2rem] text-gray-400 font-light mt-2">clear all data (categories & transactions).</div>
+                    <Button @click="isClearAllDataModalVisible = true;" class="btn-clear bg-alert hover:bg-[#f72525]">Clear all data</Button>
+                    <div class="text-[1.2rem] text-gray-400 font-light mt-2">clear all data (categories and transactions).</div>
                 </div>
             </div>
         </div>
@@ -191,6 +239,15 @@ const exportData = async function(){
             <div class="group-btn flex items-center justify-center gap-8">
                 <Button @click="deleteCategoryData()" class="btn-yes bg-alert hover:bg-[#f72525]">Yes</Button>
                 <Button @click="isDeleteCategoryModalVisible = false;" class="btn-no bg-dark hover:bg-[#363636]">No</Button>
+            </div>
+        </Modal>
+        <Transition name="noti-fade">
+            <Notification v-if="isFileLoaded" class="fixed bottom-16 right-16 bg-highlight" message="File loaded successfully!" />
+        </Transition>
+        <Modal v-model="isClearAllDataModalVisible" :nameModal="`Clear all data?`">
+            <div class="group-btn flex items-center justify-center gap-8">
+                <Button @click="clearAllData" class="btn-yes bg-alert hover:bg-[#f72525]">Yes</Button>
+                <Button @click="isClearAllDataModalVisible = false;" class="btn-no bg-dark hover:bg-[#363636]">No</Button>
             </div>
         </Modal>
     </MainLayout>
