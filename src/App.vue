@@ -20,7 +20,7 @@ watch(() => route.path, (newPath) => {
   <div class="expense-tracker">
     <div class="content flex relative">
       <Navigation :activeNav="isNav" @closeNav="closeNav" :curPath="route.path" v-show="route.name !== 'EditTransaction' && route.name !== 'CreateTransaction'" />
-      <div class="main relative w-full">
+      <div class="main relative w-full bg-light dark:bg-dark">
         <router-view />
         <PhList 
           @click="openNav" 
