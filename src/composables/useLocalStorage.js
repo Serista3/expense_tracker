@@ -14,6 +14,11 @@ export function useLocalStorage() {
   const updateDataToLocalStorage = function(key, data){
     localStorage.setItem(key, JSON.stringify(data));
   }
+  
+  // ลบข้อมูลใน localstorage ผ่าน key
+  const removeDataFromLocalStorage = function(key){
+    localStorage.removeItem(key);
+  }
 
-  return { getDataFromLocalStorage, updateDataToLocalStorage }
+  return { getDataFromLocalStorage, updateDataToLocalStorage, removeDataFromLocalStorage }
 }

@@ -18,6 +18,7 @@ import { useCategories } from '@/composables/useCategories';
 import { useTransaction } from '@/composables/useTransaction';
 import { useUserData } from '@/composables/useUserData';
 import { useModalScrollLock } from '@/composables/useModalScrollLock';
+import { useLocalStorage } from '@/composables/useLocalStorage';
 import { nextTick, ref, useTemplateRef } from 'vue'
 
 const { 
@@ -34,6 +35,7 @@ const {
 } = useCategories();
 const { transactions } = useTransaction();
 const { userAvatar, userName, userBudgets, saveUserData } = useUserData();
+const { removeDataFromLocalStorage, updateDataToLocalStorage } = useLocalStorage();
 useModalScrollLock(isCreateCategoryModalVisible);
 useModalScrollLock(isDeleteCategoryModalVisible);
 
@@ -92,10 +94,17 @@ const importData = function(){
                 
                 transactions.value = data.transactions ?? [];
                 categories.value = data.categories ?? [];
-                
-                localStorage.setItem('transactions', JSON.stringify(transactions.value));
-                localStorage.setItem('categories', JSON.stringify(categories.value));
 
+                saveUserData(data.userData ?? { username: 'User', imgUrl: '', budgets: [] });
+
+                // ข้อมูลใส่ form
+                username.value = userName.value;
+                imgUrl.value = userAvatar.value;
+                budgets.value = userBudgets.value;
+                curBudget.value = Array.from(userBudgets.value).find(b => new Date().getMonth() === b.month && new Date().getFullYear() === b.year)?.amount ?? 1;
+                
+                updateDataToLocalStorage('transactions', transactions.value);
+                updateDataToLocalStorage('categories', categories.value);
             } catch (error){
                 console.error('Error import data: file is not a valid JSON');
             } finally {
@@ -114,6 +123,11 @@ const downloadLink = useTemplateRef('downloadLink');
 // ส่งข้อมูลทั้งหมดไปเป็นไฟล์ JSON
 const exportData = async function(){
     const data = JSON.stringify([{
+        userData: {
+            username: userName.value,
+            imgUrl: userAvatar.value,
+            budgets: userBudgets.value
+        },
         categories: categories.value,
         transactions: transactions.value
     }], null, '\t');
@@ -136,9 +150,19 @@ useModalScrollLock(isClearAllDataModalVisible);
 const clearAllData = function(){
     transactions.value = [];
     categories.value = [];
+    userName.value = 'User';
+    userAvatar.value = '';
+    userBudgets.value = [];
 
-    localStorage.removeItem('transactions');
-    localStorage.removeItem('categories');
+    // reset form
+    username.value = 'User';
+    imgUrl.value = '';
+    curBudget.value = 1;
+    budgets.value = [];
+
+    removeDataFromLocalStorage('transactions');
+    removeDataFromLocalStorage('categories');
+    removeDataFromLocalStorage('userData');
 
     isClearAllDataModalVisible.value = false;
 }
@@ -151,7 +175,7 @@ const clearAllData = function(){
         <div class="general mb-30 flex flex-col justify-center items-center">
             <h2 class="general__title mb-14 text-[2.4rem] font-semibold">General</h2>
             <div class="general__content flex gap-20 justify-center items-center w-full">
-                <img class="general__img-preview w-[30rem] h-[30rem] object-cover rounded-[50%]" :src="imgUrl" alt="preview-img" v-if="imgUrl" />
+                <img class="general__img-preview w-[30rem] h-[30rem] object-cover rounded-[50%] border border-gray-300" :src="imgUrl" alt="preview-img" v-if="imgUrl" />
                 <div class="preview-img w-[30rem] h-[30rem] bg-gray-300 rounded-[50%]" v-else></div>
                 <Form class="general__form" @submit="handleProfilesave">
                     <FormField labelName="Username">
@@ -213,7 +237,7 @@ const clearAllData = function(){
         <div class="data-management max-w-[40rem] mx-auto">
             <h2 class="data__title mb-8 text-[2.4rem] font-semibold text-center">Data Management</h2>
             <div class="data__content flex flex-col justify-center items-start gap-8">
-                <div class="data__import flex justify-center items-center gap-6 relative">
+                <div class="data__import flex justify-center items-center gap-6">
                     <input type="file" name="importFile" id="importFile" class="hidden" ref="input-import-file" accept="application/json">
                     <Button @click="importData" class="btn-import bg-dark hover:bg-gray-700">Import</Button>
                     <div class="text-[1.2rem] text-gray-400 font-light mt-2">import all data from a json file.</div>
@@ -225,7 +249,7 @@ const clearAllData = function(){
                 </div>
                 <div class="data__clear flex justify-center items-center gap-6">
                     <Button @click="isClearAllDataModalVisible = true;" class="btn-clear bg-alert hover:bg-[#f72525]">Clear all data</Button>
-                    <div class="text-[1.2rem] text-gray-400 font-light mt-2">clear all data (categories and transactions).</div>
+                    <div class="text-[1.2rem] text-gray-400 font-light mt-2">clear all data.</div>
                 </div>
             </div>
         </div>

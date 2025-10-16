@@ -39,7 +39,7 @@ const handleCancel = function(){
 </script>
 
 <template>
-  <Form @submit="handleSubmit" @cancel="handleCancel" :isEdit="Boolean(editData.id)" >
+  <Form @submit="handleSubmit" @cancel="handleCancel" :isEdit="Boolean(editData?.id)" >
     <FormField labelName="Name">
       <FormInput type="text" name="categoryName" placeholder="enter your category name." v-model="formCategoryData.name" />
       <ErrorMessage v-if="errDataCategory.name" :message="errDataCategory.name" />
