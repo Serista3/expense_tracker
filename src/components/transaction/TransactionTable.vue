@@ -47,7 +47,7 @@ const deleteTransaction = function(transaction) {
             {{ t.title }}
           </TableData>
           <TableData>
-            <div class="tag inline-block px-4 py-1 rounded-xl text-light font-semibold" :style="{ backgroundColor: categories.find(c => c.name === t.category)?.color }">{{ t.category }}</div>
+            <div class="tag inline-block px-4 py-1 rounded-xl text-light font-semibold dark:border dark:border-gray-600" :style="{ backgroundColor: categories.find(c => c.name === t.category)?.color }">{{ t.category }}</div>
           </TableData>
           <TableData>
             {{ formattedDateToRead(t.date) }}

@@ -11,7 +11,7 @@ const modelValue = defineModel()
 
 <template>
   <input
-    class="py-2 px-4 border border-gray-300 rounded-[.7rem]" 
+    class="py-2 px-4 border border-gray-300 focus:border-dark dark:border-gray-600 rounded-[.7rem] dark:focus:outline-0 dark:focus:border-gray-300 dark:bg-dark dark:text-light w-full transition-all focus:outline-0" 
     :type="props.type" 
     :id="props.name" 
     :name="props.name" 

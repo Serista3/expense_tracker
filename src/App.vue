@@ -25,7 +25,7 @@ watch(() => route.path, (newPath) => {
         <PhList 
           @click="openNav" 
           :size="24" 
-          class="menu-nav cursor-pointer absolute top-8 left-8 text-dark hover:text-highlight transition-all" 
+          class="menu-nav cursor-pointer absolute top-8 left-8 text-dark dark:text-light hover:text-highlight transition-all" 
           :class="{'cursor-pointer': !isNav}"
           v-show="route.name !== 'EditTransaction' && route.name !== 'CreateTransaction'" />
       </div>

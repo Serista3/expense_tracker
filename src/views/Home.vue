@@ -116,18 +116,18 @@ const updateQuery = function(filter){
                     <PhScales :size="48" />
                 </template>
             </SummaryCard>
-            <SummaryCard class="bg-dark text-light" title="Budget" :amount="budget">
+            <SummaryCard class="bg-dark text-light dark:border dark:border-gray-500" title="Budget" :amount="budget">
                 <template #summary__card-icon>
                     <PhBank :size="48" />
                 </template>
             </SummaryCard>
             <BarChart class="col-span-2" :data="top5Income" title="Top 5 Income" />
             <BarChart class="col-span-2" :data="expenseCategories" title="Expense by Category" />
-            <div class="recent-transaction bg-light col-span-full py-14 px-20 shadow-lg rounded-[.7rem]">
+            <div class="recent-transaction bg-light dark:bg-dark dark:border dark:border-gray-500 col-span-full py-14 px-20 shadow-lg rounded-[.7rem]">
                 <div class="recent-transaction__header mb-15 flex justify-between items-center">
                     <h2 class="text-4xl font-semibold">Recent Transactions</h2>
                     <router-link to="/transaction">
-                        <Button class="btn-view-all bg-dark hover:bg-[#363636]">View All</Button>
+                        <Button class="btn-view-all bg-dark hover:bg-[#363636] dark:border dark:border-gray-500">View All</Button>
                     </router-link>
                 </div>
                 <TransactionTable style="margin-bottom: 0;" @deleteTransaction="payload => openDeleteModal(payload)" :transactions="recentTransactions" :categories="categories">

@@ -34,13 +34,13 @@ const ArrPageShow = computed(() => {
 <template>
     <div class="pagination flex items-center justify-center gap-4 mt-20">
         <Button class="pagination__icon" @click="emit('updatePage', curPage - 1)" :disabled="curPage <= 1" :class="{ 'pagination__icon-not-allowed': curPage <= 1 }">
-            <PhCaretLeft :size="20" />
+            <PhCaretLeft :size="20" class="dark:text-gray-300" />
         </Button>
-        <Button class="pagination__page-number" :class="1 === curPage ? 'pagination__page-number-active' : 'pagination__page-number'" @click="emit('updatePage', 1)">
+        <Button class="pagination__page-number dark:border dark:border-gray-600" :class="1 === curPage ? 'pagination__page-number-active' : 'pagination__page-number'" @click="emit('updatePage', 1)">
             1
         </Button>
         <PhDotsThree :size="20" v-if="curPage > 4 && totalPage > 7"/>
-        <Button class="pagination__page-number" 
+        <Button class="pagination__page-number dark:border dark:border-gray-600 dark:bg-dark" 
             v-for="page in ArrPageShow"
             :key="page"
             :class="page === curPage ? 'pagination__page-number-active' : 'pagination__page-number'"
@@ -48,11 +48,11 @@ const ArrPageShow = computed(() => {
             {{ page }}
         </Button>
         <PhDotsThree :size="20" v-if="curPage <= totalPage - 4 && totalPage > 7"/>
-        <Button v-if="totalPage > 1" class="pagination__page-number" :class="totalPage === curPage ? 'pagination__page-number-active' : 'pagination__page-number'" @click="emit('updatePage', totalPage)">
+        <Button v-if="totalPage > 1" class="pagination__page-number dark:border dark:border-gray-600" :class="totalPage === curPage ? 'pagination__page-number-active' : 'pagination__page-number'" @click="emit('updatePage', totalPage)">
             {{ totalPage }}
         </Button>
         <Button class="pagination__icon" @click="emit('updatePage', curPage + 1)" :disabled="curPage >= totalPage" :class="{ 'pagination__icon-not-allowed': curPage >= totalPage }">
-            <PhCaretRight :size="20" />
+            <PhCaretRight :size="20" class="dark:text-gray-300" />
         </Button>
     </div> 
 </template>
