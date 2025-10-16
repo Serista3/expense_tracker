@@ -215,7 +215,7 @@ const clearAllData = function(){
                             <TableData>
                                 {{ transactions.filter(t => t.category === c.name).length || 0 }}
                             </TableData>
-                            <TableData class="flex justify-center items-center gap-8">
+                            <TableData class="flex justify-center items-center gap-8" v-if="c.name !== 'Uncategorized'">
                                 <Button class="btn-edit bg-warn hover:bg-[#f58f1b]" @click="openModalCreateCategory(c)">
                                     <slot name="edit-btn">Edit</slot>
                                 </Button>
@@ -223,6 +223,7 @@ const clearAllData = function(){
                                     <slot name="del-btn">Delete</slot>
                                 </Button>
                             </TableData>
+                            <TableData class="text-center text-gray-400 font-light" v-else>Default</TableData>
                         </TableRow>
                     </TableBody>
                     <TableBody v-else>
