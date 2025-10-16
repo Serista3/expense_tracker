@@ -14,7 +14,7 @@ import { useModalScrollLock } from '@/composables/useModalScrollLock';
 import { useRouter, useRoute } from 'vue-router';
 import { computed, ref } from 'vue';
 
-const { transactions, isDeleteModalVisible, openDeleteModal, confirmDelTransaction } = useTransaction();
+const { transactions, isDeleteModalVisible, openDeleteModal, confirmDelTransaction, transactionToDel } = useTransaction();
 const { categories } = useCategories()
 const { formattedHextoRgba, months, formattedUppercaseFirstChar } = useFormat()
 const { userBudgets } = useUserData()
@@ -130,16 +130,17 @@ const updateQuery = function(filter){
                         <Button class="btn-view-all bg-dark hover:bg-[#363636]">View All</Button>
                     </router-link>
                 </div>
-                <TransactionTable style="margin-bottom: 0;" @deleteTransaction="payload => openDeleteModal(payload.id)" :transactions="recentTransactions" :categories="categories">
+                <TransactionTable style="margin-bottom: 0;" @deleteTransaction="payload => openDeleteModal(payload)" :transactions="recentTransactions" :categories="categories">
                     <template #edit-btn><PhPen :size="24" color="#fff" /></template>
                     <template #del-btn><PhTrash :size="24" color="#fff" /></template>
                 </TransactionTable>
             </div>
         </div>
-        <Modal v-model="isDeleteModalVisible" nameModal="Are you sure?">
-            <div class="group-btn flex items-center justify-center gap-8">
-                <Button @click="confirmDelTransaction()" class="btn-yes bg-alert hover:bg-[#f72525]">Yes</Button>
-                <Button @click="isDeleteModalVisible = false;" class="btn-no bg-dark hover:bg-[#363636]">No</Button>
+        <Modal v-model="isDeleteModalVisible" nameModal="Delete transaction">
+            <p class="text-gray-400 text-center font-light mt-[-1rem]">You are going to delete <span class="font-semibold text-alert">{{ transactionToDel.title }}</span>. Are you sure to delete it ?</p>
+            <div class="group-btn flex items-center justify-center gap-8 mt-20">
+                <Button @click="confirmDelTransaction()" class="btn-yes bg-alert hover:bg-[#f72525]">Confirm</Button>
+                <Button @click="isDeleteModalVisible = false;" class="btn-no bg-dark hover:bg-[#363636]">Cancel</Button>
             </div>
         </Modal>
     </MainLayout>

@@ -15,7 +15,7 @@ import { ref, computed, watch } from 'vue';
 const route = useRoute();
 const router = useRouter();
 
-const { transactions, isDeleteModalVisible, openDeleteModal, confirmDelTransaction } = useTransaction();
+const { transactions, isDeleteModalVisible, openDeleteModal, confirmDelTransaction, transactionToDel } = useTransaction();
 const { categories } = useCategories();
 useModalScrollLock(isDeleteModalVisible);
 
@@ -96,12 +96,13 @@ const pageTransaction = computed(() => {
             </Filter>
             <router-link to="/createTransaction"><Button class="btn-add bg-highlight hover:bg-[#4aba73]">Add</Button></router-link>
         </div>
-        <TransactionTable @deleteTransaction="payload => openDeleteModal(payload.id)" :transactions="pageTransaction" :categories="categories" />
+        <TransactionTable @deleteTransaction="payload => openDeleteModal(payload)" :transactions="pageTransaction" :categories="categories" />
         <Pagination :curPage="curPage" :totalPage="totalPage" @updatePage="updatePage" />
-        <Modal v-model="isDeleteModalVisible" nameModal="Are you sure?">
-            <div class="group-btn flex items-center justify-center gap-8">
-                <Button @click="confirmDelTransaction()" class="btn-yes bg-alert hover:bg-[#f72525]">Yes</Button>
-                <Button @click="isDeleteModalVisible = false;" class="btn-no bg-dark hover:bg-[#363636]">No</Button>
+        <Modal v-model="isDeleteModalVisible" nameModal="Delete transaction">
+            <p class="text-gray-400 text-center font-light mt-[-1rem]">You are going to delete <span class="font-semibold text-alert">{{ transactionToDel.title }}</span>. Are you sure to delete it ?</p>
+            <div class="group-btn flex items-center justify-center gap-8 mt-20">
+                <Button @click="confirmDelTransaction()" class="btn-yes bg-alert hover:bg-[#f72525]">Confirm</Button>
+                <Button @click="isDeleteModalVisible = false;" class="btn-no bg-dark hover:bg-[#363636]">Cancel</Button>
             </div>
         </Modal>
     </MainLayout>

@@ -259,19 +259,21 @@ const clearAllData = function(){
         <Modal v-model="isCreateCategoryModalVisible" nameModal="Category">
             <CategoryForm @submitCategory="(payload) => Boolean(editCategoryData.id) ? updateCategoryData(payload) : createCategoryData(payload)" @cancelCategory="closeModalCreateCategory" :editData="editCategoryData" />
         </Modal>
-        <Modal v-model="isDeleteCategoryModalVisible" :nameModal="`Are you sure to delete ${delCategoryData?.name}?`">
-            <div class="group-btn flex items-center justify-center gap-8">
-                <Button @click="deleteCategoryData()" class="btn-yes bg-alert hover:bg-[#f72525]">Yes</Button>
-                <Button @click="isDeleteCategoryModalVisible = false;" class="btn-no bg-dark hover:bg-[#363636]">No</Button>
+        <Modal v-model="isDeleteCategoryModalVisible" :nameModal="`Delete category`">
+            <p class="text-gray-400 text-center font-light mt-[-1rem]">You are going to delete this category.<br/> Are you sure to delete <span class="font-semibold text-alert">{{ delCategoryData?.name }}</span> ?</p>
+            <div class="group-btn flex items-center justify-center gap-8 mt-20">
+                <Button @click="deleteCategoryData()" class="btn-yes bg-alert hover:bg-[#f72525]">Confirm</Button>
+                <Button @click="isDeleteCategoryModalVisible = false;" class="btn-no bg-dark hover:bg-[#363636]">Cancel</Button>
             </div>
         </Modal>
         <Transition name="noti-fade">
             <Notification v-if="isFileLoaded" class="fixed bottom-16 right-16 bg-highlight" message="File loaded successfully!" />
         </Transition>
         <Modal v-model="isClearAllDataModalVisible" :nameModal="`Clear all data?`">
-            <div class="group-btn flex items-center justify-center gap-8">
-                <Button @click="clearAllData" class="btn-yes bg-alert hover:bg-[#f72525]">Yes</Button>
-                <Button @click="isClearAllDataModalVisible = false;" class="btn-no bg-dark hover:bg-[#363636]">No</Button>
+            <p class="text-gray-400 text-center font-light mt-[-1rem]"><span class="font-semibold text-alert">This can't restore it.</span> Export your data first if you want to keep it.</p>
+            <div class="group-btn flex items-center justify-center gap-8 mt-20">
+                <Button @click="clearAllData" class="btn-yes bg-alert hover:bg-[#f72525]">Confirm</Button>
+                <Button @click="isClearAllDataModalVisible = false;" class="btn-no bg-dark hover:bg-[#363636]">Cancel</Button>
             </div>
         </Modal>
     </MainLayout>
