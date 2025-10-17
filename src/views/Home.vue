@@ -140,7 +140,7 @@ const updateQuery = function(filter){
             <p class="text-gray-400 text-center font-light mt-[-1rem]">You are going to delete <span class="font-semibold text-alert">{{ transactionToDel.title }}</span>. Are you sure to delete it ?</p>
             <div class="group-btn flex items-center justify-center gap-8 mt-20">
                 <Button @click="confirmDelTransaction()" class="btn-yes bg-alert hover:bg-[#f72525] text-light">Confirm</Button>
-                <Button @click="isDeleteModalVisible = false;" class="btn-no bg-dark hover:bg-[#363636] text-light">Cancel</Button>
+                <Button @click="isDeleteModalVisible = false;" class="btn-no bg-dark hover:bg-[#363636] text-light dark:border dark:border-gray-600">Cancel</Button>
             </div>
         </Modal>
     </MainLayout>
