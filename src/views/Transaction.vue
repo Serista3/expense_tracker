@@ -94,15 +94,15 @@ const pageTransaction = computed(() => {
             <Filter style="max-width: 20rem;">
                 <el-select-v2 @change="updateQuery('categories', categoryFil)" v-model="categoryFil" :options="options" placeholder="Categories" multiple collapse-tags collapse-tags-tooltip/>
             </Filter>
-            <router-link to="/createTransaction"><Button class="btn-add bg-highlight hover:bg-[#4aba73]">Add</Button></router-link>
+            <router-link to="/createTransaction"><Button class="btn-add text-light bg-highlight hover:bg-[#4aba73]">Add</Button></router-link>
         </div>
         <TransactionTable @deleteTransaction="payload => openDeleteModal(payload)" :transactions="pageTransaction" :categories="categories" />
         <Pagination :curPage="curPage" :totalPage="totalPage" @updatePage="updatePage" />
         <Modal v-model="isDeleteModalVisible" nameModal="Delete transaction">
             <p class="text-gray-400 text-center font-light mt-[-1rem]">You are going to delete <span class="font-semibold text-alert">{{ transactionToDel.title }}</span>. Are you sure to delete it ?</p>
             <div class="group-btn flex items-center justify-center gap-8 mt-20">
-                <Button @click="confirmDelTransaction()" class="btn-yes bg-alert hover:bg-[#f72525]">Confirm</Button>
-                <Button @click="isDeleteModalVisible = false;" class="btn-no bg-dark hover:bg-[#363636]">Cancel</Button>
+                <Button @click="confirmDelTransaction()" class="btn-yes text-light bg-alert hover:bg-[#f72525]">Confirm</Button>
+                <Button @click="isDeleteModalVisible = false;" class="btn-no text-light bg-dark hover:bg-[#363636] dark:border dark:border-gray-600">Cancel</Button>
             </div>
         </Modal>
     </MainLayout>

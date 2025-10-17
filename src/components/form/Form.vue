@@ -29,9 +29,9 @@ const handleCancel = function(){
     <slot></slot>
     <slot name="action">
       <div class="form__button flex items-center justify-end gap-6 mt-14">
-        <Button @click.prevent="handleCancel" class="btn-cancel bg-warn hover:bg-[#f58f1b]">Cancel</Button>
-        <Button v-if="props.isEdit" type="submit" class="btn-save bg-highlight hover:bg-[#4aba73]">Save</Button>
-        <Button v-else type="submit" class="btn-confirm bg-highlight hover:bg-[#4aba73]">{{ props.confirmText }}</Button>
+        <Button @click.prevent="handleCancel" class="btn-cancel bg-warn hover:bg-[#f58f1b] text-light">Cancel</Button>
+        <Button v-if="props.isEdit" type="submit" class="btn-save bg-highlight hover:bg-[#4aba73] text-light">Save</Button>
+        <Button v-else type="submit" class="btn-confirm bg-highlight hover:bg-[#4aba73] text-light">{{ props.confirmText }}</Button>
       </div>
     </slot>
   </form>

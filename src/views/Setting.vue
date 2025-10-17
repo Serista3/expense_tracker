@@ -187,7 +187,7 @@ const clearAllData = function(){
                     <FormField labelName="This Month's Budget">
                          <FormInput type="number" name="budget" placeholder="enter your budget." v-model="curBudget" :min="1" required />
                     </FormField>
-                    <Button type="submit" :disabled="isSaving" :class="{'disabled' : isSaving}" class="btn-save bg-highlight hover:bg-[#4aba73] flex gap-4 justify-center items-center max-w-[12rem] mt-6">
+                    <Button type="submit" :disabled="isSaving" :class="{'disabled' : isSaving}" class="btn-save text-light bg-highlight hover:bg-[#4aba73] flex gap-4 justify-center items-center max-w-[12rem] mt-6">
                         {{ isSaving ? 'Saving...' : 'Save' }}
                         <PhFloppyDiskBack :size="20" weight="fill" />
                     </Button>
@@ -199,7 +199,7 @@ const clearAllData = function(){
         </div>
         <div class="category-management mb-30 max-w-[70rem] mx-auto flex flex-col">
             <h2 class="category__title mb-8 text-[2.4rem] font-semibold text-center">Category Management</h2>
-            <Button class="btn-add bg-highlight hover:bg-[#4aba73] self-end mb-4" @click="openModalCreateCategory">Add</Button>
+            <Button class="btn-add text-light bg-highlight hover:bg-[#4aba73] self-end mb-4" @click="openModalCreateCategory">Add</Button>
             <div class="category__table overflow-y-scroll h-[30rem]">
                 <Table>
                     <TableHeader>
@@ -216,10 +216,10 @@ const clearAllData = function(){
                                 {{ transactions.filter(t => t.category === c.name).length || 0 }}
                             </TableData>
                             <TableData class="flex justify-center items-center gap-8" v-if="c.name !== 'Uncategorized'">
-                                <Button class="btn-edit bg-warn hover:bg-[#f58f1b]" @click="openModalCreateCategory(c)">
+                                <Button class="btn-edit text-light bg-warn hover:bg-[#f58f1b]" @click="openModalCreateCategory(c)">
                                     <slot name="edit-btn">Edit</slot>
                                 </Button>
-                                <Button class="btn-delete bg-alert hover:bg-[#f72525]" @click="delCategoryData = c, isDeleteCategoryModalVisible = true">
+                                <Button class="btn-delete text-light bg-alert hover:bg-[#f72525]" @click="delCategoryData = c, isDeleteCategoryModalVisible = true">
                                     <slot name="del-btn">Delete</slot>
                                 </Button>
                             </TableData>
@@ -240,16 +240,16 @@ const clearAllData = function(){
             <div class="data__content flex flex-col justify-center items-start gap-8">
                 <div class="data__import flex justify-center items-center gap-6">
                     <input type="file" name="importFile" id="importFile" class="hidden" ref="input-import-file" accept="application/json">
-                    <Button @click="importData" class="btn-import bg-dark hover:bg-gray-700 dark:border dark:border-gray-600">Import</Button>
+                    <Button @click="importData" class="btn-import text-light bg-dark hover:bg-gray-700 dark:border dark:border-gray-600">Import</Button>
                     <div class="text-[1.2rem] text-gray-400 font-light mt-2">import all data from a json file.</div>
                 </div>
                 <div class="data__export flex justify-center items-center gap-6">
                     <a v-if="urlData" :href="urlData" download="data.json" class="hidden" ref="downloadLink"></a>
-                    <Button @click="exportData" class="btn-export bg-gray-500 hover:bg-gray-600">Export</Button>
+                    <Button @click="exportData" class="btn-export text-light bg-gray-500 hover:bg-gray-600">Export</Button>
                     <div class="text-[1.2rem] text-gray-400 font-light mt-2">export all data to a json file.</div>
                 </div>
                 <div class="data__clear flex justify-center items-center gap-6">
-                    <Button @click="isClearAllDataModalVisible = true;" class="btn-clear bg-alert hover:bg-[#f72525]">Clear all data</Button>
+                    <Button @click="isClearAllDataModalVisible = true;" class="btn-clear text-light bg-alert hover:bg-[#f72525]">Clear all data</Button>
                     <div class="text-[1.2rem] text-gray-400 font-light mt-2">clear all data.</div>
                 </div>
             </div>
@@ -263,8 +263,8 @@ const clearAllData = function(){
         <Modal v-model="isDeleteCategoryModalVisible" :nameModal="`Delete category`">
             <p class="text-gray-400 text-center font-light mt-[-1rem]">You are going to delete this category.<br/> Are you sure to delete <span class="font-semibold text-alert">{{ delCategoryData?.name }} ?</span></p>
             <div class="group-btn flex items-center justify-center gap-8 mt-20">
-                <Button @click="deleteCategoryData()" class="btn-yes bg-alert hover:bg-[#f72525]">Confirm</Button>
-                <Button @click="isDeleteCategoryModalVisible = false;" class="btn-no bg-dark hover:bg-[#363636] dark:border dark:border-gray-600">Cancel</Button>
+                <Button @click="deleteCategoryData()" class="btn-yes text-light bg-alert hover:bg-[#f72525]">Confirm</Button>
+                <Button @click="isDeleteCategoryModalVisible = false;" class="btn-no text-light bg-dark hover:bg-[#363636] dark:border dark:border-gray-600">Cancel</Button>
             </div>
         </Modal>
         <Transition name="noti-fade">
@@ -273,8 +273,8 @@ const clearAllData = function(){
         <Modal v-model="isClearAllDataModalVisible" :nameModal="`Clear all data?`">
             <p class="text-gray-400 text-center font-light mt-[-1rem]"><span class="font-semibold text-alert">This can't restore it.</span> Export your data first if you want to keep it.</p>
             <div class="group-btn flex items-center justify-center gap-8 mt-20">
-                <Button @click="clearAllData" class="btn-yes bg-alert hover:bg-[#f72525]">Confirm</Button>
-                <Button @click="isClearAllDataModalVisible = false;" class="btn-no bg-dark hover:bg-[#363636] dark:border dark:border-gray-600">Cancel</Button>
+                <Button @click="clearAllData" class="btn-yes text-light bg-alert hover:bg-[#f72525]">Confirm</Button>
+                <Button @click="isClearAllDataModalVisible = false;" class="btn-no text-light bg-dark hover:bg-[#363636] dark:border dark:border-gray-600">Cancel</Button>
             </div>
         </Modal>
     </MainLayout>

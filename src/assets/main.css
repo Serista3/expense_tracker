@@ -14,8 +14,11 @@
 :root {
     --el-color-primary: var(--color-dark) !important;
     --el-text-color-regular: var(--color-dark) !important;
+    --el-text-color-placeholder: var(--color-dark) !important;
     --el-font-size-base: 1.6rem !important;
-    --el-text-color-placeholder: #999999 !important;
+    --el-radio-text-color: var(--color-dark) !important;
+    --el-radio-font-weight: 400 !important;
+    --el-radio-input-bg-color: var(--color-dark) !important;
 }
 
 html {
@@ -23,15 +26,20 @@ html {
 }
 
 html.dark {
-    --el-color-primary: var(--color-light) !important;
+    --el-color-white: var(--color-dark) !important;
+    --el-color-primary: var(--color-gray-300) !important;
+    --el-color-info-light-9: #3d3d3d !important;
     --el-text-color-regular: var(--color-light) !important;
+    --el-text-color-primary: var(--color-light) !important;
+    --el-text-color-placeholder: #999999 !important;
     --el-fill-color-blank: var(--color-dark) !important;
+    --el-fill-color-light:  #3d3d3d !important;
     --el-border-color: oklch(55.1% 0.027 264.364) !important;
     --el-bg-color: var(--color-dark) !important;
     --el-bg-color-overlay: var(--color-dark) !important;
-    --el-text-color-placeholder: #999999 !important;
-    --el-fill-color-light:  #3d3d3d !important;
     --el-bg-color-light: var(--color-dark) !important;
+    --el-radio-text-color: var(--color-light) !important;
+    --el-radio-input-bg-color: var(--color-dark) !important;
 }
 
 body {
@@ -40,4 +48,16 @@ body {
     font-size: 1.6rem;
     background-color: var(--secondary-color);
     line-height: 1.75;
+}
+
+.el-date-table td.current:not(.disabled) .el-date-table-cell__text,
+.el-month-table td.current:not(.disabled) .el-date-table-cell__text,
+.el-year-table td.current:not(.disabled) .el-date-table-cell__text {
+    color: var(--el-color-white) !important;
+    font-weight: 600 !important;
+}
+
+.el-radio__inner:after {
+    height: .7rem !important;
+    width: .7rem !important;
 }

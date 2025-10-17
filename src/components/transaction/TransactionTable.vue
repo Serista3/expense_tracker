@@ -57,11 +57,11 @@ const deleteTransaction = function(transaction) {
           </TableData>
           <TableData class="flex justify-center items-center gap-8">
               <router-link :to="{name: 'EditTransaction', params: {id : t.id}}">
-                  <Button class="btn-edit bg-warn hover:bg-[#f58f1b]">
+                  <Button class="btn-edit bg-warn hover:bg-[#f58f1b] text-light">
                     <slot name="edit-btn">Edit</slot>
                   </Button>
               </router-link>
-              <Button @click="deleteTransaction(t)" class="btn-delete bg-alert hover:bg-[#f72525]">
+              <Button @click="deleteTransaction(t)" class="btn-delete bg-alert hover:bg-[#f72525] text-light">
                 <slot name="del-btn">Delete</slot>
               </Button>
           </TableData>

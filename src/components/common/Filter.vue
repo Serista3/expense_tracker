@@ -24,8 +24,4 @@ import Form from '../form/Form.vue';
   border-radius: 7px !important;
 }
 
-:deep(.el-select__placeholder.is-transparent) {
-  color: var(--color-dark) !important;
-}
-
 </style>

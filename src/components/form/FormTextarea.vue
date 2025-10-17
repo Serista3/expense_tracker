@@ -10,7 +10,7 @@ const modelValue = defineModel()
 
 <template>
   <textarea
-    class="py-2 px-4 border border-gray-300 rounded-[.5rem]" 
+    class="py-2 px-4 border border-gray-300 rounded-[.5rem] focus:border-dark dark:border-gray-600 dark:focus:outline-0 dark:focus:border-gray-300 dark:bg-dark dark:text-light w-full transition-all focus:outline-0" 
     :name="props.name" 
     :id="props.name" 
     :placeholder="props.placeholder"

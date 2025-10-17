@@ -116,18 +116,18 @@ const updateQuery = function(filter){
                     <PhScales :size="48" />
                 </template>
             </SummaryCard>
-            <SummaryCard class="bg-dark text-light dark:border dark:border-gray-500" title="Budget" :amount="budget">
+            <SummaryCard class="bg-dark text-light border border-gray-300 dark:border-gray-600" title="Budget" :amount="budget">
                 <template #summary__card-icon>
                     <PhBank :size="48" />
                 </template>
             </SummaryCard>
             <BarChart class="col-span-2" :data="top5Income" title="Top 5 Income" />
             <BarChart class="col-span-2" :data="expenseCategories" title="Expense by Category" />
-            <div class="recent-transaction bg-light dark:bg-dark dark:border dark:border-gray-500 col-span-full py-14 px-20 shadow-lg rounded-[.7rem]">
+            <div class="recent-transaction bg-light dark:bg-dark border border-gray-300 dark:border-gray-600 col-span-full py-14 px-20 shadow-lg rounded-[.7rem]">
                 <div class="recent-transaction__header mb-15 flex justify-between items-center">
                     <h2 class="text-4xl font-semibold">Recent Transactions</h2>
                     <router-link to="/transaction">
-                        <Button class="btn-view-all bg-dark hover:bg-[#363636] dark:border dark:border-gray-500">View All</Button>
+                        <Button class="btn-view-all text-light bg-dark hover:bg-[#363636] dark:border dark:border-gray-500">View All</Button>
                     </router-link>
                 </div>
                 <TransactionTable style="margin-bottom: 0;" @deleteTransaction="payload => openDeleteModal(payload)" :transactions="recentTransactions" :categories="categories">
@@ -139,8 +139,8 @@ const updateQuery = function(filter){
         <Modal v-model="isDeleteModalVisible" nameModal="Delete transaction">
             <p class="text-gray-400 text-center font-light mt-[-1rem]">You are going to delete <span class="font-semibold text-alert">{{ transactionToDel.title }}</span>. Are you sure to delete it ?</p>
             <div class="group-btn flex items-center justify-center gap-8 mt-20">
-                <Button @click="confirmDelTransaction()" class="btn-yes bg-alert hover:bg-[#f72525]">Confirm</Button>
-                <Button @click="isDeleteModalVisible = false;" class="btn-no bg-dark hover:bg-[#363636]">Cancel</Button>
+                <Button @click="confirmDelTransaction()" class="btn-yes bg-alert hover:bg-[#f72525] text-light">Confirm</Button>
+                <Button @click="isDeleteModalVisible = false;" class="btn-no bg-dark hover:bg-[#363636] text-light">Cancel</Button>
             </div>
         </Modal>
     </MainLayout>

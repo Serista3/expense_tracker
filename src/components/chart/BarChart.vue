@@ -3,6 +3,7 @@ import BaseChart from './BaseChart.vue';
 import { Bar } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
 import { computed } from 'vue';
+import { useTheme } from '@/composables/useTheme';
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
@@ -16,6 +17,7 @@ const props = defineProps({
     default: [],
   },
 })
+const { curTheme } = useTheme();
 
 // ข้อมูลใน Barchart
 const barChartData = computed(() => {
@@ -44,7 +46,7 @@ const barChartOptions = computed(() => {
       title: {
         display: true,
         text: props.title,
-        color: '#212121',
+        color: `${curTheme.value === 'dark' ? '#fff' : '#212121'}`,
         font: {
           size: 24
         }
@@ -58,16 +60,36 @@ const barChartOptions = computed(() => {
       x: { 
         beginAtZero: true,
         grid: {
-          color: 'rgba(0, 0, 0, 0.1)'
+          color: `${curTheme.value === 'dark' ? 'oklch(44.6% 0.03 256.802)' : 'oklch(87.2% 0.01 258.338)' }`
         },
         title: {
           display: true,
           text: 'Amount' ,
-          color: 'rgba(0,0,0,0.4)',
+          color: `${curTheme.value === 'dark' ? 'oklch(70.7% 0.022 261.325)' : 'oklch(55.2% 0.016 285.938)'}`,
           font: {
             weight: '300',
-            size: 14,
+            size: 12,
           }
+        },
+        ticks: {
+          color: `${curTheme.value === 'dark' ? '#FFFFFF' : '#212121'}`
+        }
+      },
+      y: {
+        grid: {
+          color: `${curTheme.value === 'dark' ? 'oklch(44.6% 0.03 256.802)' : 'oklch(87.2% 0.01 258.338)' }`
+        },
+        title: {
+          display: true,
+          text: 'Category' ,
+          color: `${curTheme.value === 'dark' ? 'oklch(70.7% 0.022 261.325)' : 'oklch(55.2% 0.016 285.938)'}`,
+          font: {
+            weight: '300',
+            size: 12,
+          }
+        },
+        ticks: {
+          color: `${curTheme.value === 'dark' ? '#FFFFFF' : '#212121'}`
         }
       }
     }
@@ -80,7 +102,7 @@ const barChartOptions = computed(() => {
   <BaseChart>
     <Bar
       v-if="data.length"
-      class="bar-chart"
+      class="bar-chart dark:bg-dark"
       :options="barChartOptions"
       :data="barChartData"
     />

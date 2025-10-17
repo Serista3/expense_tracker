@@ -104,9 +104,4 @@ const openModalCreateCategory = function(){
   font-size: 1.6rem !important;
 }
 
-.el-radio {
-  --el-radio-text-color: var(--color-dark);
-  --el-radio-font-weight: 400 !important;
-}
-
 </style>
