@@ -48,7 +48,7 @@ const barChartOptions = computed(() => {
         text: props.title,
         color: `${curTheme.value === 'dark' ? '#fff' : '#212121'}`,
         font: {
-          size: 24
+          size: 20
         }
       },
       legend: {

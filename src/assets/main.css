@@ -9,6 +9,13 @@
     --color-alert: #f75e5e;
     --color-warn: #ffa135;
     --color-smooth: #35C9FF;
+
+    /* Breakpoints */
+    --breakpoint-*: initial;
+    --breakpoint-mobile: 480px;
+    --breakpoint-tablet: 640px;
+    --breakpoint-laptop: 900px;
+    --breakpoint-desktop: 1200px;
 }
 
 :root {

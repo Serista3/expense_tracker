@@ -55,7 +55,7 @@ const deleteTransaction = function(transaction) {
           <TableData class="font-semibold" :class="{'text-highlight' : t.type === 'income', 'text-alert' : t.type === 'expense'}">
             {{ t.type === 'income' ? `${numeral(t.amount).format('+0,0.00')}` : `-${numeral(t.amount).format('0,0.00')}` }} THB
           </TableData>
-          <TableData class="flex justify-center items-center gap-8">
+          <TableData class="flex justify-center items-center gap-4 tablet:gap-6 laptop:gap-8">
               <router-link :to="{name: 'EditTransaction', params: {id : t.id}}">
                   <Button class="btn-edit bg-warn hover:bg-[#f58f1b] text-light">
                     <slot name="edit-btn">Edit</slot>
