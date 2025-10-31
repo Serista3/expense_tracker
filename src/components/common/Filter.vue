@@ -19,8 +19,6 @@ import Form from '../form/Form.vue';
 }
 
 :deep(.el-select__wrapper) {
-  font-size: 1.6rem !important;
-  min-height: 4rem !important;
   border-radius: 7px !important;
 }
 

@@ -25,7 +25,7 @@ const searchData = function(){
     <FormInput class="form__input-search" v-model="searchValue" type="text" name="search" placeholder="enter your title here."></FormInput>
     <template #action>
       <Button type="submit" class="btn-search text-light bg-dark hover:bg-[#474747] dark:border dark:border-gray-600 absolute top-0 right-0 h-full">
-        <PhMagnifyingGlass :size="22" />
+        <PhMagnifyingGlass class="text-[1.8rem] tablet:text-[2rem] laptop:text-[2.2rem]" />
       </Button>
     </template>
   </Form>
@@ -33,12 +33,24 @@ const searchData = function(){
 
 <style scoped>
 
-.form__search {
-  max-width: 40rem !important;
+@media screen and (max-width: 480px), screen and (min-width: 480px) {
+  .form__search {
+    max-width: 100% !important;
+  }
+
+  .form__input-search {
+    padding-right: 5rem !important;
+  }
 }
 
-.form__input-search {
-  padding-right: 8rem !important;
+@media screen and (min-width: 900px) {
+  .form__search {
+    max-width: 40rem !important;
+  }
+
+  .form__input-search {
+    padding-right: 8rem !important
+  }
 }
 
 .btn-search {

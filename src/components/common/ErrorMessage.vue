@@ -10,5 +10,5 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="error-mesg text-alert text-[1.4rem]">{{ props.message }}</div>
+  <div class="error-mesg text-alert text-[1rem] tablet:text-[1.2rem] laptop:text-[1.4rem]">{{ props.message }}</div>
 </template>
