@@ -24,20 +24,20 @@ const emit = defineEmits(['closeNav'])
             <UserProfile />
             <ul class="nav__list flex flex-col gap-10">
                 <li>
-                    <router-link to="/" class="nav__link" id="Dashboard" :class="[classNavLink, { 'text-highlight': curPath === '/' }]">
-                        <PhChartPie :size="24" />
+                    <router-link to="/" class="nav__link text-[1.4rem] laptop:text-[1.6rem]" id="Dashboard" :class="[classNavLink, { 'text-highlight': curPath === '/' }]">
+                        <PhChartPie class="text-[1.8rem] tablet:text-[2rem] laptop:text-[2.4rem]" />
                         Dashboard
                     </router-link>
                 </li>
                 <li>
-                    <router-link to="/transaction" class="nav__link" id="transaction" :class="[classNavLink, { 'text-highlight': curPath === '/transaction' }]">
-                        <PhArrowsLeftRight :size="24" />
+                    <router-link to="/transaction" class="nav__link text-[1.4rem] laptop:text-[1.6rem]" id="transaction" :class="[classNavLink, { 'text-highlight': curPath === '/transaction' }]">
+                        <PhArrowsLeftRight class="text-[1.8rem] tablet:text-[2rem] laptop:text-[2.4rem]" />
                         Transaction
                     </router-link>
                 </li>
                 <li>
-                    <router-link to="/setting" class="nav__link" id="setting" :class="[classNavLink, { 'text-highlight': curPath === '/setting' }]">
-                        <PhGear :size="24" />
+                    <router-link to="/setting" class="nav__link text-[1.4rem] laptop:text-[1.6rem]" id="setting" :class="[classNavLink, { 'text-highlight': curPath === '/setting' }]">
+                        <PhGear class="text-[1.8rem] tablet:text-[2rem] laptop:text-[2.4rem]" />
                         Setting
                     </router-link>
                 </li>

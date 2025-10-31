@@ -11,7 +11,7 @@ const labelValue = computed(() => props.labelName.slice(0, 1).toUpperCase() + pr
 
 <template>
   <div class="form__group flex flex-col gap-4">
-    <label :for="props.labelName" class="self-start font-semibold">{{ labelValue }}:</label>
+    <label :for="props.labelName" class="self-start font-semibold text-[1.4rem] tablet:text-[1.6rem]">{{ labelValue }}:</label>
     <slot></slot>
   </div>
 </template>

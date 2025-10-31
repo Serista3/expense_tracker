@@ -171,12 +171,12 @@ const clearAllData = function(){
 
 <template>
     <MainLayout class="setting-page">
-        <h1 class="text-6xl font-semibold mb-14 text-center">Setting</h1>
+        <h1 class="text-5xl laptop:text-6xl font-semibold mb-10 tablet:mb-12 laptop:mb-14 text-center">Setting</h1>
         <div class="general mb-30 flex flex-col justify-center items-center">
-            <h2 class="general__title mb-14 text-[2.4rem] font-semibold">General</h2>
-            <div class="general__content flex gap-20 justify-center items-center w-full">
-                <img class="general__img-preview w-[30rem] h-[30rem] object-cover rounded-[50%] border border-gray-300 dark:border-gray-600" :src="imgUrl" alt="preview-img" v-if="imgUrl" />
-                <div class="preview-img w-[30rem] h-[30rem] bg-gray-300 rounded-[50%]" v-else></div>
+            <h2 class="general__title mb-10 tablet:mb-12 laptop:mb-14 text-[2rem] tablet:text-[2.2rem] laptop:text-[2.4rem] font-semibold">General</h2>
+            <div class="general__content flex flex-col laptop:flex-row gap-10 tablet:gap-15 laptop:gap-20 justify-center items-center w-full">
+                <img class="general__img-preview w-[25rem] h-[25rem] laptop:w-[30rem] laptop:h-[30rem] object-cover rounded-[50%] border border-gray-300 dark:border-gray-600" :src="imgUrl" alt="preview-img" v-if="imgUrl" />
+                <div class="preview-img w-[25rem] h-[25rem] laptop:w-[30rem] laptop:h-[30rem] bg-gray-300 rounded-[50%]" v-else></div>
                 <Form class="general__form" @submit="handleProfilesave">
                     <FormField labelName="Username">
                          <FormInput type="text" name="username" placeholder="enter your username." v-model="username" />
@@ -187,9 +187,9 @@ const clearAllData = function(){
                     <FormField labelName="This Month's Budget">
                          <FormInput type="number" name="budget" placeholder="enter your budget." v-model="curBudget" :min="1" required />
                     </FormField>
-                    <Button type="submit" :disabled="isSaving" :class="{'disabled' : isSaving}" class="btn-save text-light bg-highlight hover:bg-[#4aba73] flex gap-4 justify-center items-center max-w-[12rem] mt-6">
+                    <Button type="submit" :disabled="isSaving" :class="{'disabled' : isSaving}" class="btn-save mx-auto w-full max-w-auto laptop:mx-0 tablet:w-auto tablet:max-w-[12rem] text-light bg-highlight hover:bg-[#4aba73] flex gap-4 justify-center items-center mt-6">
                         {{ isSaving ? 'Saving...' : 'Save' }}
-                        <PhFloppyDiskBack :size="20" weight="fill" />
+                        <PhFloppyDiskBack class="text-[1.6rem] tablet:text-[1.8rem] laptop:text-[2rem]" weight="fill" />
                     </Button>
                     <template #action>
                         <div class="hidden"></div>
@@ -197,11 +197,11 @@ const clearAllData = function(){
                 </Form>
             </div>
         </div>
-        <div class="category-management mb-30 max-w-[70rem] mx-auto flex flex-col">
-            <h2 class="category__title mb-8 text-[2.4rem] font-semibold text-center">Category Management</h2>
+        <div class="category-management mb-30 max-w-[80rem] mx-auto flex flex-col">
+            <h2 class="category__title mb-8 text-[2rem] tablet:text-[2.2rem] laptop:text-[2.4rem] font-semibold text-center">Category Management</h2>
             <Button class="btn-add text-light bg-highlight hover:bg-[#4aba73] self-end mb-4" @click="openModalCreateCategory">Add</Button>
             <div class="category__table overflow-y-scroll h-[30rem]">
-                <Table>
+                <Table class="min-w-[50rem]">
                     <TableHeader>
                         <TableHead>Name</TableHead>
                         <TableHead>Transactions</TableHead>
@@ -215,7 +215,7 @@ const clearAllData = function(){
                             <TableData>
                                 {{ transactions.filter(t => t.category === c.name).length || 0 }}
                             </TableData>
-                            <TableData class="flex justify-center items-center gap-8" v-if="c.name !== 'Uncategorized'">
+                            <TableData class="flex justify-center items-center gap-4 tablet:gap-6 laptop:gap-8" v-if="c.name !== 'Uncategorized'">
                                 <Button class="btn-edit text-light bg-warn hover:bg-[#f58f1b]" @click="openModalCreateCategory(c)">
                                     <slot name="edit-btn">Edit</slot>
                                 </Button>
@@ -236,7 +236,7 @@ const clearAllData = function(){
             
         </div>
         <div class="data-management max-w-[40rem] mx-auto">
-            <h2 class="data__title mb-8 text-[2.4rem] font-semibold text-center">Data Management</h2>
+            <h2 class="data__title mb-8 text-[2rem] tablet:text-[2.2rem] laptop:text-[2.4rem] font-semibold text-center">Data Management</h2>
             <div class="data__content flex flex-col justify-center items-start gap-8">
                 <div class="data__import flex justify-center items-center gap-6">
                     <input type="file" name="importFile" id="importFile" class="hidden" ref="input-import-file" accept="application/json">
@@ -255,14 +255,14 @@ const clearAllData = function(){
             </div>
         </div>
         <Transition name="noti-fade">
-            <Notification v-if="success" class="fixed bottom-16 right-16 bg-highlight" message="Profile saved successfully!" />
+            <Notification v-if="success" class="fixed bottom-8 right-8 tablet:bottom-12 tablet:right-12 laptop:bottom-16 laptop:right-16 bg-highlight" message="Profile saved successfully!" />
         </Transition>
         <Modal v-model="isCreateCategoryModalVisible" nameModal="Category">
             <CategoryForm @submitCategory="(payload) => Boolean(editCategoryData.id) ? updateCategoryData(payload) : createCategoryData(payload)" @cancelCategory="closeModalCreateCategory" :editData="editCategoryData" />
         </Modal>
         <Modal v-model="isDeleteCategoryModalVisible" :nameModal="`Delete category`">
-            <p class="text-gray-400 text-center font-light mt-[-1rem]">You are going to delete this category.<br/> Are you sure to delete <span class="font-semibold text-alert">{{ delCategoryData?.name }} ?</span></p>
-            <div class="group-btn flex items-center justify-center gap-8 mt-20">
+            <p class="text-gray-400 text-center font-light mt-[-1rem] text-[1.2rem] tablet:text-[1.4rem] laptop:text-[1.6rem]">You are going to delete this category.<br/> Are you sure to delete <span class="font-semibold text-alert">{{ delCategoryData?.name }} ?</span></p>
+            <div class="group-btn flex items-center justify-center gap-4 tablet:gap-6 laptop:gap-8 mt-12 tablet:mt-14 laptop:mt-16 desktop:mt-20">
                 <Button @click="deleteCategoryData()" class="btn-yes text-light bg-alert hover:bg-[#f72525]">Confirm</Button>
                 <Button @click="isDeleteCategoryModalVisible = false;" class="btn-no text-light bg-dark hover:bg-[#363636] dark:border dark:border-gray-600">Cancel</Button>
             </div>
@@ -271,8 +271,8 @@ const clearAllData = function(){
             <Notification v-if="isFileLoaded" class="fixed bottom-16 right-16 bg-highlight" message="File loaded successfully!" />
         </Transition>
         <Modal v-model="isClearAllDataModalVisible" :nameModal="`Clear all data?`">
-            <p class="text-gray-400 text-center font-light mt-[-1rem]"><span class="font-semibold text-alert">This can't restore it.</span> Export your data first if you want to keep it.</p>
-            <div class="group-btn flex items-center justify-center gap-8 mt-20">
+            <p class="text-gray-400 text-center font-light mt-[-1rem] text-[1.2rem] tablet:text-[1.4rem] laptop:text-[1.6rem]"><span class="font-semibold text-alert">This can't restore it.</span> Export your data first if you want to keep it.</p>
+            <div class="group-btn flex items-center justify-center gap-4 tablet:gap-6 laptop:gap-8 mt-12 tablet:mt-14 laptop:mt-16 desktop:mt-20">
                 <Button @click="clearAllData" class="btn-yes text-light bg-alert hover:bg-[#f72525]">Confirm</Button>
                 <Button @click="isClearAllDataModalVisible = false;" class="btn-no text-light bg-dark hover:bg-[#363636] dark:border dark:border-gray-600">Cancel</Button>
             </div>
