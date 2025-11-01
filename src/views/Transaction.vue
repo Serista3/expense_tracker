@@ -83,27 +83,90 @@ const pageTransaction = computed(() => {
 
 <template>
     <MainLayout class="transaction-page">
-        <h1 class="text-6xl font-semibold mb-10">Transactions</h1>
-        <div class="manage-transaction-data flex justify-end items-center gap-8 mb-10">
+        <h1 class="text-4xl tablet:text-5xl laptop:text-6xl font-semibold mb-8 tablet:mb-9 laptop:mb-10">Transactions</h1>
+        <div class="manage-transaction-data flex flex-col laptop:flex-row laptop:justify-center desktop:justify-end gap-4 tablet:gap-6 laptop:gap-8 mb-8 tablet:mb-9 laptop:mb-10">
             <Search @searchData="payload => updateQuery('title', payload)" :initSearchVal="route.query.title" />
-            <Filter style="max-width: 12rem;">
+            <Filter class="single-filter">
                 <el-select v-model="typeFil" placeholder="Type" @change="updateQuery('type', typeFil)">
                     <el-option v-for="item, index in types" :key="index" :label="item" :value="item" />
                 </el-select>
             </Filter>
-            <Filter style="max-width: 20rem;">
+            <Filter class="multi-filter">
                 <el-select-v2 @change="updateQuery('categories', categoryFil)" v-model="categoryFil" :options="options" placeholder="Categories" multiple collapse-tags collapse-tags-tooltip/>
             </Filter>
-            <router-link to="/createTransaction"><Button class="btn-add text-light bg-highlight hover:bg-[#4aba73]">Add</Button></router-link>
+            <router-link to="/createTransaction"><Button class="btn-add text-light bg-highlight hover:bg-[#4aba73] w-full">Add</Button></router-link>
         </div>
-        <TransactionTable @deleteTransaction="payload => openDeleteModal(payload)" :transactions="pageTransaction" :categories="categories" />
+        <div class="transaction__table overflow-x-auto">
+            <TransactionTable @deleteTransaction="payload => openDeleteModal(payload)" :transactions="pageTransaction" :categories="categories" />
+        </div>
         <Pagination :curPage="curPage" :totalPage="totalPage" @updatePage="updatePage" />
         <Modal v-model="isDeleteModalVisible" nameModal="Delete transaction">
-            <p class="text-gray-400 text-center font-light mt-[-1rem]">You are going to delete <span class="font-semibold text-alert">{{ transactionToDel.title }}</span>. Are you sure to delete it ?</p>
-            <div class="group-btn flex items-center justify-center gap-8 mt-20">
+            <p class="text-gray-400 text-center font-light mt-[-1rem] text-[1.2rem] tablet:text-[1.4rem] laptop:text-[1.6rem]">You are going to delete <span class="font-semibold text-alert">{{ transactionToDel.title }}</span>. Are you sure to delete it ?</p>
+            <div class="group-btn flex items-center justify-center gap-4 tablet:gap-6 laptop:gap-8 mt-12 tablet:mt-16 laptop:mt-20">
                 <Button @click="confirmDelTransaction()" class="btn-yes text-light bg-alert hover:bg-[#f72525]">Confirm</Button>
                 <Button @click="isDeleteModalVisible = false;" class="btn-no text-light bg-dark hover:bg-[#363636] dark:border dark:border-gray-600">Cancel</Button>
             </div>
         </Modal>
     </MainLayout>
 </template>
+
+<style scoped>
+
+@media screen and (max-width: 480px), screen and (min-width: 480px) {
+    :deep(.el-select__wrapper) {
+        font-size: 1.2rem !important;
+        min-height: 3.5rem !important;
+    }
+
+    .el-select__selected-item {
+        font-size: 1.2rem !important;
+    }
+
+    .el-select-dropdown__item {
+        font-size: 1.2rem !important;
+    }
+
+    .single-filter, .multi-filter {
+        max-width: 100% !important;
+    }
+}
+
+@media screen and (min-width: 640px) {
+    :deep(.el-select__wrapper) {
+        font-size: 1.4rem !important;
+        min-height: 3.75rem !important;
+    }
+
+    .el-select__selected-item {
+        font-size: 1.4rem !important;
+    }
+
+    .el-select-dropdown__item {
+        font-size: 1.4rem !important;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    :deep(.el-select__wrapper) {
+        font-size: 1.6rem !important;
+        min-height: 4rem !important;
+    }
+
+    .el-select__selected-item {
+        font-size: 1.6rem !important;
+    }
+
+    .el-select-dropdown__item {
+        font-size: 1.6rem !important;
+    }
+
+    .single-filter {
+        max-width: 12rem !important;
+    }
+
+    .multi-filter {
+        max-width: 20rem !important;
+    }
+}
+
+</style>

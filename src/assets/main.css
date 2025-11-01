@@ -68,3 +68,21 @@ body {
     height: .7rem !important;
     width: .7rem !important;
 }
+
+@media screen and (max-width: 640px) {
+    :root {
+        --el-font-size-base: 1.2rem !important;
+    }
+}
+
+@media screen and (min-width: 640px) {
+    :root {
+        --el-font-size-base: 1.4rem !important;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    :root {
+        --el-font-size-base: 1.6rem !important;
+    }
+}

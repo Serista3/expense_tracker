@@ -157,4 +157,8 @@ const openModalCreateCategory = function(){
     }
 }
 
+:deep(.el-input__wrapper), :deep(.el-select__wrapper) {
+  border-radius: .7rem !important;
+}
+
 </style>
