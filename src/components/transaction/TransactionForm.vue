@@ -75,7 +75,7 @@ const openModalCreateCategory = function(){
       </el-select>
       <div class="flex justify-between items-center">
         <ErrorMessage v-if="errDataTransac.category" :message="errDataTransac.category" />
-        <button @click.prevent="openModalCreateCategory" v-if="!formData.id" class="create-category inline-block ml-auto font-semibold text-[1.4rem] hover:underline cursor-pointer">create your category</button>
+        <button @click.prevent="openModalCreateCategory" v-if="!formData.id" class="create-category inline-block ml-auto font-semibold text-[1rem] tablet:text-[1.2rem] laptop:text-[1.4rem] hover:underline cursor-pointer">create your category</button>
       </div>
     </FormField>
     <FormField labelName="date">
@@ -99,9 +99,62 @@ const openModalCreateCategory = function(){
 
 <style scoped>
 
-:deep(.el-select__wrapper) {
-  padding: .5rem 1rem !important;
-  font-size: 1.6rem !important;
+@media screen and (max-width: 480px), screen and (min-width: 480px) {
+    :deep(.el-select__wrapper) {
+        font-size: 1.2rem !important;
+        min-height: 3.5rem !important;
+    }
+
+    .el-select__selected-item {
+        font-size: 1.2rem !important;
+    }
+
+    .el-select-dropdown__item {
+        font-size: 1.2rem !important;
+    }
+
+    :deep(.el-radio__label) {
+        font-size: 1.2rem !important;
+    }
+}
+
+@media screen and (min-width: 640px) {
+    :deep(.el-select__wrapper) {
+        font-size: 1.4rem !important;
+        min-height: 3.75rem !important;
+    }
+
+    .el-select__selected-item {
+        font-size: 1.4rem !important;
+    }
+
+    .el-select-dropdown__item {
+        font-size: 1.4rem !important;
+    }
+
+    :deep(.el-radio__label) {
+        font-size: 1.4rem !important;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    :deep(.el-select__wrapper) {
+        padding: .5rem 1rem !important;
+        font-size: 1.6rem !important;
+        min-height: 4rem !important;
+    }
+
+    .el-select__selected-item {
+        font-size: 1.6rem !important;
+    }
+
+    .el-select-dropdown__item {
+        font-size: 1.6rem !important;
+    }
+
+    :deep(.el-radio__label) {
+        font-size: 1.6rem !important;
+    }
 }
 
 </style>

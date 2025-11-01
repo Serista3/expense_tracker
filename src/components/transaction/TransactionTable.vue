@@ -33,7 +33,7 @@ const deleteTransaction = function(transaction) {
 </script>
 
 <template>
-    <Table class="min-w-[65rem]">
+    <Table class="min-w-[80rem]">
       <TableHeader>
         <TableHead>Title</TableHead>
         <TableHead>Category</TableHead>
