@@ -103,44 +103,44 @@ const updateQuery = function(filter){
         <div class="dashboard grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4 gap-8 tablet:gap-9 laptop:gap-10">
             <SummaryCard class="bg-highlight text-light" title="Total Income" :amount="income">
                 <template #summary__card-icon>
-                    <PhTrendUp class="text-[2.8rem] tablet:text-[3.6rem] laptop:text-[4.2rem]" />
+                    <PhTrendUp class="text-[4.2rem]" />
                 </template>
             </SummaryCard>
             <SummaryCard class="bg-alert text-light" title="Total Expenses" :amount="expense">
                 <template #summary__card-icon>
-                    <PhTrendDown class="text-[2.8rem] tablet:text-[3.6rem] laptop:text-[4.2rem]" />
+                    <PhTrendDown class="text-[4.2rem]" />
                 </template>
             </SummaryCard>
             <SummaryCard class="bg-smooth text-light" title="Balance" :amount="balance">
                 <template #summary__card-icon>
-                    <PhScales class="text-[2.8rem] tablet:text-[3.6rem] laptop:text-[4.2rem]" />
+                    <PhScales class="text-[4.2rem]" />
                 </template>
             </SummaryCard>
             <SummaryCard class="bg-dark text-light border border-gray-300 dark:border-gray-600" title="Budget" :amount="budget">
                 <template #summary__card-icon>
-                    <PhBank class="text-[2.8rem] tablet:text-[3.6rem] laptop:text-[4.2rem]" />
+                    <PhBank class="text-[4.2rem]" />
                 </template>
             </SummaryCard>
             <BarChart class="col-span-full desktop:col-span-2" :data="top5Income" title="Top 5 Income" />
             <BarChart class="col-span-full desktop:col-span-2" :data="expenseCategories" title="Expense by Category" />
             <div class="recent-transaction bg-light dark:bg-dark border border-gray-300 dark:border-gray-600 col-span-full p-10 tablet:p-15 laptop:p-20 shadow-lg rounded-[.7rem]">
-                <div class="recent-transaction__header mb-8 tablet:mb-12 laptop:mb-15 flex justify-between items-center">
-                    <h2 class="text-2xl tablet:text-3xl laptop:text-4xl font-semibold">Recent Transactions</h2>
-                    <router-link to="/transaction">
+                <div class="recent-transaction__header mb-8 tablet:mb-12 laptop:mb-15 flex justify-between items-center gap-2">
+                    <h2 class="text-4xl font-semibold inline-block leading-12">Recent Transactions</h2>
+                    <router-link to="/transaction" class="flex-none">
                         <Button class="btn-view-all text-light bg-dark hover:bg-[#363636] dark:border dark:border-gray-500">View All</Button>
                     </router-link>
                 </div>
                 <div class="recent-transaction__table overflow-x-auto">
                     <TransactionTable style="margin-bottom: 0;" @deleteTransaction="payload => openDeleteModal(payload)" :transactions="recentTransactions" :categories="categories">
-                        <template #edit-btn><PhPen class="text-[1.4rem] tablet:text-[1.7rem] laptop:text-[2rem]" color="#fff" /></template>
-                        <template #del-btn><PhTrash class="text-[1.4rem] tablet:text-[1.7rem] laptop:text-[2rem]" color="#fff" /></template>
+                        <template #edit-btn><PhPen class="text-[2rem]" color="#fff" /></template>
+                        <template #del-btn><PhTrash class="text-[2rem]" color="#fff" /></template>
                     </TransactionTable>
                 </div>
             </div>
         </div>
         <Modal v-model="isDeleteModalVisible" nameModal="Delete transaction">
-            <p class="text-gray-400 text-center font-light mt-[-1rem] text-[1.2rem] tablet:text-[1.4rem] laptop:text-[1.6rem]">You are going to delete <span class="font-semibold text-alert">{{ transactionToDel.title }}</span>. Are you sure to delete it ?</p>
-            <div class="group-btn flex items-center justify-center gap-4 tablet:gap-6 laptop:gap-8 mt-12 tablet:mt-16 laptop:mt-20">
+            <p class="text-gray-400 text-center font-light mt-[-1rem] text-[1.6rem]">You are going to delete <span class="font-semibold text-alert">{{ transactionToDel.title }}</span>. Are you sure to delete it ?</p>
+            <div class="group-btn flex items-center justify-center gap-6 tablet:gap-8 mt-15 tablet:mt-17 laptop:mt-20">
                 <Button @click="confirmDelTransaction()" class="btn-yes bg-alert hover:bg-[#f72525] text-light">Confirm</Button>
                 <Button @click="isDeleteModalVisible = false;" class="btn-no bg-dark hover:bg-[#363636] text-light dark:border dark:border-gray-600">Cancel</Button>
             </div>
@@ -149,39 +149,15 @@ const updateQuery = function(filter){
 </template>
 <style scoped>
 
-@media screen and (min-width: 640px) {
-    :deep(.el-select__wrapper) {
-        width: 12rem !important;
-        min-height: 3.75rem !important;
-        font-size: 1.4rem !important;
-    }
-
-    .el-select-dropdown__item {
-        font-size: 1.4rem !important;
-    }
-}
-
-@media screen and (min-width: 900px) {
-    :deep(.el-select__wrapper) {
-        width: 15rem !important;
-        min-height: 4rem !important;
-        font-size: 1.6rem !important;
-    }
-
-    .el-select-dropdown__item {
-        font-size: 1.6rem !important;
-    }
-}
-
 :deep(.el-select__wrapper) {
-    width: 10rem;
-    min-height: 3.5rem;
-    font-size: 1.2rem;
+    width: 12rem;
+    min-height: 4rem;
+    font-size: 1.6rem;
     border-radius: .7rem;
 }
 
 .el-select-dropdown__item {
-    font-size: 1.2rem;
+    font-size: 1.6rem;
 }
 
 </style>

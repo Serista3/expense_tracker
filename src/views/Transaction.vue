@@ -83,8 +83,8 @@ const pageTransaction = computed(() => {
 
 <template>
     <MainLayout class="transaction-page">
-        <h1 class="text-4xl tablet:text-5xl laptop:text-6xl font-semibold mb-8 tablet:mb-9 laptop:mb-10">Transactions</h1>
-        <div class="manage-transaction-data flex flex-col laptop:flex-row laptop:justify-center desktop:justify-end gap-4 tablet:gap-6 laptop:gap-8 mb-8 tablet:mb-9 laptop:mb-10">
+        <h1 class="text-5xl tablet:text-6xl font-semibold mb-10">Transactions</h1>
+        <div class="manage-transaction-data flex flex-col laptop:flex-row laptop:justify-center desktop:justify-end gap-4 tablet:gap-6 laptop:gap-8 mb-10">
             <Search @searchData="payload => updateQuery('title', payload)" :initSearchVal="route.query.title" />
             <Filter class="single-filter">
                 <el-select v-model="typeFil" placeholder="Type" @change="updateQuery('type', typeFil)">
@@ -101,8 +101,8 @@ const pageTransaction = computed(() => {
         </div>
         <Pagination :curPage="curPage" :totalPage="totalPage" @updatePage="updatePage" />
         <Modal v-model="isDeleteModalVisible" nameModal="Delete transaction">
-            <p class="text-gray-400 text-center font-light mt-[-1rem] text-[1.2rem] tablet:text-[1.4rem] laptop:text-[1.6rem]">You are going to delete <span class="font-semibold text-alert">{{ transactionToDel.title }}</span>. Are you sure to delete it ?</p>
-            <div class="group-btn flex items-center justify-center gap-4 tablet:gap-6 laptop:gap-8 mt-12 tablet:mt-16 laptop:mt-20">
+            <p class="text-gray-400 text-center font-light mt-[-1rem] text-[1.6rem]">You are going to delete <span class="font-semibold text-alert">{{ transactionToDel.title }}</span>. Are you sure to delete it ?</p>
+            <div class="group-btn flex items-center justify-center gap-6 tablet:gap-8 mt-15 tablet:mt-17 laptop:mt-20">
                 <Button @click="confirmDelTransaction()" class="btn-yes text-light bg-alert hover:bg-[#f72525]">Confirm</Button>
                 <Button @click="isDeleteModalVisible = false;" class="btn-no text-light bg-dark hover:bg-[#363636] dark:border dark:border-gray-600">Cancel</Button>
             </div>
@@ -112,60 +112,26 @@ const pageTransaction = computed(() => {
 
 <style scoped>
 
-@media screen and (max-width: 480px), screen and (min-width: 480px) {
-    :deep(.el-select__wrapper) {
-        font-size: 1.2rem !important;
-        min-height: 3.5rem !important;
-    }
+:deep(.el-select__wrapper) {
+    font-size: 1.6rem;
+    min-height: 4rem;
+}
 
-    .el-select__selected-item {
-        font-size: 1.2rem !important;
-    }
+.el-select__selected-item, .el-select-dropdown__item  {
+    font-size: 1.6rem;
+}
 
-    .el-select-dropdown__item {
-        font-size: 1.2rem !important;
-    }
+.single-filter {
+    max-width: 12rem;
+}
 
+.multi-filter {
+    max-width: 20rem;
+}
+
+@media screen and (max-width: 900px) {
     .single-filter, .multi-filter {
         max-width: 100% !important;
-    }
-}
-
-@media screen and (min-width: 640px) {
-    :deep(.el-select__wrapper) {
-        font-size: 1.4rem !important;
-        min-height: 3.75rem !important;
-    }
-
-    .el-select__selected-item {
-        font-size: 1.4rem !important;
-    }
-
-    .el-select-dropdown__item {
-        font-size: 1.4rem !important;
-    }
-}
-
-@media screen and (min-width: 900px) {
-    :deep(.el-select__wrapper) {
-        font-size: 1.6rem !important;
-        min-height: 4rem !important;
-    }
-
-    .el-select__selected-item {
-        font-size: 1.6rem !important;
-    }
-
-    .el-select-dropdown__item {
-        font-size: 1.6rem !important;
-    }
-
-    .single-filter {
-        max-width: 12rem !important;
-    }
-
-    .multi-filter {
-        max-width: 20rem !important;
     }
 }
 

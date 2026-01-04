@@ -48,7 +48,7 @@ const barChartOptions = computed(() => {
         text: props.title,
         color: `${curTheme.value === 'dark' ? '#fff' : '#212121'}`,
         font: {
-          size: 20
+          size: 24
         }
       },
       legend: {
@@ -68,7 +68,7 @@ const barChartOptions = computed(() => {
           color: `${curTheme.value === 'dark' ? 'oklch(70.7% 0.022 261.325)' : 'oklch(55.2% 0.016 285.938)'}`,
           font: {
             weight: '300',
-            size: 12,
+            size: 16,
           }
         },
         ticks: {
@@ -85,7 +85,7 @@ const barChartOptions = computed(() => {
           color: `${curTheme.value === 'dark' ? 'oklch(70.7% 0.022 261.325)' : 'oklch(55.2% 0.016 285.938)'}`,
           font: {
             weight: '300',
-            size: 12,
+            size: 16,
           }
         },
         ticks: {
@@ -106,6 +106,6 @@ const barChartOptions = computed(() => {
       :options="barChartOptions"
       :data="barChartData"
     />
-    <div v-else class="text-gray-400 text-[1.4rem] font-light">no transactions</div>
+    <div v-else class="text-gray-400 text-[1.6rem] font-light">no transactions</div>
   </BaseChart>
 </template>

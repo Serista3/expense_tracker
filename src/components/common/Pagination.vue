@@ -32,14 +32,14 @@ const ArrPageShow = computed(() => {
 </script>
 
 <template>
-    <div class="pagination flex items-center justify-center gap-1 tablet:gap-2 laptop:gap-4 mt-10 tablet:mt-15 laptop:mt-20">
+    <div class="pagination flex items-center justify-center gap-1 tablet:gap-2 laptop:gap-4 mt-20">
         <Button class="pagination__icon" @click="emit('updatePage', curPage - 1)" :disabled="curPage <= 1" :class="{ 'pagination__icon-not-allowed': curPage <= 1 }">
-            <PhCaretLeft class="dark:text-gray-300 text-[1.6rem] tablet:text-[1.8rem] laptop:text-[2rem]" />
+            <PhCaretLeft class="dark:text-gray-300 text-[1.8rem] tablet:text-[2rem]" />
         </Button>
         <Button class="pagination__page-number" :disabled="1 === curPage" :class="1 === curPage ? 'pagination__page-number-active bg-dark text-light hover:bg-dark dark:bg-[#3d3d3d] dark:hover:bg-[#3d3d3d]' : 'pagination__page-number bg-gray-200 text-dark hover:bg-gray-300 dark:bg-dark dark:text-light dark:hover:bg-[#3d3d3d]'" @click="emit('updatePage', 1)">
             1
         </Button>
-        <PhDotsThree class="text-[1.6rem] tablet:text-[1.8rem] laptop:text-[2rem]" v-if="curPage > 4 && totalPage > 7"/>
+        <PhDotsThree class="text-[1.8rem] tablet:text-[2rem]" v-if="curPage > 4 && totalPage > 7"/>
         <Button class="pagination__page-number" 
             v-for="page in ArrPageShow"
             :key="page"
@@ -48,12 +48,12 @@ const ArrPageShow = computed(() => {
             :disabled="page === curPage">
             {{ page }}
         </Button>
-        <PhDotsThree class="text-[1.6rem] tablet:text-[1.8rem] laptop:text-[2rem]" v-if="curPage <= totalPage - 4 && totalPage > 7"/>
+        <PhDotsThree class="text-[1.8rem] tablet:text-[2rem]" v-if="curPage <= totalPage - 4 && totalPage > 7"/>
         <Button v-if="totalPage > 1" class="pagination__page-number" :disabled="totalPage === curPage" :class="totalPage === curPage ? 'pagination__page-number-active bg-dark text-light hover:bg-dark dark:bg-[#3d3d3d] dark:hover:bg-[#3d3d3d]' : 'pagination__page-number bg-gray-200 text-dark hover:bg-gray-300 dark:bg-dark dark:text-light dark:hover:bg-[#3d3d3d]'" @click="emit('updatePage', totalPage)">
             {{ totalPage }}
         </Button>
         <Button class="pagination__icon" @click="emit('updatePage', curPage + 1)" :disabled="curPage >= totalPage" :class="{ 'pagination__icon-not-allowed': curPage >= totalPage }">
-            <PhCaretRight class="dark:text-gray-300 text-[1.6rem] tablet:text-[1.8rem] laptop:text-[2rem]" />
+            <PhCaretRight class="dark:text-gray-300 text-[1.8rem] tablet:text-[2rem]" />
         </Button>
     </div> 
 </template>

@@ -25,7 +25,7 @@ const searchData = function(){
     <FormInput class="form__input-search" v-model="searchValue" type="text" name="search" placeholder="enter your title here."></FormInput>
     <template #action>
       <Button type="submit" class="btn-search text-light bg-dark hover:bg-[#474747] dark:border dark:border-gray-600 absolute top-0 right-0 h-full">
-        <PhMagnifyingGlass class="text-[1.8rem] tablet:text-[2rem] laptop:text-[2.2rem]" />
+        <PhMagnifyingGlass class="text-[2rem] tablet:text-[2.2rem]" />
       </Button>
     </template>
   </Form>
