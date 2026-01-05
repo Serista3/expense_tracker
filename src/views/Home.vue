@@ -82,7 +82,7 @@ const updateQuery = function(filter){
 <template>
     <MainLayout class="home-page relative">
         <div class="dashboard__filter absolute top-8 right-8 flex gap-4 justify-center items-center">
-            <el-select @change="updateQuery(filterMonth)" v-model="filterMonth" placeholder="select month">
+            <el-select @change="updateQuery(filterMonth)" v-model="filterMonth" placeholder="select month" class="month-select">
                 <el-option
                 v-for="(m, index) in allMonth"
                 :key="index"
@@ -90,7 +90,7 @@ const updateQuery = function(filter){
                 :value="months[m]"
                 />
             </el-select>
-            <el-select @change="updateQuery(filterYear)" v-model="filterYear" placeholder="select year">
+            <el-select @change="updateQuery(filterYear)" v-model="filterYear" placeholder="select year" class="year-select">
                 <el-option
                 v-for="(y, index) in allYear"
                 :key="index"
@@ -149,10 +149,17 @@ const updateQuery = function(filter){
 <style scoped>
 
 :deep(.el-select__wrapper) {
-    width: 12rem;
     min-height: 4rem;
     font-size: 1.6rem;
     border-radius: .7rem;
+}
+
+:deep(.el-select.month-select) {
+    width: 14rem;
+}
+
+:deep(.el-select.year-select) {
+    width: 10rem;
 }
 
 .el-select-dropdown__item {
