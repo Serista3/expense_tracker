@@ -4,6 +4,7 @@ import FormField from '@/components/form/FormField.vue'
 import FormInput from '@/components/form/FormInput.vue'
 import ErrorMessage from '@/components/common/ErrorMessage.vue'
 import { ref } from 'vue'
+import { useCategories } from '@/composables/useCategories'
 
 const props = defineProps({
   editData: {
@@ -12,6 +13,7 @@ const props = defineProps({
   }
 })
 
+const { categories } = useCategories()
 const emit = defineEmits(['submitCategory', 'cancelCategory'])
 const formCategoryData = ref({ ...props.editData } || {})
 const errDataCategory = ref({})
@@ -20,6 +22,8 @@ const errDataCategory = ref({})
 const validationCategory = function(){
   errDataCategory.value.name = !formCategoryData.value.name || Number.parseInt(formCategoryData.value.name) 
     ? "Category must have data or Category must not be number." : undefined
+  errDataCategory.value.name = categories.value.some(c => c.name.toLowerCase() === formCategoryData.value.name.toLowerCase() && c.id !== formCategoryData.value.id) 
+    ? "Category name already exists." : undefined
   errDataCategory.value.color = !formCategoryData.value.color  ? "Category color must have data" : undefined
   
   return Object.values(errDataCategory.value).every(err => err === undefined);

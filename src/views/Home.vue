@@ -56,9 +56,8 @@ const calcuCategory = function(type){
                 {
                     'name': c.name, 
                     'amount': filterTransactionsbyMonthAndYear.value.filter(t => t.category === c.name && t.type === type).reduce((sum, t) => sum + t.amount, 0),
-                    'color': formattedHextoRgba(c.color, 0.5),
-                    'backgroundColor': formattedHextoRgba(c.color, 0.8),
-                    'hoverColor': formattedHextoRgba(c.color, 1),
+                    'color': c.color,
+                    'hoverColor': formattedHextoRgba(c.color, 0.75),
                 })
     })
     return newCategories.filter(n => n.amount !== 0).sort((a, b) => b.amount - a.amount)

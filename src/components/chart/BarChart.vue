@@ -26,10 +26,8 @@ const barChartData = computed(() => {
     datasets: [
       {
         order: 0,
-        backgroundColor: props.data.map(c => c.color),
-        hoverBackgroundColor: props.data.map(c => c.hoverColor),
-        boderWidth: 2,
-        borderColor: props.data.map(c => c.backgroundColor),
+        backgroundColor: props.data.map(c => curTheme.value === 'dark' && c.color === '#212121' ? '#ffffff' : c.color),
+        hoverBackgroundColor: props.data.map(c => curTheme.value === 'dark' && c.color === '#212121' ? '#bbbbbb' : c.hoverColor),
         data: props.data.map(c => c.amount)
       }
     ]
