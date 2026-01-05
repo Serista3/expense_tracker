@@ -124,7 +124,7 @@ const updateQuery = function(filter){
             <BarChart class="col-span-full desktop:col-span-2" :data="top5Income" title="Top 5 Income" />
             <BarChart class="col-span-full desktop:col-span-2" :data="expenseCategories" title="Expense by Category" />
             <div class="recent-transaction bg-light dark:bg-dark border border-gray-300 dark:border-gray-600 col-span-full p-10 tablet:p-15 laptop:p-20 shadow-lg rounded-[.7rem]">
-                <div class="recent-transaction__header mb-8 tablet:mb-12 laptop:mb-15 flex justify-between items-center gap-2">
+                <div class="recent-transaction__header mb-8 tablet:mb-12 laptop:mb-15 flex justify-between items-center gap-8">
                     <h2 class="text-4xl font-semibold inline-block leading-12">Recent Transactions</h2>
                     <router-link to="/transaction" class="flex-none">
                         <Button class="btn-view-all text-light bg-dark hover:bg-[#363636] dark:border dark:border-gray-500">View All</Button>

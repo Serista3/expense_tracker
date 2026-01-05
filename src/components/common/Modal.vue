@@ -17,7 +17,7 @@ const activeModal = defineModel({
     <Transition name="modal-transition">
         <div v-if="activeModal" 
             class="modal-background h-screen w-full bg-[rgba(0,0,0,0.3)] backdrop-blur-[1px] fixed top-0 left-0 z-10 flex items-center justify-center" 
-            @click.self="activeModal = false"> <div class="modal-content max-w-[30rem] tablet:max-w-[35rem] laptop:max-w-[40rem] w-full bg-light dark:bg-dark dark:text-light p-10 tablet:p-12 laptop:p-14 shadow-lg rounded-[1rem] relative">
+            @click.self="activeModal = false"> <div class="modal-content max-w-[35rem] laptop:max-w-[40rem] mx-4 w-full bg-light dark:bg-dark dark:text-light py-10 px-6 tablet:p-12 laptop:p-14 shadow-lg rounded-[1rem] relative">
                 <h1 class="text-4xl laptop:text-5xl font-semibold text-dark dark:text-light text-center mb-8 tablet:mb-10 laptop:mb-12 leading-[1.4]">{{ nameModal }}</h1>
                 <slot></slot>
                 <div class="close-modal cursor-pointer absolute top-4 right-4 tablet:top-6 tablet:right-6 laptop:top-8 laptop:right-8" @click="activeModal = false">

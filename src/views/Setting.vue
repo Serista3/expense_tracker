@@ -175,8 +175,8 @@ const clearAllData = function(){
         <div class="general mb-30 flex flex-col justify-center items-center">
             <h2 class="general__title mb-14 text-[2.4rem] font-semibold">General</h2>
             <div class="general__content flex flex-col laptop:flex-row gap-20 justify-center items-center w-full">
-                <img class="general__img-preview w-[30rem] h-[30rem] object-cover rounded-[50%] border border-gray-300 dark:border-gray-600" :src="imgUrl" alt="preview-img" v-if="imgUrl" />
-                <div class="preview-img w-[30rem] h-[30rem] bg-gray-300 rounded-[50%]" v-else></div>
+                <img class="general__img-preview w-[25rem] h-[25rem] tablet:w-[30rem] tablet:h-[30rem] object-cover rounded-[50%] border border-gray-300 dark:border-gray-600" :src="imgUrl" alt="preview-img" v-if="imgUrl" />
+                <div class="preview-img w-[25rem] h-[25rem] tablet:w-[30rem] tablet:h-[30rem] bg-gray-300 rounded-[50%]" v-else></div>
                 <Form class="general__form" @submit="handleProfilesave">
                     <FormField labelName="Username">
                          <FormInput type="text" name="username" placeholder="enter your username." v-model="username" />

@@ -19,7 +19,7 @@ const emit = defineEmits(['closeNav'])
 
 <template>
     <div @click.self="emit('closeNav')" :class="{'visible' : activeNav, 'invisible': !activeNav}" class="nav__bg backdrop-blur-[1px] bg-[rgba(0,0,0,0.3)] fixed top-0 left-0 w-full h-screen z-10">
-        <nav :class="{'translate-x-[0]' : activeNav, '-translate-x-[100%]' : !activeNav}" class="nav__sidebar pt-30 pb-40 pl-22 pr-32 max-w-[35rem] w-full h-screen border-r border-gray-300 dark:border-gray-600 bg-light dark:bg-dark dark:text-light fixed top-0 left-0 z-20 transition-all">
+        <nav :class="{'translate-x-[0]' : activeNav, '-translate-x-[100%]' : !activeNav}" class="nav__sidebar flex flex-col pt-30 pb-40 pl-22 pr-32 max-w-[35rem] w-full h-screen border-r border-gray-300 dark:border-gray-600 bg-light dark:bg-dark dark:text-light fixed top-0 left-0 z-20 transition-all">
             <PhX @click.self="emit('closeNav')" class="close-nav text-[2rem] cursor-pointer absolute text-gray-400 top-6 right-6 tablet:top-7 tablet:right-7 laptop:top-8 laptop:right-8 hover:text-dark dark:hover:text-gray-300 transition-all" />
             <UserProfile />
             <ul class="nav__list flex flex-col gap-10">
