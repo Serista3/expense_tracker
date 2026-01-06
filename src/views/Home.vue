@@ -109,6 +109,9 @@ const updateQuery = function(filter){
                 <template #summary__card-icon>
                     <PhTrendDown class="text-[4.2rem]" />
                 </template>
+                <div v-if="expense > budget" class="py-1 px-4 bg-light dark:bg-dark text-[1.4rem] border border-alert text-alert rounded-full absolute bottom-[-13%] left-6">
+                    +{{ `${(((expense - budget)/budget) * 100).toFixed(2)}%` }} over budget
+                </div>
             </SummaryCard>
             <SummaryCard class="bg-smooth text-light" title="Balance" :amount="balance">
                 <template #summary__card-icon>

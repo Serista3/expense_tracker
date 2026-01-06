@@ -17,9 +17,10 @@ import { PhFloppyDiskBack } from '@phosphor-icons/vue';
 import { useCategories } from '@/composables/useCategories';
 import { useTransaction } from '@/composables/useTransaction';
 import { useUserData } from '@/composables/useUserData';
+import { useFormat } from '@/composables/useFormat';
 import { useModalScrollLock } from '@/composables/useModalScrollLock';
 import { useLocalStorage } from '@/composables/useLocalStorage';
-import { nextTick, ref, useTemplateRef } from 'vue'
+import { nextTick, ref, useTemplateRef, computed } from 'vue'
 
 const { 
         categories, 
@@ -36,32 +37,40 @@ const {
 const { transactions } = useTransaction();
 const { userAvatar, userName, userBudgets, saveUserData } = useUserData();
 const { removeDataFromLocalStorage, updateDataToLocalStorage } = useLocalStorage();
+const { months, formattedUppercaseFirstChar } = useFormat()
 useModalScrollLock(isCreateCategoryModalVisible);
 useModalScrollLock(isDeleteCategoryModalVisible);
+
+const allYear = Array.from({ length: 101}, (_, i) => new Date().getFullYear() - 50 + i)
+const allMonth = months
 
 const username = ref(userName.value)
 const imgUrl = ref(userAvatar.value)
 const curBudget = ref(Array.from(userBudgets.value).find(b => new Date().getMonth() === b.month && new Date().getFullYear() === b.year)?.amount ?? 1)
+const curBudgetMonth = ref(new Date().getMonth())
+const curBudgetYear = ref(new Date().getFullYear())
 
-const budgets = ref(userBudgets.value)
+const budgets = computed(() => userBudgets.value)
 const success = ref(false)
 const isSaving = ref(false);
 let notiTimeout = null;
+
+const updateBudgetWhenChangeMonthYear = function(){
+    const budgetData = Array.from(budgets.value).find(b => b.month === curBudgetMonth.value && b.year === curBudgetYear.value);
+    curBudget.value = budgetData ? budgetData.amount : 1;
+}
 
 const handleProfilesave = function(){
     isSaving.value = true;
     clearTimeout(notiTimeout);
 
-    const newBudgets = [...budgets.value]
-    const today = new Date()
-    const currentMonth = today.getMonth()
-    const currentYear = today.getFullYear()
-
-    const budgetIndex = newBudgets.findIndex(b => b.month === currentMonth && b.year === currentYear);
+    const newBudgets = [...budgets.value.map(b => ({...b}))];
+    const budgetIndex = newBudgets.findIndex(b => b.month === curBudgetMonth.value && b.year === curBudgetYear.value);
 
     if(budgetIndex === -1){
-        newBudgets.push({ 'id': newBudgets.length + 1, 'month': currentMonth, 'year': currentYear, 'amount': Number(curBudget.value) });
-    } else {
+        const maxId = newBudgets.length > 0 ? Math.max(...newBudgets.map(b => b.id)) : 0;
+        newBudgets.push({ 'id': maxId + 1, 'month': curBudgetMonth.value, 'year': curBudgetYear.value, 'amount': Number(curBudget.value) });
+    }else {
         newBudgets[budgetIndex].amount = Number(curBudget.value);
     }
 
@@ -184,8 +193,26 @@ const clearAllData = function(){
                     <FormField labelName="Url Image">
                          <FormInput type="text" name="imgurl" placeholder="enter your image url." v-model="imgUrl" />
                     </FormField>
-                    <FormField labelName="This Month's Budget">
-                         <FormInput type="number" name="budget" placeholder="enter your budget." v-model="curBudget" :min="1" required />
+                    <FormField labelName="Budget">
+                        <div class="flex gap-4">
+                            <el-select @change="updateBudgetWhenChangeMonthYear" v-model="curBudgetMonth" placeholder="select month" class="month-select">
+                                <el-option
+                                    v-for="(m, index) in allMonth"
+                                    :key="index"
+                                    :label="formattedUppercaseFirstChar(m)"
+                                    :value="index"
+                                    />
+                            </el-select>
+                            <el-select @change="updateBudgetWhenChangeMonthYear" v-model="curBudgetYear" placeholder="select year" class="year-select">
+                                <el-option
+                                    v-for="(y, index) in allYear"
+                                    :key="index"
+                                    :label="y"
+                                    :value="y"
+                                    />
+                            </el-select>
+                        </div>
+                        <FormInput type="number" name="budget" placeholder="enter your budget." v-model="curBudget" :min="1" required />
                     </FormField>
                     <Button type="submit" :disabled="isSaving" :class="{'disabled' : isSaving}" class="btn-save mx-auto w-full max-w-auto laptop:mx-0 tablet:w-auto tablet:max-w-[12rem] text-light bg-highlight hover:bg-[#4aba73] flex gap-4 justify-center items-center mt-6">
                         {{ isSaving ? 'Saving...' : 'Save' }}
