@@ -5,7 +5,7 @@
 > **Web Application สำหรับบันทึกและวางแผนการเงินส่วนบุคคล** ช่วยให้คุณวิเคราะห์พฤติกรรมการใช้จ่ายและตั้งเป้าหมายทางการเงินได้อย่างมีประสิทธิภาพ
 
 ![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)
-![Vue Router](https://img.shields.io/badge/Vue_Router-35495E?style=for-the-badge&logo=vue.js&logoColor=4FC08D)
+![Vue Router](https://img.shields.io/badge/Vue_Router-eeeeee?style=for-the-badge&logo=vue.js&logoColor=4FC08D)
 ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![Chart.js](https://img.shields.io/badge/chart.js-F5788D.svg?style=for-the-badge&logo=chart.js&logoColor=white)
 ![Element Plus](https://img.shields.io/badge/Element_Plus-409EFF?style=for-the-badge&logo=element-plus&logoColor=white)
