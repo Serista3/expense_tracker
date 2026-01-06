@@ -5,7 +5,7 @@
 > **Web Application สำหรับบันทึกและวางแผนการเงินส่วนบุคคล** ช่วยให้คุณวิเคราะห์พฤติกรรมการใช้จ่ายและตั้งเป้าหมายทางการเงินได้อย่างมีประสิทธิภาพ
 
 ![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)
-![Vue Router](https://img.shields.io/badge/Vue_Router-eeeeee?style=for-the-badge&logo=vue.js&logoColor=4FC08D)
+![Vue Router](https://img.shields.io/badge/Vue_Router-35495E?style=for-the-badge&logo=vue.js&logoColor=4FC08D)
 ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![Chart.js](https://img.shields.io/badge/chart.js-F5788D.svg?style=for-the-badge&logo=chart.js&logoColor=white)
 ![Element Plus](https://img.shields.io/badge/Element_Plus-409EFF?style=for-the-badge&logo=element-plus&logoColor=white)
@@ -72,16 +72,16 @@ src/
 
 ## 📚 Technical Highlights (สิ่งที่ได้เรียนรู้)
 โปรเจคนี้เน้นการประยุกต์ใช้ Vue 3 Composition API และ Modern CSS Framework:
-- State Management: การจัดการข้อมูลที่ซับซ้อนระหว่าง Component ด้วย ref
-- Composable Pattern: แยก Logic ที่ใช้ซ้ำ (เช่น การคำนวณเงินรวม, การจัดการ Local Storage) ออกเป็น Composable functions
-- Optimized Performance: ใช้ computed และ watch เพื่อลดการคำนวณที่ไม่จำเป็น
-- Routing: การจัดการ Routing และ Navigation ในรูปแบบ Single Page Application (SPA)
-- Responsive Layout: ใช้ TailwindCSS Grid/Flexbox จัดการหน้าจอที่หลากหลายโดยไม่ต้องเขียน Custom CSS เยอะ
+- **State Management:** การจัดการข้อมูลที่ซับซ้อนระหว่าง Component ด้วย ref
+- **Composable Pattern:** แยก Logic ที่ใช้ซ้ำ (เช่น การคำนวณเงินรวม, การจัดการ Local Storage) ออกเป็น Composable functions
+- **Optimized Performance:** ใช้ computed และ watch เพื่อลดการคำนวณที่ไม่จำเป็น
+- **Routing:** การจัดการ Routing และ Navigation ในรูปแบบ Single Page Application (SPA)
+- **Responsive Layout:** ใช้ TailwindCSS Grid/Flexbox จัดการหน้าจอที่หลากหลายโดยไม่ต้องเขียน Custom CSS เยอะ
 
 ## 🚀 Roadmap
-- เพิ่มระบบ Authentication (Login/Register)
-- เชื่อมต่อ Backend/Database จริง (Firebase/Supabase)
-- Export เป็น PDF
+- [ ] เพิ่มระบบ Authentication (Login/Register)
+- [ ] เชื่อมต่อ Backend/Database จริง (Firebase/Supabase)
+- [ ] Export เป็น PDF
 
 ## 🧑‍💼 Contact
 หากมีข้อเสนอแนะหรือพบปัญหาในการใช้งาน สามารถติดต่อได้ที่: 📧 Email: stacla5282@gmail.com
