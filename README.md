@@ -4,9 +4,11 @@
 
 > **Web Application สำหรับบันทึกและวางแผนการเงินส่วนบุคคล** ช่วยให้คุณวิเคราะห์พฤติกรรมการใช้จ่ายและตั้งเป้าหมายทางการเงินได้อย่างมีประสิทธิภาพ
 
-[![Vue.js](https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D)](https://vuejs.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![Chart.js](https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white)](https://www.chartjs.org/)
+![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)
+![Vue Router](https://img.shields.io/badge/Vue_Router-35495E?style=for-the-badge&logo=vue.js&logoColor=4FC08D)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Chart.js](https://img.shields.io/badge/chart.js-F5788D.svg?style=for-the-badge&logo=chart.js&logoColor=white)
+![Element Plus](https://img.shields.io/badge/Element_Plus-409EFF?style=for-the-badge&logo=element-plus&logoColor=white)
 
 🔗 **Live Demo:** [Click Here to View App](https://expense-tracker-alpha-one-81.vercel.app/)
 
@@ -15,7 +17,7 @@
 ## ✨ Features (คุณสมบัติเด่น)
 
 ### 📊 Dashboard & Analytics
-- **Visual Analysis:** แสดงกราฟสรุปรายรับ-รายจ่าย แยกตามหมวดหมู่ เข้าใจง่ายด้วย Chart.js
+- **Visual Analysis:** แสดงกราฟสรุปรายการธุรกรรม แยกตามหมวดหมู่ เข้าใจง่ายด้วย Chart.js
 - **Monthly Budgeting:** ระบบตั้งงบประมาณรายเดือนพร้อมแจ้งเตือนสถานะการใช้เงิน
 
 ### 📝 Transaction Management
@@ -39,7 +41,7 @@
 
 ```bash
 # 1. Clone the repository
-git clone [https://github.com/Serista3/expense_tracker.git](https://github.com/Serista3/expense_tracker.git)
+git clone https://github.com/Serista3/expense_tracker.git
 
 # 2. Enter the directory
 cd expense_tracker
@@ -55,14 +57,17 @@ npm run dev
 โครงสร้างไฟล์ถูกออกแบบโดยเน้นความ Modular และ Scalable
 ```structure
 src/
-├── components/         # Reusable Components
-│   ├── chart/          # กราฟแสดงผล (Chart.js wrapper)
-│   ├── common/         # ปุ่ม, Input และ UI พื้นฐาน
-│   ├── layout/         # Navbar, Sidebar, Layout wrappers
-│   └── transaction/    # Logic การจัดการรายการเงิน
-├── composables/        # Shared Logic (Vue Composables)
-├── views/              # หน้าหลัก (Pages)
-└── assets/             # Static files & Tailwind config
+├── assets/             # ไฟล์รูปภาพ, ไอคอน และ Global Styles
+├── components/         # ส่วนประกอบต่างๆ ของหน้าเว็บ (Reusable Components)
+│   ├── chart/          # ส่วนแสดงผลกราฟ
+│   ├── common/         # Component ส่วนกลางที่ใช้ซ้ำบ่อย (Buttons, Inputs)
+│   ├── form/           # Component เกี่ยวกับแบบฟอร์ม
+│   ├── layout/         # โครงสร้างหลัก เช่น Navbar, Footer, Sidebar
+│   ├── table/          # ส่วนแสดงผลตารางข้อมูล
+│   └── transaction/    # ส่วนจัดการรายการธุรกรรม
+├── composables/        # Shared Logic หรือ Reusable Functions
+├── router/             # การตั้งค่าเส้นทางของเว็บไซต์ (Routing)
+└── views/              # หน้าหลักของเว็บไซต์ (Pages)
 ```
 
 ## 📚 Technical Highlights (สิ่งที่ได้เรียนรู้)
@@ -70,6 +75,7 @@ src/
 - State Management: การจัดการข้อมูลที่ซับซ้อนระหว่าง Component ด้วย ref
 - Composable Pattern: แยก Logic ที่ใช้ซ้ำ (เช่น การคำนวณเงินรวม, การจัดการ Local Storage) ออกเป็น Composable functions
 - Optimized Performance: ใช้ computed และ watch เพื่อลดการคำนวณที่ไม่จำเป็น
+- Routing: การจัดการ Routing และ Navigation ในรูปแบบ Single Page Application (SPA)
 - Responsive Layout: ใช้ TailwindCSS Grid/Flexbox จัดการหน้าจอที่หลากหลายโดยไม่ต้องเขียน Custom CSS เยอะ
 
 ## 🚀 Roadmap
