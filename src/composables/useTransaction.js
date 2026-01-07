@@ -1,8 +1,9 @@
-import { ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useLocalStorage } from './useLocalStorage';
 
 const { updateDataToLocalStorage, getDataFromLocalStorage } = useLocalStorage();
 const transactions = ref(getDataFromLocalStorage('transactions') ?? [])
+const recentTransactions = computed(() => transactions.value.sort((a, b) => new Date(b.date) - new Date(a.date)));
 
 export function useTransaction(){
   const isDeleteModalVisible = ref(false);
@@ -24,5 +25,12 @@ export function useTransaction(){
       transactionToDel.value = null;
   })
 
-  return { transactions, isDeleteModalVisible, openDeleteModal, confirmDelTransaction, transactionToDel }
+  return { 
+    transactions,
+    recentTransactions,
+    isDeleteModalVisible,
+    openDeleteModal,
+    confirmDelTransaction,
+    transactionToDel
+  }
 }

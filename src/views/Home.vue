@@ -14,7 +14,7 @@ import { useModalScrollLock } from '@/composables/useModalScrollLock';
 import { useRouter, useRoute } from 'vue-router';
 import { computed, ref } from 'vue';
 
-const { transactions, isDeleteModalVisible, openDeleteModal, confirmDelTransaction, transactionToDel } = useTransaction();
+const { transactions, recentTransactions: recentTransac, isDeleteModalVisible, openDeleteModal, confirmDelTransaction, transactionToDel } = useTransaction();
 const { categories } = useCategories()
 const { formattedHextoRgba, months, formattedUppercaseFirstChar } = useFormat()
 const { userBudgets } = useUserData()
@@ -30,7 +30,7 @@ const allMonth = computed(() => [...new Set(Array.from(transactions.value).map(t
 
 // Filter ตามเดือนและปีใน url query
 const filterTransactionsbyMonthAndYear = computed(() => {
-    return Array.from(transactions.value).filter(t => {
+    return Array.from(recentTransac.value).filter(t => {
         if (months[new Date(t.date).getMonth()] === filterMonth.value && new Date(t.date).getFullYear() === filterYear.value)
             return t
     })
@@ -39,7 +39,7 @@ const filterTransactionsbyMonthAndYear = computed(() => {
 // คำนวนหา transactions ล่าสุด มา 3 ตัว
 const recentTransactions = computed(() => {
     if(filterTransactionsbyMonthAndYear.value.length)
-        return Array.from(filterTransactionsbyMonthAndYear.value).sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3)
+        return Array.from(filterTransactionsbyMonthAndYear.value).slice(0, 3)
     return [];
 })
 

@@ -15,7 +15,7 @@ import { ref, computed, watch } from 'vue';
 const route = useRoute();
 const router = useRouter();
 
-const { transactions, isDeleteModalVisible, openDeleteModal, confirmDelTransaction, transactionToDel } = useTransaction();
+const { recentTransactions, isDeleteModalVisible, openDeleteModal, confirmDelTransaction, transactionToDel } = useTransaction();
 const { categories } = useCategories();
 useModalScrollLock(isDeleteModalVisible);
 
@@ -41,11 +41,11 @@ const filterTransaction = computed(() => {
     const { title, type, categories } = { ...route.query }
 
     if(!title && !type && !categories)
-        return transactions.value
+        return recentTransactions.value
     
     const categoryArr = categories ? categories.split(',') : []
 
-    return Array.from(transactions.value).filter(transaction => {
+    return Array.from(recentTransactions.value).filter(transaction => {
         const isTitle = !title || transaction.title.toLowerCase().includes(title.toLowerCase())
         const isType = !type || type.toLowerCase().includes(transaction.type.toLowerCase())
         const isCategory = !categoryArr.length || categoryArr.find(c => c.toLowerCase() === transaction.category.toLowerCase())
